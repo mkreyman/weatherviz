@@ -9,4 +9,19 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-WeatherViz::Application.config.secret_key_base = '7532358c852b268ee63ce6888340154b3ea51660751634f5822124672a3aabbba34b962db651abba6827e6705a711128abb0152149891404771fc2eeb0476dda'
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+WeatherViz::Application.config.secret_key_base = secure_token
