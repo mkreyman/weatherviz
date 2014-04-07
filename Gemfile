@@ -13,9 +13,12 @@ group :development, :test do
 end
 
 group :test do
-  gem "faker"
-  gem "capybara"
-  gem "shoulda-matchers"
+  gem 'faker'
+  gem 'capybara'
+  gem 'shoulda-matchers'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
 end
 
 group :development do
