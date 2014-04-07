@@ -1,0 +1,23 @@
+<% if current_user.present? %>
+    <% navigation_dropdown_text = "Signed in as #{current_user.email}" %>
+<% else %>
+    <% navigation_dropdown_text = "Signup / Login" %>
+<% end %>
+
+<ul class="nav navbar-nav navbar-right">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <%= navigation_dropdown_text %>
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <% if current_user.present? %>
+          <li class="divider"></li>
+          <li><%= link_to 'Logout', logout_path, method: :delete %></li>
+      <% else %>
+          <li><%= link_to 'Signup', new_user_path %></li>
+          <li><%= link_to 'Login', login_path %></li>
+      <% end %>
+    </ul>
+  </li>
+</ul>
