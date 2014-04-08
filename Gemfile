@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.4'
 gem 'omniauth-github'
+gem 'omniauth-google-oauth2'
 
 group :development, :test do
   gem 'rspec-rails'
