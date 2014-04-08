@@ -1,16 +1,17 @@
 
 <% unless @user.omniauth? %>
-    <div>
-      <%= image_tag('octocat.png', size: '60x60') %>
-      <%= link_to button_tag('Sign up via Github'), '/auth/github' %>
-    </div>
-    <div>
-      <%= image_tag('google.png', size: '60x60') %>
-      <%= link_to button_tag('Sign up via Google'), '/auth/google_oauth2' %>
-    </div>
-    <div>
-      <h1>Signup</h1>
-    </div>
+ <div>
+   <h1>Signup</h1>
+ </div>
+ <p><strong>Sign up through one of these services:</strong></p>
+ <div class="'auth_providers">
+   <%= link_to image_tag('octocat.png', size: '64x64'), '/auth/github' %>
+   <%= link_to image_tag('google.png', size: '64x64'), '/auth/google_oauth2' %>
+   <%= link_to image_tag('facebook.png', size: '64x64'), '/auth/facebook' %>
+ </div>
+
+ <p><strong>Don't use these services? Sign up below.</strong></p>
+
 <% else %>
     <h1>Verify Details</h1>
 <% end %>

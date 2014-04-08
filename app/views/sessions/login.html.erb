@@ -1,14 +1,14 @@
 <h1>Login</h1>
 
-<div>
-  <%= image_tag('octocat.png', size: '60x60') %>
-  <%= link_to button_tag('Sign in via Github'), '/auth/github' %>
+<p><strong>Log in through one of these services:</strong></p>
+
+<div class="'auth_providers">
+  <%= link_to image_tag('octocat.png', size: '64x64'), '/auth/github' %>
+  <%= link_to image_tag('google.png', size: '64x64'), '/auth/google_oauth2' %>
+  <%= link_to image_tag('facebook.png', size: '64x64'), '/auth/facebook' %>
 </div>
 <div>
-  <%= image_tag('google.png', size: '60x60') %>
-  <%= link_to button_tag('Sign in via Google'), '/auth/google_oauth2' %>
-</div>
-<div>
+  <p><strong>Don't use these services? Log in below.</strong></p>
   <%= form_tag login_path do %>
       <p>
         <%= label_tag :email %>
