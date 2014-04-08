@@ -23,18 +23,6 @@
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
-  <div class="field">
-    <%= f.label :cell_phone %><br>
-    <%= f.text_field :cell_phone %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :state %><br>
-    <%= f.text_field :state %>
-  </div>
   <% if @user.omniauth? %>
     <%= f.hidden_field :omniauth %>
   <% else %>
