@@ -1,11 +1,11 @@
-<h1>New user</h1>
+
 <% unless @user.omniauth? %>
     <div>
-      <%= image_tag('octocat.png', size: '300x300') %>
+      <%= image_tag('octocat.png', size: '60x60') %>
       <%= link_to button_tag('Sign up via Github'), '/auth/github' %>
     </div>
     <div>
-      <%= image_tag('google.png', size: '300x300') %>
+      <%= image_tag('google.png', size: '60x60') %>
       <%= link_to button_tag('Sign up via Google'), '/auth/google_oauth2' %>
     </div>
     <div>
