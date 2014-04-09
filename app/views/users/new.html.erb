@@ -1,7 +1,7 @@
 
 <% unless @user.omniauth? %>
  <div>
-   <h1>Signup</h1>
+   <h1>Sign up</h1>
  </div>
  <p><strong>Sign up through one of these services:</strong></p>
  <div class="'auth_providers">
@@ -18,4 +18,3 @@
 
 <%= render 'users/form' %>
 
-<%= link_to 'Back', users_path %>
