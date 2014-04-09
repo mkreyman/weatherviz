@@ -55,6 +55,10 @@ class WeatherReportsController < ApplicationController
     end
 
     def weather_report_params
-      params.require(:weather_report).permit(:location_id, :time_received, :sunrise, :sunset, :weather, :weather_desc, :temp, :temp_min, :temp_max, :pressure, :humidity, :wind_speed, :wind_gust, :wind_degree, :clouds, :rain_3h, :snow_3h)
+      params.require(:weather_report).permit(
+          :location_id, :time_received, :sunrise, :sunset,
+          :weather, :weather_desc, :temp, :temp_min, :temp_max,
+          :pressure, :humidity, :wind_speed, :wind_gust, :wind_degree,
+          :clouds, :rain_3h, :snow_3h)
     end
 end
