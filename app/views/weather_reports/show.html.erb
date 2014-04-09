@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Time received:</strong>
+  <%= @weather_report.time_received %>
+</p>
+
+<p>
+  <strong>Sunrise:</strong>
+  <%= @weather_report.sunrise %>
+</p>
+
+<p>
+  <strong>Sunset:</strong>
+  <%= @weather_report.sunset %>
+</p>
+
+<p>
+  <strong>Weather:</strong>
+  <%= @weather_report.weather %>
+</p>
+
+<p>
+  <strong>Weather desc:</strong>
+  <%= @weather_report.weather_desc %>
+</p>
+
+<p>
+  <strong>Temp:</strong>
+  <%= @weather_report.temp %>
+</p>
+
+<p>
+  <strong>Temp min:</strong>
+  <%= @weather_report.temp_min %>
+</p>
+
+<p>
+  <strong>Temp max:</strong>
+  <%= @weather_report.temp_max %>
+</p>
+
+<p>
+  <strong>Pressure:</strong>
+  <%= @weather_report.pressure %>
+</p>
+
+<p>
+  <strong>Humidity:</strong>
+  <%= @weather_report.humidity %>
+</p>
+
+<p>
+  <strong>Wind speed:</strong>
+  <%= @weather_report.wind_speed %>
+</p>
+
+<p>
+  <strong>Wind gust:</strong>
+  <%= @weather_report.wind_gust %>
+</p>
+
+<p>
+  <strong>Wind degree:</strong>
+  <%= @weather_report.wind_degree %>
+</p>
+
+<p>
+  <strong>Clouds:</strong>
+  <%= @weather_report.clouds %>
+</p>
+
+<p>
+  <strong>Rain 3h:</strong>
+  <%= @weather_report.rain_3h %>
+</p>
+
+<p>
+  <strong>Snow 3h:</strong>
+  <%= @weather_report.snow_3h %>
+</p>
+
+<%= link_to 'Edit', edit_weather_report_path(@weather_report) %> |
+<%= link_to 'Back', weather_reports_path %>

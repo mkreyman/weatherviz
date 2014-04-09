@@ -1,5 +1,9 @@
 WeatherViz::Application.routes.draw do
 
+  resources :weather_reports
+
+  resources :locations
+
   resources :users
 
   root :to => 'static_pages#home'
