@@ -1,19 +1,14 @@
 WeatherViz::Application.routes.draw do
+
   resources :users
 
-  root :to => "users#index"
+  root :to => 'static_pages#home'
 
-  get 'login',
-      to: 'sessions#login',
-      as: 'login'
-
-  post 'login',
-       to: 'sessions#create'
-
-  delete 'logout',
-         to: 'sessions#destroy'
-
+  get 'login', to: 'sessions#login', as: 'login'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
   get 'auth/:provider/callback', to: 'sessions#oauth'
+  get 'static_pages/home'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
