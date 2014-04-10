@@ -7,26 +7,57 @@ class WeatherFetcher < ActiveRecord::Base
   # API key for OpenWeatherMap API
   APPKEY = "APPID=#{ENV['OPENWEATHER_APPID']}"
 
+  def initialize
+    @fetched_data = {}
+  end
+
   def self.fetch(location)
     sanitized_location = location.split(/[\s,]+/).map(&:strip).join(',')
+
+    if @fetched_data[sanitized_location] &&  @fetched_data[sanitized_location]['cached_at'] > 10.minutes.ago
+      @fetched_data[sanitized_location] = nil
+    end
+
     search_by_city_url = "http://api.openweathermap.org/data/2.5/find?q="
     url = URI.escape("#{search_by_city_url}#{sanitized_location}&#{APPKEY}")
-    array_of_responses = JSON.parse(open(url).read)
+    @fetched_data[sanitized_location] ||= JSON.parse(open(url).read).merge('cached_at' => Time.zone.now)
 
-    array_of_responses['list'].each do |response|
+    # Timecop gem
+    # Expect JSON.parse to have been called twice
+    # Timecop.travel(15.minutes.ago).do
+    #   WeatherFetcher.fetch(...)
+    # end
+    # WeatherFetcher.fetch(...)
 
-      if existing_city = Location.where(city_id: response['id']).first
-        @location = existing_city
-      else
-        @location = Location.new
-        @location.city_id = response['id']
-        @location.city = response['name']
-        @location.country = response['sys']['country']
-        @location.lat = response['coord']['lat']
-        @location.lon = response['coord']['lon']
-        @location.save
+    # Expect JSON.parse to have been called once
+    # Timecop.travel(5.minutes.ago).do
+    #   WeatherFetcher.fetch(...)
+    # end
+    # WeatherFetcher.fetch(...)
+
+    
+
+    @fetched_data[sanitized_location]['list'].each do |response|
+
+      #if existing_city = Location.where(city_id: response['id']).first
+      #  @location = existing_city
+      #else
+      #  @location = Location.new
+      #  @
+      #  @location.save
+      #end
+
+      @location = Location.where(city_id: response['id']).first_or_create do |location|
+        location.city_id = response['id']
+        location.city = response['name']
+        location.country = response['sys']['country']
+        location.lat = response['coord']['lat']
+        location.lon = response['coord']['lon']
       end
 
+      weather_report = WeatherReport.where(location: @location, time_received: response['dt']).first_or_create do |weather_report|
+        # Move lines from below up here
+      end
       weather_report = WeatherReport.new(location: @location)
       weather_report.time_received = response['dt']
       weather_report.sunrise = response['sys']['sunrise']
