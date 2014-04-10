@@ -8,8 +8,9 @@ class WeatherFetcher < ActiveRecord::Base
   APPKEY = "APPID=#{ENV['OPENWEATHER_APPID']}"
 
   def self.fetch(location)
+    sanitized_location = location.split(/[\s,]+/).map(&:strip).join(',')
     search_by_city_url = "http://api.openweathermap.org/data/2.5/find?q="
-    url = URI.escape("#{search_by_city_url}#{location}&#{APPKEY}")
+    url = URI.escape("#{search_by_city_url}#{sanitized_location}&#{APPKEY}")
     array_of_responses = JSON.parse(open(url).read)
 
     array_of_responses['list'].each do |response|
