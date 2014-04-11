@@ -2,7 +2,7 @@ module WeatherReportsHelper
 
   def time_received(weather_report)
     if Time.at(weather_report.time_received).today?
-      Time.at(weather_report.time_received).strftime("%I:%M %P")
+      Time.at(weather_report.time_received).strftime("today at %I:%M %P")
     else
       Time.at(weather_report.time_received).strftime("%x, %I:%M %P")
     end

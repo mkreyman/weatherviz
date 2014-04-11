@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-  before_action :set_location, only: [:show, :edit, :update, :destroy]
+  before_action :set_location, only: [:show, :edit, :update, :destroy, :reports]
 
   def index
     @locations = Location.all
@@ -47,6 +47,10 @@ class LocationsController < ApplicationController
       format.html { redirect_to locations_url }
       format.json { head :no_content }
     end
+  end
+
+  def reports
+    @location.weather_reports
   end
 
   private

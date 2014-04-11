@@ -2,7 +2,11 @@ WeatherViz::Application.routes.draw do
 
   resources :weather_reports
 
-  resources :locations
+  resources :locations do
+    member do
+      get 'reports' => "locations#reports"
+    end
+  end
 
   resources :users
 

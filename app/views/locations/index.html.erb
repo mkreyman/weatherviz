@@ -4,11 +4,9 @@
   <thead>
     <tr>
       <th>City</th>
-      <th>City</th>
-      <th>State</th>
       <th>Country</th>
-      <th>Lat</th>
-      <th>Lon</th>
+      <th>Latitude</th>
+      <th>Longtitude</th>
       <th></th>
       <th></th>
       <th></th>
@@ -18,15 +16,13 @@
   <tbody>
     <% @locations.each do |location| %>
       <tr>
-        <td><%= location.city_id %></td>
         <td><%= location.city %></td>
-        <td><%= location.state %></td>
-        <td><%= location.country %></td>
+        <td><%= country(location) %></td>
         <td><%= location.lat %></td>
         <td><%= location.lon %></td>
-        <td><%= link_to 'Show', location %></td>
+        <td><%= link_to 'Show reports', reports_location_path(location) %></td>
         <td><%= link_to 'Edit', edit_location_path(location) %></td>
-        <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
