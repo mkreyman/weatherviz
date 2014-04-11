@@ -46,6 +46,7 @@ class WeatherFetcher
 
       @location = Location.where(
           city_id: response['id']).first_or_create do |location|
+
         location.city_id = response['id']
         location.city = response['name']
         location.country = response['sys']['country']

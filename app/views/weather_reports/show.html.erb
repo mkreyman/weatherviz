@@ -1,84 +1,83 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Time received:</strong>
-  <%= @weather_report.time_received %>
+  <strong>Location:</strong>
+  <%= city(@weather_report) %>
+</p>
+
+<p>
+  <strong>At time:</strong>
+  <%= time_received(@weather_report) %>
 </p>
 
 <p>
   <strong>Sunrise:</strong>
-  <%= @weather_report.sunrise %>
+  <%= sunrise(@weather_report) %>
 </p>
 
 <p>
   <strong>Sunset:</strong>
-  <%= @weather_report.sunset %>
+  <%= sunset(@weather_report) %>
 </p>
 
 <p>
   <strong>Weather:</strong>
-  <%= @weather_report.weather %>
+  <%= describe_weather(@weather_report) %>
 </p>
 
 <p>
-  <strong>Weather desc:</strong>
-  <%= @weather_report.weather_desc %>
+  <strong>Current Temp:</strong>
+  <%= temp(@weather_report) %>
 </p>
 
 <p>
-  <strong>Temp:</strong>
-  <%= @weather_report.temp %>
+  <strong>Min Temp:</strong>
+  <%= temp_min(@weather_report) %>
 </p>
 
 <p>
-  <strong>Temp min:</strong>
-  <%= @weather_report.temp_min %>
-</p>
-
-<p>
-  <strong>Temp max:</strong>
-  <%= @weather_report.temp_max %>
+  <strong>Max Temp:</strong>
+  <%= temp_max(@weather_report) %>
 </p>
 
 <p>
   <strong>Pressure:</strong>
-  <%= @weather_report.pressure %>
+  <%= pressure(@weather_report) %>
 </p>
 
 <p>
   <strong>Humidity:</strong>
-  <%= @weather_report.humidity %>
+  <%= humidity(@weather_report) %>
 </p>
 
 <p>
   <strong>Wind speed:</strong>
-  <%= @weather_report.wind_speed %>
+  <%= wind_speed(@weather_report) %>
 </p>
 
 <p>
   <strong>Wind gust:</strong>
-  <%= @weather_report.wind_gust %>
+  <%= wind_gust(@weather_report) %>
 </p>
 
 <p>
-  <strong>Wind degree:</strong>
-  <%= @weather_report.wind_degree %>
+  <strong>Wind direction:</strong>
+  <%= wind_degree(@weather_report) %>
 </p>
 
 <p>
   <strong>Clouds:</strong>
-  <%= @weather_report.clouds %>
+  <%= clouds(@weather_report) %>
 </p>
 
 <p>
-  <strong>Rain 3h:</strong>
-  <%= @weather_report.rain_3h %>
+  <strong>Rain (3h):</strong>
+  <%= rain_3h(@weather_report) %>
 </p>
 
 <p>
-  <strong>Snow 3h:</strong>
-  <%= @weather_report.snow_3h %>
+  <strong>Snow (3h):</strong>
+  <%= snow_3h(@weather_report) %>
 </p>
 
-<%= link_to 'Edit', edit_weather_report_path(@weather_report) %> |
 <%= link_to 'Back', weather_reports_path %>
