@@ -77,11 +77,19 @@ module WeatherReportsHelper
   end
 
   def rain_3h(weather_report)
-    weather_report.rain_3h || 'n/a'
+    if weather_report.rain_3h
+      sprintf("%.02f", mm_to_inch(weather_report.rain_3h))
+    else
+      'n/a'
+    end
   end
 
   def snow_3h(weather_report)
-    weather_report.snow_3h || 'n/a'
+    if weather_report.snow_3h
+      sprintf("%.02f", mm_to_inch(weather_report.snow_3h))
+    else
+      'n/a'
+    end
   end
 
   def to_F(kelvin)
@@ -111,5 +119,8 @@ module WeatherReportsHelper
     end
   end
 
+  def mm_to_inch(precipitation)
+    precipitation * 0.0393701
+  end
 
 end
