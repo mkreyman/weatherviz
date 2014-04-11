@@ -24,7 +24,7 @@
   </thead>
 
   <tbody>
-  <% @location.weather_reports.each do |weather_report| %>
+  <% @location.weather_reports.order(time_received: :desc).each do |weather_report| %>
       <tr>
         <td><%= time_received(weather_report) %></td>
         <td><%= sunrise(weather_report) %></td>

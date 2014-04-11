@@ -3,7 +3,10 @@ class WeatherReportsController < ApplicationController
 
   def index
     if params[:search]
-      @weather_reports = WeatherReport.search(params[:search]).order(time_received: :desc)
+      WeatherFetcher.fetch(params[:search])
+      sanitized_search = params[:search].split(/[\s,]+/).first.strip
+      # @weather_reports = WeatherReport.search(params[:search]).order(time_received: :desc)
+      @weather_reports = WeatherReport.search(sanitized_search).order(time_received: :desc)
     else
       @weather_reports = WeatherReport.order(time_received: :desc)
     end

@@ -28,20 +28,6 @@ class WeatherFetcher
     url = URI.escape("#{search_by_city_url}#{sanitized_location}&#{APPKEY}")
     @fetched_data[sanitized_location] ||= JSON.parse(open(url).read).merge('cached_at' => Time.now)
 
-    # Possible tests...
-    # Timecop gem
-    # Expect JSON.parse to have been called twice
-    # Timecop.travel(15.minutes.ago).do
-    #   WeatherFetcher.fetch(...)
-    # end
-    # WeatherFetcher.fetch(...)
-
-    # Expect JSON.parse to have been called once
-    # Timecop.travel(5.minutes.ago).do
-    #   WeatherFetcher.fetch(...)
-    # end
-    # WeatherFetcher.fetch(...)
-
     @fetched_data[sanitized_location]['list'].each do |response|
 
       @location = Location.where(

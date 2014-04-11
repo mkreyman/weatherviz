@@ -9,9 +9,11 @@
       <%= link_to image_tag("weatherviz_logo.png", size: '64x64'), root_path, class: 'brand' %>
       <div class="nav-collapse">
         <ul class="nav">
-          <li><%= link_to "My Alerts" %></li>
-          <li><%= link_to "My Profile" %></li>
-          <li><%= link_to "Nav Link 3" %></li>
+          <li><%= link_to 'Profile' %></li>
+          <li><%= link_to 'Alerts' %></li>
+          <li><%= link_to 'Locations', locations_path %></li>
+          <li><%= link_to 'Reports', weather_reports_path %></li>
+          <li><%= link_to 'Search', root_path %></li>
         </ul>
         <%= render 'layouts/authentication' %>
       </div>

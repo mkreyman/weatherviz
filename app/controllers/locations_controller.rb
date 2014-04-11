@@ -3,7 +3,10 @@ class LocationsController < ApplicationController
 
   def index
     if params[:search]
-      @locations = Location.search(params[:search]).order(city: :asc)
+      WeatherFetcher.fetch(params[:search])
+      sanitized_search = params[:search].split(/[\s,]+/).first.strip
+      # @locations = Location.search(params[:search]).order(city: :asc)
+      @locations = Location.search(sanitized_search).order(city: :asc)
     else
       @locations = Location.order(city: :asc)
     end
@@ -54,6 +57,7 @@ class LocationsController < ApplicationController
   end
 
   def reports
+    WeatherFetcher.fetch(@location.city)
     @location.weather_reports
   end
 
