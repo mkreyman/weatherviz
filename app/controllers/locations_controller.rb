@@ -2,7 +2,11 @@ class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy, :reports]
 
   def index
-    @locations = Location.all
+    if params[:search]
+      @locations = Location.search(params[:search]).order(city: :asc)
+    else
+      @locations = Location.order(city: :asc)
+    end
   end
 
   def show

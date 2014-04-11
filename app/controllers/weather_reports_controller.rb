@@ -2,7 +2,11 @@ class WeatherReportsController < ApplicationController
   before_action :set_weather_report, only: [:show, :edit, :update, :destroy]
 
   def index
-    @weather_reports = WeatherReport.all
+    if params[:search]
+      @weather_reports = WeatherReport.search(params[:search]).order(time_received: :desc)
+    else
+      @weather_reports = WeatherReport.order(time_received: :desc)
+    end
   end
 
   def show
