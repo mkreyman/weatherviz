@@ -78,7 +78,7 @@ module WeatherReportsHelper
 
   def rain_3h(weather_report)
     if weather_report.rain_3h
-      sprintf("%.02f", mm_to_inch(weather_report.rain_3h))
+      sprintf("%.02f in", mm_to_inch(weather_report.rain_3h))
     else
       'n/a'
     end
@@ -86,7 +86,7 @@ module WeatherReportsHelper
 
   def snow_3h(weather_report)
     if weather_report.snow_3h
-      sprintf("%.02f", mm_to_inch(weather_report.snow_3h))
+      sprintf("%.02f in", mm_to_inch(weather_report.snow_3h))
     else
       'n/a'
     end
