@@ -21,6 +21,25 @@ feature 'User Authentication' do
     expect(page).to have_text("Thank you for signing up #{@user.first_name}")
   end
 
+  scenario 'login followed by signout' do
+    @user = FactoryGirl.create(:user)
+    visit '/'
+
+    expect(page).to have_link('Login')
+
+    click_link 'Login'
+
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: @user.password
+
+    click_button 'Login'
+
+    click_link 'Logout'
+
+    expect(page).to have_content("#{@user.email} has been logged out")
+    expect(page).to have_link('Login')
+  end
+
   scenario 'allows existing user to login' do
     @user = FactoryGirl.create(:user)
     visit '/'
@@ -36,11 +55,26 @@ feature 'User Authentication' do
 
     expect(page).to have_text("Welcome back #{@user.first_name}")
     expect(page).to have_text("Signed in as #{@user.email}")
+
   end
+
+  scenario 'does not allow to login with invalid credentials' do
+    @user = FactoryGirl.build(:user)
+    visit login_path
+
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: @user.password
+
+    click_button 'Login'
+
+    expect(page).to have_text("Invalid email or password")
+    expect(page).to have_link('Login')
+  end
+
 end
 
 feature "Profile Page" do
-  scenario "allows to view user profile page" do
+  scenario "allows to view user profile" do
     @user = FactoryGirl.create(:user)
     visit user_path(@user)
 

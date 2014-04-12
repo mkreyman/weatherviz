@@ -9,13 +9,16 @@ WeatherViz::Application.routes.draw do
   end
 
   resources :users
+  get 'signup', to: 'users#new', as: 'signup'
 
   root :to => 'static_pages#home'
 
+  resources :sessions, only: [:login, :create, :destroy]
   get 'login', to: 'sessions#login', as: 'login'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   get 'auth/:provider/callback', to: 'sessions#oauth'
+
   get 'static_pages/home'
 
   # The priority is based upon order of creation: first created -> highest priority.

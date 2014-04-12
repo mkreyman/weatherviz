@@ -26,4 +26,7 @@ WeatherViz::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  # http://guides.rubyonrails.org/debugging_rails_applications.html
+  Rails.logger.level = 0 # at any time
 end

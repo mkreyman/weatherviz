@@ -16,15 +16,11 @@ class SessionsController < ApplicationController
   end
 
   def create
-    # Old way of doing it...
-    # User.find_by_email(params[:email])
     user = User.where(email: params[:email]).first
     if user && user.authenticate(params[:password])
-      # User has correct password
       session[:user_id] = user.id
       redirect_to root_path, notice: "Welcome back #{user.first_name}"
     else
-      # User does not exist, or has invalid password
       flash[:alert] = 'Invalid email or password'
       render :login
     end
