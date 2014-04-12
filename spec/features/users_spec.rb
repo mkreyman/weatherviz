@@ -2,22 +2,23 @@ require 'spec_helper'
 
 feature 'User Authentication' do
   scenario 'allows a user to signup' do
+    @user = FactoryGirl.build(:user)
     visit '/'
 
     expect(page).to have_link('Signup')
 
     click_link 'Signup'
 
-    fill_in 'First name', with: 'Kaitlin'
-    fill_in 'Last name', with: 'Barrer'
-    fill_in 'Email', with: 'kaitlin@barrer.com'
-    fill_in 'Password', with: 'supersecret'
-    fill_in 'Password confirmation', with: 'supersecret'
+    fill_in 'First name', with: @user.first_name
+    fill_in 'Last name', with: @user.last_name
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: @user.password
+    fill_in 'Password confirmation', with: @user.password_confirmation
 
     click_button 'Signup'
 
     expect(current_path).to eq('/')
-    expect(page).to have_text('Thank you for signing up Kaitlin')
+    expect(page).to have_text("Thank you for signing up #{@user.first_name}")
   end
 
   scenario 'allows existing user to login' do
@@ -36,6 +37,14 @@ feature 'User Authentication' do
     expect(page).to have_text("Welcome back #{@user.first_name}")
     expect(page).to have_text("Signed in as #{@user.email}")
   end
+end
 
+feature "Profile Page" do
+  scenario "allows to view user profile page" do
+    @user = FactoryGirl.create(:user)
+    visit user_path(@user)
 
+    expect(page).to have_content(@user.first_name)
+    expect(page).to have_title("#{@user.first_name} #{@user.last_name}")
+  end
 end
