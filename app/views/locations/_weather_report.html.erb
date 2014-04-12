@@ -1,0 +1,51 @@
+<h1>Listing reports for <%= @location.city %></h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Received</th>
+    <th>Sunrise</th>
+    <th>Sunset</th>
+    <th>Weather</th>
+    <th>Temp</th>
+    <th>Min Temp</th>
+    <th>Max Temp</th>
+    <th>Pressure</th>
+    <th>Humidity</th>
+    <th>Wind speed</th>
+    <th>Wind gust</th>
+    <th>Wind direction</th>
+    <th>Clouds</th>
+    <th>Rain (3h)</th>
+    <th>Snow (3h)</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @location.weather_reports.order(time_received: :desc).each do |weather_report| %>
+      <tr>
+        <td><%= time_received(weather_report) %></td>
+        <td><%= sunrise(weather_report) %></td>
+        <td><%= sunset(weather_report) %></td>
+        <td><%= describe_weather(weather_report) %></td>
+        <td><%= temp(weather_report) %></td>
+        <td><%= temp_min(weather_report) %></td>
+        <td><%= temp_max(weather_report) %></td>
+        <td><%= pressure(weather_report) %></td>
+        <td><%= humidity(weather_report) %></td>
+        <td><%= wind_speed(weather_report) %></td>
+        <td><%= wind_gust(weather_report) %></td>
+        <td><%= wind_degree(weather_report) %></td>
+        <td><%= clouds(weather_report) %></td>
+        <td><%= rain_3h(weather_report) %></td>
+        <td><%= snow_3h(weather_report) %></td>
+        <td><%= link_to 'Show', weather_report %></td>
+        <td><%= link_to 'Delete', weather_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<p><%= link_to 'Back', locations_path %></p>

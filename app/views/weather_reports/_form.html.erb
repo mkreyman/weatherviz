@@ -1,0 +1,81 @@
+<%= form_for(@weather_report) do |f| %>
+  <% if @weather_report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@weather_report.errors.count, "error") %> prohibited this weather_report from being saved:</h2>
+
+      <ul>
+      <% @weather_report.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :time_received %><br>
+    <%= f.number_field :time_received %>
+  </div>
+  <div class="field">
+    <%= f.label :sunrise %><br>
+    <%= f.number_field :sunrise %>
+  </div>
+  <div class="field">
+    <%= f.label :sunset %><br>
+    <%= f.number_field :sunset %>
+  </div>
+  <div class="field">
+    <%= f.label :weather %><br>
+    <%= f.text_field :weather %>
+  </div>
+  <div class="field">
+    <%= f.label :weather_desc %><br>
+    <%= f.text_field :weather_desc %>
+  </div>
+  <div class="field">
+    <%= f.label :temp %><br>
+    <%= f.text_field :temp %>
+  </div>
+  <div class="field">
+    <%= f.label :temp_min %><br>
+    <%= f.text_field :temp_min %>
+  </div>
+  <div class="field">
+    <%= f.label :temp_max %><br>
+    <%= f.text_field :temp_max %>
+  </div>
+  <div class="field">
+    <%= f.label :pressure %><br>
+    <%= f.number_field :pressure %>
+  </div>
+  <div class="field">
+    <%= f.label :humidity %><br>
+    <%= f.number_field :humidity %>
+  </div>
+  <div class="field">
+    <%= f.label :wind_speed %><br>
+    <%= f.text_field :wind_speed %>
+  </div>
+  <div class="field">
+    <%= f.label :wind_gust %><br>
+    <%= f.text_field :wind_gust %>
+  </div>
+  <div class="field">
+    <%= f.label :wind_degree %><br>
+    <%= f.number_field :wind_degree %>
+  </div>
+  <div class="field">
+    <%= f.label :clouds %><br>
+    <%= f.text_field :clouds %>
+  </div>
+  <div class="field">
+    <%= f.label :rain_3h %><br>
+    <%= f.number_field :rain_3h %>
+  </div>
+  <div class="field">
+    <%= f.label :snow_3h %><br>
+    <%= f.number_field :snow_3h %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

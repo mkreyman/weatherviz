@@ -1,0 +1,36 @@
+<h1>Listing locations</h1>
+
+<%= render 'locations/search_form' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>City</th>
+      <th>Country</th>
+      <th>Latitude</th>
+      <th>Longtitude</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @locations.each do |location| %>
+      <tr>
+        <td><%= location.city %></td>
+        <td><%= country(location) %></td>
+        <td><%= location.lat %></td>
+        <td><%= location.lon %></td>
+        <td><%= link_to 'Show reports', reports_location_path(location) %></td>
+        <td><%= link_to 'Edit', edit_location_path(location) %></td>
+        <td><%= link_to 'Delete', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+<%= link_to 'New Location', root_path %>

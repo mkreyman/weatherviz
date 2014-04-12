@@ -1,0 +1,83 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Location:</strong>
+  <%= city(@weather_report) %>
+</p>
+
+<p>
+  <strong>Received:</strong>
+  <%= time_received(@weather_report) %>
+</p>
+
+<p>
+  <strong>Sunrise:</strong>
+  <%= sunrise(@weather_report) %>
+</p>
+
+<p>
+  <strong>Sunset:</strong>
+  <%= sunset(@weather_report) %>
+</p>
+
+<p>
+  <strong>Weather:</strong>
+  <%= describe_weather(@weather_report) %>
+</p>
+
+<p>
+  <strong>Current Temp:</strong>
+  <%= temp(@weather_report) %>
+</p>
+
+<p>
+  <strong>Min Temp:</strong>
+  <%= temp_min(@weather_report) %>
+</p>
+
+<p>
+  <strong>Max Temp:</strong>
+  <%= temp_max(@weather_report) %>
+</p>
+
+<p>
+  <strong>Pressure:</strong>
+  <%= pressure(@weather_report) %>
+</p>
+
+<p>
+  <strong>Humidity:</strong>
+  <%= humidity(@weather_report) %>
+</p>
+
+<p>
+  <strong>Wind speed:</strong>
+  <%= wind_speed(@weather_report) %>
+</p>
+
+<p>
+  <strong>Wind gust:</strong>
+  <%= wind_gust(@weather_report) %>
+</p>
+
+<p>
+  <strong>Wind direction:</strong>
+  <%= wind_degree(@weather_report) %>
+</p>
+
+<p>
+  <strong>Clouds:</strong>
+  <%= clouds(@weather_report) %>
+</p>
+
+<p>
+  <strong>Rain (3h):</strong>
+  <%= rain_3h(@weather_report) %>
+</p>
+
+<p>
+  <strong>Snow (3h):</strong>
+  <%= snow_3h(@weather_report) %>
+</p>
+
+<p><%= link_to 'Back', weather_reports_path %></p>
