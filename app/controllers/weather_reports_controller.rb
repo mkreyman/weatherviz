@@ -7,7 +7,7 @@ class WeatherReportsController < ApplicationController
       sanitized_search = params[:search].split(/[\s,]+/).first.strip
       @weather_reports = WeatherReport.search(sanitized_search).order(time_received: :desc)
       if @weather_reports.blank?
-        redirect_to weather_reports_path, notice: 'Sorry, no results found.'
+        redirect_to weather_reports_path #, notice: 'Sorry, no results found.'
       else
         @weather_reports
       end

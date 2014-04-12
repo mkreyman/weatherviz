@@ -7,7 +7,7 @@ class LocationsController < ApplicationController
       sanitized_search = params[:search].split(/[\s,]+/).first.strip
       @locations = Location.search(sanitized_search).order(city: :asc)
       if @locations.blank?
-        redirect_to locations_path, notice: 'Sorry, no results found.'
+        redirect_to locations_path # , notice: 'Sorry, no results found.'
       else
         @locations
       end
