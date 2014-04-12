@@ -13,6 +13,7 @@ group :development, :test do
 #  gem 'guard-rubocop'
   gem 'factory_girl_rails'
   gem 'byebug'
+  gem 'sqlite3'
 end
 
 group :test do
@@ -28,8 +29,13 @@ group :development do
   gem 'ruby_gntp'
 end
 
+group :production do
+  gem 'rails_12factor'
+  gem 'pg'
+end
+
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
