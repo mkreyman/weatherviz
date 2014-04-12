@@ -2,11 +2,10 @@
 
 FactoryGirl.define do
   factory :location do
-    city_id 1
-    city "MyString"
-    state "MyString"
-    country "MyString"
-    lat 1.5
-    lon 1.5
+    city { Faker::Address.city }
+    state { Faker::Address.state_abbr }
+    country { Faker::Address.country }
+    lat { Faker::Address.latitude }
+    lon { Faker::Address.longitude }
   end
 end

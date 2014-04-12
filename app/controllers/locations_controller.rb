@@ -5,8 +5,12 @@ class LocationsController < ApplicationController
     if params[:search]
       WeatherFetcher.fetch(params[:search])
       sanitized_search = params[:search].split(/[\s,]+/).first.strip
-      # @locations = Location.search(params[:search]).order(city: :asc)
       @locations = Location.search(sanitized_search).order(city: :asc)
+      if @locations.blank?
+        redirect_to locations_path, notice: 'Sorry, no results found.'
+      else
+        @locations
+      end
     else
       @locations = Location.order(city: :asc)
     end
@@ -58,7 +62,11 @@ class LocationsController < ApplicationController
 
   def reports
     WeatherFetcher.fetch(@location.city)
-    @location.weather_reports
+    if @location.weather_reports.blank?
+      redirect_to root_path, notice: 'Sorry, no results found.'
+    else
+      @location.weather_reports
+    end
   end
 
   private

@@ -5,8 +5,12 @@ class WeatherReportsController < ApplicationController
     if params[:search]
       WeatherFetcher.fetch(params[:search])
       sanitized_search = params[:search].split(/[\s,]+/).first.strip
-      # @weather_reports = WeatherReport.search(params[:search]).order(time_received: :desc)
       @weather_reports = WeatherReport.search(sanitized_search).order(time_received: :desc)
+      if @weather_reports.blank?
+        redirect_to weather_reports_path, notice: 'Sorry, no results found.'
+      else
+        @weather_reports
+      end
     else
       @weather_reports = WeatherReport.order(time_received: :desc)
     end
