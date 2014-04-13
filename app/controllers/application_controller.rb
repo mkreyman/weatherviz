@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user
+  helper_method :current_user?
 
   private
   def current_user
@@ -13,4 +14,9 @@ class ApplicationController < ActionController::Base
     session.delete(:user_id)
     @current_user = nil
   end
+
+  def current_user?(user)
+    user == current_user
+  end
+
 end

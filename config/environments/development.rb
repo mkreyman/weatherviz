@@ -28,5 +28,5 @@ WeatherViz::Application.configure do
   config.assets.debug = true
 
   # http://guides.rubyonrails.org/debugging_rails_applications.html
-  Rails.logger.level = 0 # at any time
+  # Rails.logger.level = 0 # at any time
 end

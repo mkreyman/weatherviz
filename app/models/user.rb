@@ -8,4 +8,10 @@ class User < ActiveRecord::Base
   validates_presence_of :password_confirmation, :on => :create,
     if: lambda { |user| !user.omniauth? && user.password.present? }
 
+  validates :first_name, presence: true, length: { maximum: 50 }
+  validates :last_name, presence: true, length: { maximum: 50 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
+            uniqueness: { case_sensitive: false }
+
 end

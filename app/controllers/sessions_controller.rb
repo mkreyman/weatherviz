@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     ).first_or_initialize(omniauth_options)
     if @user.persisted?
       session[:user_id] = @user.id
-      redirect_to root_path, notice: "Welcome back #{@user.first_name}"
+      redirect_to @user, notice: "Welcome back #{@user.first_name}"
     else
       render 'users/new'
     end
@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
     user = User.where(email: params[:email]).first
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to root_path, notice: "Welcome back #{user.first_name}"
+      redirect_to user, notice: "Welcome back #{user.first_name}"
     else
       flash[:alert] = 'Invalid email or password'
       render :login

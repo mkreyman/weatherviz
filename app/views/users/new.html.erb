@@ -1,4 +1,4 @@
-
+<% provide(:title, 'Sign up') %>
 <% unless @user.omniauth? %>
  <div>
    <h1>Sign up</h1>
@@ -16,5 +16,12 @@
     <h1>Verify Details</h1>
 <% end %>
 
-<%= render 'users/form' %>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@user) do |f| %>
+        <%= render 'fields', f: f %>
+        <%= f.submit 'Signup', class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
 

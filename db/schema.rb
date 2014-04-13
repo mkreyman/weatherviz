@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140409041325) do
+ActiveRecord::Schema.define(version: 20140413084041) do
 
   create_table "locations", force: true do |t|
     t.integer  "city_id"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140409041325) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "omniauth"
+    t.boolean  "admin",           default: false
   end
 
   create_table "weather_reports", force: true do |t|
