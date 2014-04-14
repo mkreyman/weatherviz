@@ -1,8 +1,11 @@
 require 'spec_helper'
 
-feature 'User Authentication' do
+feature 'User Authentication - signing up' do
+  background do
+    @user = build(:user)
+  end
+
   scenario 'allows a user to signup' do
-    @user = FactoryGirl.build(:user)
     visit '/'
 
     expect(page).to have_link('Signup')
@@ -22,7 +25,6 @@ feature 'User Authentication' do
   end
 
   scenario "prevents signing up with blank password" do
-    @user = FactoryGirl.build(:user)
     visit signup_path
 
     fill_in 'First name', with: @user.first_name
@@ -33,8 +35,42 @@ feature 'User Authentication' do
     expect(page).to have_content("Password can't be blank")
   end
 
-  scenario 'login followed by signout' do
-    @user = FactoryGirl.create(:user)
+  scenario "prevents signing up with the same email" do
+    @user_existing = create(:user)
+
+    visit signup_path
+
+    fill_in 'First name', with: @user.first_name
+    fill_in 'Last name', with: @user.last_name
+    fill_in 'Email', with: @user_existing.email
+
+    click_button 'Signup'
+    expect(page).to have_content("Email has already been taken")
+  end
+end
+
+feature 'User Authentication - signing in' do
+  background do
+    @user = create(:user)
+  end
+
+  scenario 'allows existing user to login' do
+    visit '/'
+
+    expect(page).to have_link('Login')
+
+    click_link 'Login'
+
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: @user.password
+
+    click_button 'Login'
+
+    expect(page).to have_text("Welcome back #{@user.first_name}")
+    expect(page).to have_text("Signed in as #{@user.email}")
+  end
+
+  scenario 'allows user to log out' do
     visit '/'
 
     expect(page).to have_link('Login')
@@ -52,54 +88,34 @@ feature 'User Authentication' do
     expect(page).to have_link('Login')
   end
 
-  scenario 'allows existing user to login' do
-    @user = FactoryGirl.create(:user)
-    visit '/'
-
-    expect(page).to have_link('Login')
-
-    click_link 'Login'
-
-    fill_in 'Email', with: @user.email
-    fill_in 'Password', with: @user.password
-
-    click_button 'Login'
-
-    expect(page).to have_text("Welcome back #{@user.first_name}")
-    expect(page).to have_text("Signed in as #{@user.email}")
-
-  end
-
-  scenario 'does not allow to login with invalid credentials' do
-    @user = FactoryGirl.build(:user)
+  scenario 'prevents signing in with invalid credentials' do
     visit login_path
 
     fill_in 'Email', with: @user.email
-    fill_in 'Password', with: @user.password
+    fill_in 'Password', with: ''
 
     click_button 'Login'
 
     expect(page).to have_text("Invalid email or password")
     expect(page).to have_link('Login')
   end
-
 end
 
-feature "Profile Page" do
-  scenario "allows signed in user to view their own profile" do
-    @user = FactoryGirl.create(:user)
-    sign_in(@user)
 
+feature "Profile Page" do
+  background do
+    @user = create(:user)
+    sign_in(@user)
+  end
+
+  scenario "allows signed in user to view their own profile" do
     visit user_path(@user)
 
     expect(page).to have_content(@user.first_name)
     expect(page).to have_title("#{@user.first_name} #{@user.last_name}")
   end
 
-  scenario "allows signed in user to edit user profile" do
-    @user = FactoryGirl.create(:user)
-    sign_in(@user)
-
+  scenario "allows signed in user to edit their profile" do
     visit edit_user_path(@user)
 
     expect(page).to have_content("Update your profile")
@@ -114,9 +130,6 @@ feature "Profile Page" do
   end
 
   scenario "prevents user from updating their profile with blank or invalid email" do
-    @user = FactoryGirl.create(:user)
-    sign_in(@user)
-
     visit edit_user_path(@user)
 
     fill_in 'Email', with: ''
@@ -126,14 +139,78 @@ feature "Profile Page" do
   end
 end
 
-feature "Authentication" do
-  scenario "prompts non-signed-in users to login when attempting to visit a protected page" do
-    @user = FactoryGirl.create(:user)
+
+feature 'User Authorization' do
+  background do
+    @user = create(:user)
+  end
+
+  scenario "prompts to login before visiting a protected page" do
     visit edit_user_path(@user)
 
     expect(page).to have_title("Log in")
     expect(current_path).to eq(login_path)
   end
 
+  scenario "prevents user from viewing other users' profiles" do
+    @another_user = create(:user)
+    sign_in(@user)
+
+    visit user_path(@another_user)
+    expect(current_path).to eq(login_path)
+  end
+
+  scenario "allows admin to view all users" do
+    @admin = create(:admin)
+    sign_in(@admin)
+
+    visit users_path
+
+    expect(current_path).to eq(users_path)
+    expect(page).to have_title("All users")
+  end
+
+  scenario "prevents non-admin user from viewing all users" do
+    sign_in(@user)
+    visit users_path
+
+    expect(current_path).to eq(root_path)
+  end
+
+  scenario "allows admin to delete a user" do
+    @admin = create(:admin)
+    sign_in(@admin)
+    visit users_path
+
+    expect(page).to have_link('delete')
+    click_link('delete', match: :first)
+
+    expect(page).to have_content("User deleted.")
+  end
+
+  scenario "prevents non-admin from deleting themselves" do
+    @another_user = create(:user)
+    sign_in(@user)
+    visit user_path(@user)
+
+    expect(page).not_to have_link('delete')
+  end
+
+  scenario "prevents admin from deleting themselves" do
+    @admin = create(:admin)
+    sign_in(@admin)
+    visit users_path
+
+    expect(page).to have_link('delete')
+    # for an existing user created as the 'background' for this feature.
+    click_link('delete', match: :first)
+
+    expect(page).to have_content("User deleted.")
+
+    # no more users except himself
+    expect(page).not_to have_link('delete')
+  end
 
 end
+
+
