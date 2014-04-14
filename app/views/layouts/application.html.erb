@@ -13,9 +13,7 @@
   <%= render 'layouts/navigation' %>
 
   <% flash.each do |type, message| %>
-      <div class='flash' id='<%= type %>'>
-        <%= message %>
-      </div>
+      <%= content_tag(:div, message, class: "alert alert-#{type}") %>
   <% end %>
 
   <%= yield %>
