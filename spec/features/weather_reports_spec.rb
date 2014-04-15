@@ -54,7 +54,7 @@ end
 
 feature "Deleting weather reports" do
   background do
-    @location = 'Boulder'
+    @location = 'Pyatigorsk'
     visit '/weather_reports'
     fill_in 'Search for a city name:', with: @location
     click_button 'Search'
@@ -80,7 +80,7 @@ feature "Deleting weather reports" do
     visit '/weather_reports'
     expect(page).to have_link('Delete')
 
-    click_link('Delete')
+    click_link('Delete', match: :first)
     expect(page).to_not have_content(@location)
   end
 

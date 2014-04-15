@@ -157,7 +157,9 @@ feature 'User Authorization' do
     sign_in(@user)
 
     visit user_path(@another_user)
-    expect(current_path).to eq(login_path)
+    expect(current_path).to eq(root_path)
+    #save_and_open_page
+    expect(page).to have_text("Not authorized")
   end
 
   scenario "allows admin to view all users" do
@@ -210,6 +212,11 @@ feature 'User Authorization' do
     # no more users except himself
     expect(page).not_to have_link('delete')
   end
+
+  scenario "prevents admin from disabling themselves as admin" do
+
+  end
+
 
 end
 
