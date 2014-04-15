@@ -49,5 +49,39 @@ feature 'Weather Reports Search' do
 
     expect(page).to have_content(@location)
   end
+end
+
+
+feature "Deleting weather reports" do
+  background do
+    @location = 'Boulder'
+    visit '/weather_reports'
+    fill_in 'Search for a city name:', with: @location
+    click_button 'Search'
+  end
+
+  scenario "visitor can't delete a report" do
+    visit '/weather_reports'
+    expect(page).to_not have_link('Delete')
+  end
+
+  scenario "Non-admin user can't delete a report" do
+    @user = create(:user)
+    sign_in(@user)
+
+    visit '/weather_reports'
+    expect(page).to_not have_link('Delete')
+  end
+
+  scenario "admin can delete a report" do
+    @admin = create(:admin)
+    sign_in(@admin)
+
+    visit '/weather_reports'
+    expect(page).to have_link('Delete')
+
+    click_link('Delete')
+    expect(page).to_not have_content(@location)
+  end
 
 end

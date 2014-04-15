@@ -46,7 +46,11 @@
         <td><%= rain_3h(weather_report) %></td>
         <td><%= snow_3h(weather_report) %></td>
         <td><%= link_to 'Show', weather_report %></td>
-        <td><%= link_to 'Delete', weather_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.present? && admin_user?(current_user) %>
+          <td><%= link_to 'Delete', weather_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+            <td></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
