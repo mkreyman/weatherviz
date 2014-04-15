@@ -53,11 +53,8 @@ class WeatherReportsController < ApplicationController
   end
 
   def destroy
-    @weather_report.destroy
-    respond_to do |format|
-      format.html { redirect_to weather_reports_url }
-      format.json { head :no_content }
-    end
+    @weather_report.destroy if current_user.admin?
+    redirect_to weather_reports_url
   end
 
   private

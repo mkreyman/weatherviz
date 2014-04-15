@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :current_user?
+  helper_method :admin_user?
 
   private
   def current_user
@@ -17,6 +18,10 @@ class ApplicationController < ActionController::Base
 
   def current_user?(user)
     user == current_user
+  end
+
+  def admin_user?(user)
+    user.admin?
   end
 
 end
