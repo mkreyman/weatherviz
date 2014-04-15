@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :signed_in_user, only: [:show, :edit, :update]
   before_action :set_user, only: [:show, :edit, :update]
+  before_action :allowed_to_edit?, only: [:show, :edit, :update]
   before_action :admin_user, only: [:index, :destroy]
 
   def index
@@ -19,6 +20,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.update_attributes(admin: true) if User.count == 1
 
     if @user.save
       session[:user_id] = @user.id
@@ -38,7 +40,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if User.find(params[:id]).admin && current_user.admin
+    if User.find(params[:id]).admin && current_user.admin?
       flash[:error] = "Cannot delete current admin"
       redirect_to users_url
     else
@@ -58,20 +60,26 @@ class UsersController < ApplicationController
     end
   end
 
-  private
-    def set_user
-      @user = User.find(params[:id])
-      redirect_to(login_url) unless current_user?(@user)
-    end
-
   def admin_user
     redirect_to(root_url) unless current_user.admin?
   end
 
+  private
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    def allowed_to_edit?
+      if current_user.present? && (current_user.admin? || current_user == @user)
+      else
+        redirect_to(root_url, alert: "Not authorized")
+      end
+    end
+
     def user_params
-      params.require(:user).permit(
-          :first_name, :last_name, :email,
-          :cell_phone, :city, :state,
-          :password, :password_confirmation, :omniauth)
+      user_parameters = [:first_name, :last_name, :email,
+                       :password, :password_confirmation, :omniauth]
+      user_parameters << :admin if current_user && current_user.admin?
+      params.require(:user).permit(*user_parameters)
     end
 end

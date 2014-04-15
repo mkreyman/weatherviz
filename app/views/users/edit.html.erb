@@ -5,6 +5,12 @@
   <div class="span6 offset3">
     <%= form_for(@user) do |f| %>
         <%= render 'users/fields', f: f %>
+        <% if current_user.present? && current_user.admin? %>
+          <div class="field">
+            <%= f.check_box :admin %>
+            <%= f.label :admin, "Admin" %>
+          </div>
+        <% end %>
         <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
     <% end %>
 
