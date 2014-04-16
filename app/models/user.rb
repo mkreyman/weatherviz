@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   validates_confirmation_of :password,
     if: lambda { |user| !user.omniauth? && user.password.present? }
-  validates_presence_of :password, :on => :create,
+  validates_presence_of :password, length: { minimum: 8 }, :on => :create,
     if: lambda { |user| !user.omniauth? }
   validates_presence_of :password_confirmation, :on => :create,
     if: lambda { |user| !user.omniauth? && user.password.present? }

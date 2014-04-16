@@ -9,12 +9,12 @@ WeatherViz::Application.routes.draw do
   end
 
   resources :users
-  get 'signup', to: 'users#new', as: 'signup'
+  get 'signup', to: 'users#new'
 
   root :to => 'static_pages#home'
 
   resources :sessions, only: [:login, :create, :destroy]
-  get 'login', to: 'sessions#login', as: 'login'
+  get 'login', to: 'sessions#login'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   get 'auth/:provider/callback', to: 'sessions#oauth'

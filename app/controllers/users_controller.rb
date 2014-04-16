@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.update_attributes(admin: true) if User.count == 1
+    @user.update_attributes(admin: true) if User.count == 0
 
     if @user.save
       session[:user_id] = @user.id
