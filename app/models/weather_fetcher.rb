@@ -36,8 +36,8 @@ class WeatherFetcher
         location.city_id = response['id']
         location.city = response['name']
         location.country = response['sys']['country']
-        location.lat = response['coord']['lat']
-        location.lon = response['coord']['lon']
+        location.latitude = response['coord']['lat']
+        location.longitude = response['coord']['lon']
       end
 
       weather_report = WeatherReport.where(location: @location,
