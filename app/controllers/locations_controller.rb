@@ -42,21 +42,29 @@ class LocationsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @location.update(location_params)
-        format.html { redirect_to @location, notice: 'Location was successfully updated.' }
-        format.json { head :no_content }
+      if (current_user.present? && current_user.admin?)
+        if @location.update(location_params)
+          format.html { redirect_to @location, notice: 'Location was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: 'edit' }
+          format.json { render json: @location.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
+        redirect_to locations_url, alert: 'Not authorized.'
       end
     end
   end
 
   def destroy
-    @location.destroy
-    respond_to do |format|
-      format.html { redirect_to locations_url }
-      format.json { head :no_content }
+    if (current_user.present? && current_user.admin?)
+      @location.destroy
+        respond_to do |format|
+        format.html { redirect_to locations_url, notice: 'Location was deleted.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to locations_url, alert: 'Not authorized.'
     end
   end
 
