@@ -23,8 +23,10 @@
         <td><%= location.lat %></td>
         <td><%= location.lon %></td>
         <td><%= link_to 'Show reports', reports_location_path(location) %></td>
-        <td><%= link_to 'Edit', edit_location_path(location) %></td>
-        <td><%= link_to 'Delete', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if (current_user.present? && current_user.admin?) %>
+          <td><%= link_to 'Edit location', edit_location_path(location) %></td>
+          <td><%= link_to 'Delete', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

@@ -53,8 +53,12 @@ class WeatherReportsController < ApplicationController
   end
 
   def destroy
-    @weather_report.destroy if current_user.admin?
-    redirect_to weather_reports_url
+    if (current_user.present? && current_user.admin?)
+      @weather_report.destroy
+      redirect_to weather_reports_url, notice: 'Report was deleted.'
+    else
+      redirect_to weather_reports_path, alert: 'Not authorized.'
+    end
   end
 
   private
