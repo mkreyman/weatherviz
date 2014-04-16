@@ -17,6 +17,7 @@ WeatherViz::Application.routes.draw do
   get 'login', to: 'sessions#login'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
+  get 'logout', to: 'static_pages#home'
   get 'auth/:provider/callback', to: 'sessions#oauth'
 
   get 'static_pages/home'
