@@ -1,20 +1,20 @@
 class Location < ActiveRecord::Base
   has_many :weather_reports, :dependent => :destroy
   geocoded_by :address
-  reverse_geocoded_by :latitude, :longitude do |location,results|
+  reverse_geocoded_by :latitude, :longitude do |obj,results|
     if geo = results.first
-      location.street       = geo.address
-      location.city         = geo.city
-      location.state_code   = geo.state_code
-      location.state        = geo.state
-      location.postal_code  = geo.postal_code
-      location.country_code = geo.country_code
-      location.country      = geo.country
-      location.latitude     = geo.latitude
-      location.longitude    = geo.longitude
+      obj.street = geo.address.split(', ').first
+      obj.city    = geo.city
+      obj.state_code = geo.state_code
+      obj.postal_code = geo.postal_code
+      obj.state = geo.state
+      obj.country_code = geo.country_code
+      obj.country = geo.country
+      obj.latitude = geo.latitude
+      obj.longitude = geo.longitude
     end
   end
-  after_validation :geocode
+  after_validation :reverse_geocode
 
   def self.search(search)
     if search
@@ -31,4 +31,5 @@ class Location < ActiveRecord::Base
   def coordinates
     [:latitude, :longitude]
   end
+
 end

@@ -21,12 +21,12 @@
 
 <p>
   <strong>Lat:</strong>
-  <%= @location.lat %>
+  <%= @location.latitude %>
 </p>
 
 <p>
   <strong>Lon:</strong>
-  <%= @location.lon %>
+  <%= @location.longitude %>
 </p>
 
 <% if (current_user.present? && current_user.admin?) %>

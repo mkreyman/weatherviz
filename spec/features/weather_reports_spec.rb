@@ -11,7 +11,7 @@ feature 'Weather Reports Search' do
   scenario 'Visitor searches for a location' do
     # @location = FactoryGirl.create(:location)
     # Faker gives too hard to find cities!
-    @location = 'Boulder'
+    @location = 'Pueblo'
     visit '/weather_reports'
 
     fill_in 'Search for a city name:', with: @location
