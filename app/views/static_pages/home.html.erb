@@ -3,7 +3,7 @@
 
 <%= render 'locations/search_form' %>
 
-<p>Your current IP Address: <%= params[:location] %></p>
+<p>Your current IP Address: <%= request.location %></p>
 <p><%=  %></p>
 
 <%= link_to 'Browse recently searched locations', locations_path %> |
