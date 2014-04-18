@@ -18,7 +18,7 @@ class LocationFetcher
 
     if provider == 'openweather'
       city_and_state_url = "http://api.openweathermap.org/data/2.5/weather?q="
-      sanitized_search = search.split(/[\s,]+/).join(',').downcase
+      sanitized_search = search.split(', ').join(',').downcase
       url = URI.escape("#{city_and_state_url}#{sanitized_search}&#{appkey}")
       response = JSON.parse(open(url).read)
       @city_id = response['id']

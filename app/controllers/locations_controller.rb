@@ -4,9 +4,10 @@ class LocationsController < ApplicationController
   def index
     if params[:search].present?
       LocationFetcher.fetch(params[:search])
-      @locations = Location.search(params[:search])
+      @locations = Location.search(params[:search]).order(updated_at: :desc)
+      redirect_to locations_path
     else
-      @locations = Location.order(city: :asc)
+      @locations = Location.order(updated_at: :desc)
     end
   end
 

@@ -2,9 +2,9 @@ module WeatherReportsHelper
 
   def time_received(weather_report)
     if Time.at(weather_report.time_received).today?
-      Time.at(weather_report.time_received).strftime("today at %I:%M %P")
+      Time.at(weather_report.time_received).localtime.strftime("today at %I:%M %P")
     else
-      Time.at(weather_report.time_received).strftime("%x, %I:%M %P")
+      Time.at(weather_report.time_received).localtime.strftime("%x, %I:%M %P")
     end
   end
 
@@ -28,11 +28,19 @@ module WeatherReportsHelper
   end
 
   def sunrise(weather_report)
-    weather_report.sunrise || 'n/a'
+    if weather_report.sunrise.nil?
+      'n/a'
+    else
+      Time.at(weather_report.sunrise).localtime.strftime("%I:%M %P")
+    end
   end
 
   def sunset(weather_report)
-    weather_report.sunset || 'n/a'
+    if weather_report.sunset.nil?
+      'n/a'
+    else
+      Time.at(weather_report.sunset).localtime.strftime("%I:%M %P")
+    end
   end
 
   def temp(weather_report)

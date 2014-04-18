@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>City</th>
+      <th>State</th>
       <th>Country</th>
       <th>Latitude</th>
       <th>Longtitude</th>
@@ -19,6 +20,7 @@
     <% @locations.each do |location| %>
       <tr>
         <td><%= location.city %></td>
+        <td><%= location.state_code %></td>
         <td><%= country(location) %></td>
         <td><%= location.latitude %></td>
         <td><%= location.longitude %></td>
