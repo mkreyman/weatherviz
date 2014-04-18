@@ -18,7 +18,7 @@ class LocationFetcher
 
     if provider == 'openweather'
       city_and_state_url = "http://api.openweathermap.org/data/2.5/weather?q="
-      sanitized_search = search.split(/[\s,]+/).join(',').downcase
+      sanitized_search = search.split(', ').join(',').downcase
       url = URI.escape("#{city_and_state_url}#{sanitized_search}&#{appkey}")
       response = JSON.parse(open(url).read)
       @city_id = response['id']
@@ -40,6 +40,20 @@ class LocationFetcher
       @country_code = geo.data['address_components'][3]['short_name']
       @latitude = geo.data["geometry"]["location"]["lat"]
       @longitude = geo.data["geometry"]["location"]["lng"]
+
+      @geo = Geocoder.search(search).first do |obj,results|
+          if geo = results.first
+            obj.street = geo.address.split(', ').first
+            @city    = geo.city
+            obj.state_code = geo.state_code
+            obj.postal_code = geo.postal_code
+            obj.state = geo.state
+            obj.country_code = geo.country_code
+            obj.country = geo.country
+            obj.latitude = geo.latitude
+            obj.longitude = geo.longitude
+          end
+      end
 
     else
       @city = 'Denver'

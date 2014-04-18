@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140416222234) do
+ActiveRecord::Schema.define(version: 20140418173516) do
 
   create_table "locations", force: true do |t|
     t.integer  "city_id"
@@ -40,7 +40,12 @@ ActiveRecord::Schema.define(version: 20140416222234) do
     t.datetime "updated_at"
     t.boolean  "omniauth"
     t.boolean  "admin",           default: false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "ip_address"
   end
+
+  add_index "users", ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"
 
   create_table "weather_reports", force: true do |t|
     t.integer  "time_received"

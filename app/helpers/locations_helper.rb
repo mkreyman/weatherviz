@@ -2,7 +2,7 @@ module LocationsHelper
 
   def country(location)
     if location['country'] == 'United States of America'
-      'US'
+      'USA'
     else
       location['country']
     end
