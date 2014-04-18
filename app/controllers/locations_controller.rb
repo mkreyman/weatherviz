@@ -2,15 +2,9 @@ class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy, :reports]
 
   def index
-    if params[:search]
-      WeatherFetcher.fetch(params[:search])
-      sanitized_search = params[:search].split(/[\s,]+/).first.strip
-      @locations = Location.search(sanitized_search).order(city: :asc)
-      if @locations.blank?
-        redirect_to locations_path # , notice: 'Sorry, no results found.'
-      else
-        @locations
-      end
+    if params[:search].present?
+      LocationFetcher.fetch(params[:search])
+      @locations = Location.search(params[:search])
     else
       @locations = Location.order(city: :asc)
     end

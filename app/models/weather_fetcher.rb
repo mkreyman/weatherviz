@@ -3,45 +3,31 @@ require 'json'
 
 class WeatherFetcher
 
-  @fetched_data = {}
-
   # API key for OpenWeatherMap API
   APPKEY = "APPID=#{ENV['OPENWEATHER_APPID']}"
 
   def self.fetch(location)
 
-    sanitized_location = location.split(/[\s,]+/).map(&:strip).join(',')
-
-    #if @fetched_data[sanitized_location] &&  @fetched_data[sanitized_location]['cached_at'] > 10.minutes.ago
-    #  @fetched_data[sanitized_location] = nil
-    #end
-
-    if @fetched_data[sanitized_location]
-      if @fetched_data[sanitized_location]['cached_at'] > 10.minutes.ago
-        @fetched_data[sanitized_location] = nil
-      else
-        return @fetched_data[sanitized_location]
-      end
+    if location.city_id
+      city_url = "http://api.openweathermap.org/data/2.5/weather?id="
+      url = URI.escape("#{city_url}#{location.city_id}&#{APPKEY}")
+    elsif (location.latitude && location.longitude)
+      coordinates_url = "http://api.openweathermap.org/data/2.5/find?"
+      coordinates = "lat=#{location.latitude}&lon=#{location.longitude}&cnt=2"
+      url = URI.escape("#{coordinates_url}#{coordinates}&#{APPKEY}")
+    else
+      city_and_state_url = "http://api.openweathermap.org/data/2.5/weather?q="
+      search = "#{location.city.downcase},#{location.state_code.downcase}"
+      url = URI.escape("#{city_and_state_url}#{search}&#{APPKEY}")
     end
 
-    search_by_city_url = "http://api.openweathermap.org/data/2.5/find?q="
-    url = URI.escape("#{search_by_city_url}#{sanitized_location}&#{APPKEY}")
-    @fetched_data[sanitized_location] ||= JSON.parse(open(url).read).merge('cached_at' => Time.now)
+    fetched_data = JSON.parse(open(url).read)
 
-    @fetched_data[sanitized_location]['list'].each do |response|
+    response = fetched_data['list'].first
+    location.update_attributes(city_id: response['id'])
 
-      @location = Location.where(
-          city_id: response['id']).first_or_create do |location|
-
-        location.city_id = response['id']
-        location.city = response['name']
-        location.country = response['sys']['country']
-        location.latitude = response['coord']['lat']
-        location.longitude = response['coord']['lon']
-      end
-
-      weather_report = WeatherReport.where(location: @location,
-        time_received: response['dt']).first_or_create do |weather_report|
+    weather_report = WeatherReport.where(location: location,
+      time_received: response['dt']).first_or_create do |weather_report|
 
         weather_report.time_received = response['dt']
         weather_report.sunrise = response['sys']['sunrise']
@@ -61,5 +47,4 @@ class WeatherFetcher
         weather_report.snow_3h = response['snow']['3h'] unless response['snow'].nil?
       end
     end
-  end
 end
