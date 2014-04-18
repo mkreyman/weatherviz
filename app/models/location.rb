@@ -39,7 +39,7 @@ class Location < ActiveRecord::Base
   end
 
   def address
-    [:street, :city, :state, :country].compact.join(', ')
+    [:street, :city, :state_code, :country_code].compact.join(', ')
   end
 
   def coordinates

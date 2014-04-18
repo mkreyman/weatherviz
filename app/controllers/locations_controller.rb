@@ -63,7 +63,7 @@ class LocationsController < ApplicationController
   end
 
   def reports
-    WeatherFetcher.fetch(@location.city)
+    WeatherFetcher.fetch(@location)
     if @location.weather_reports.blank?
       redirect_to root_path, notice: 'Sorry, no results found.'
     else

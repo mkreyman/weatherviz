@@ -8,14 +8,15 @@ feature 'Location Search' do
   end
 
   scenario 'Visitor searches for a valid location' do
-    @location = FactoryGirl.create(:location)
+    #@location = create(:location)
+    @location = 'Chicago'
     visit root_path
 
-    fill_in 'Search for a city name:', with: @location.city
+    fill_in 'Search for a city name:', with: @location
 
     click_button 'Search'
 
-    expect(page).to have_content(@location.city)
+    expect(page).to have_content(@location)
   end
 
   # Found this doesn't work when deployed to Heroku.
@@ -33,23 +34,24 @@ feature 'Location Search' do
   #end
 
   scenario 'Visitor views previously fetched locations' do
-    @location = FactoryGirl.create(:location)
+    #@location = create(:location)
+    @location = 'Boston'
     visit root_path
 
-    fill_in 'Search for a city name:', with: @location.city
+    fill_in 'Search for a city name:', with: @location
 
     click_button 'Search'
 
     visit '/locations'
 
     expect(page).to have_content("Listing locations")
-    expect(page).to have_content(@location.city)
+    expect(page).to have_content(@location)
   end
 end
 
 feature "Deleting locations" do
   background do
-    @location = 'Pyatigorsk'
+    @location = 'New York'
     visit '/locations'
     fill_in 'Search for a city name:', with: @location
     click_button 'Search'
