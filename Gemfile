@@ -6,6 +6,7 @@ gem 'rails', '4.0.4'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
+gem 'geocoder'
 
 group :development, :test do
   gem 'rspec-rails'

@@ -9,9 +9,9 @@ feature 'Weather Reports Search' do
   end
 
   scenario 'Visitor searches for a location' do
-    # @location = FactoryGirl.create(:location)
+    # @location = create(:location)
     # Faker gives too hard to find cities!
-    @location = 'Boulder'
+    @location = 'Moscow'
     visit '/weather_reports'
 
     fill_in 'Search for a city name:', with: @location
@@ -36,9 +36,9 @@ feature 'Weather Reports Search' do
   #end
 
   scenario 'Visitor views previously fetched reports' do
-    # @location = FactoryGirl.create(:location)
+    # @location = create(:location)
     # Faker gives too hard to find cities!
-    @location = 'Denver'
+    @location = 'Kiev'
     visit '/weather_reports'
 
     fill_in 'Search for a city name:', with: @location
@@ -54,7 +54,7 @@ end
 
 feature "Deleting weather reports" do
   background do
-    @location = 'Pyatigorsk'
+    @location = 'Aspen'
     visit '/weather_reports'
     fill_in 'Search for a city name:', with: @location
     click_button 'Search'

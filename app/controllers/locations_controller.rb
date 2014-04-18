@@ -2,15 +2,9 @@ class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy, :reports]
 
   def index
-    if params[:search]
-      WeatherFetcher.fetch(params[:search])
-      sanitized_search = params[:search].split(/[\s,]+/).first.strip
-      @locations = Location.search(sanitized_search).order(city: :asc)
-      if @locations.blank?
-        redirect_to locations_path # , notice: 'Sorry, no results found.'
-      else
-        @locations
-      end
+    if params[:search].present?
+      LocationFetcher.fetch(params[:search])
+      @locations = Location.search(params[:search])
     else
       @locations = Location.order(city: :asc)
     end
@@ -69,7 +63,7 @@ class LocationsController < ApplicationController
   end
 
   def reports
-    WeatherFetcher.fetch(@location.city)
+    WeatherFetcher.fetch(@location)
     if @location.weather_reports.blank?
       redirect_to root_path, notice: 'Sorry, no results found.'
     else
@@ -83,6 +77,8 @@ class LocationsController < ApplicationController
     end
 
     def location_params
-      params.require(:location).permit(:city_id, :city, :state, :country, :lat, :lon)
+      params.require(:location).permit(
+          :woeid, :city_id, :street, :city, :state_code, :state,
+          :postal_code, :country_code, :country, :latitude, :longitude)
     end
 end
