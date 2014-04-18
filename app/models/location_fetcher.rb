@@ -2,7 +2,7 @@ require 'open-uri'
 require 'json'
 
 class LocationFetcher
-  def self.fetch(search, provider='openweather')
+  def self.fetch(search, provider='geocoder')
 
     # API key for OpenWeatherMap API
     appkey = "APPID=#{ENV['OPENWEATHER_APPID']}"
