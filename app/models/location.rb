@@ -27,7 +27,7 @@ class Location < ActiveRecord::Base
     end
   end
   #after_validation :geocode
-  after_validation :reverse_geocode
+  after_validation :reverse_geocode, :if => :city_id_changed?
 
 
   def self.search(search)
@@ -39,11 +39,11 @@ class Location < ActiveRecord::Base
   end
 
   def address
-    [:street, :city, :state_code, :country_code].compact.join(', ')
+    [self.street, self.city, self.state_code, self.country_code].compact.join(', ')
   end
 
   def coordinates
-    [:latitude, :longitude]
+    [self.latitude, self.longitude]
   end
 
 end

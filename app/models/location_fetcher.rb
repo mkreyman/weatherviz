@@ -41,6 +41,20 @@ class LocationFetcher
       @latitude = geo.data["geometry"]["location"]["lat"]
       @longitude = geo.data["geometry"]["location"]["lng"]
 
+      @geo = Geocoder.search(search).first do |obj,results|
+          if geo = results.first
+            obj.street = geo.address.split(', ').first
+            @city    = geo.city
+            obj.state_code = geo.state_code
+            obj.postal_code = geo.postal_code
+            obj.state = geo.state
+            obj.country_code = geo.country_code
+            obj.country = geo.country
+            obj.latitude = geo.latitude
+            obj.longitude = geo.longitude
+          end
+      end
+
     else
       @city = 'Denver'
       @state_code = 'CO'

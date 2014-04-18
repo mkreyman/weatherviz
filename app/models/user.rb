@@ -14,4 +14,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
 
+  geocoded_by :ip_address
+  after_validation :geocode, :if => :ip_address_changed?
+
 end

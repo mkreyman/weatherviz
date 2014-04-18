@@ -77,8 +77,9 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      user_parameters = [:first_name, :last_name, :email,
-                       :password, :password_confirmation, :omniauth]
+      user_parameters = [:first_name, :last_name,
+                         :email, :password, :password_confirmation,
+                         :omniauth, :ip_address, :latitude, :longitude]
       user_parameters << :admin if current_user && current_user.admin?
       params.require(:user).permit(*user_parameters)
     end

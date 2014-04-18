@@ -25,6 +25,12 @@
   <%= @user.email %>
 </p>
 
+<% if current_user.present? && current_user.admin? %>
+    <div class="field">
+      <strong>IP Address:</strong>
+      <%= @user.ip_address %>
+    </div>
+<% end %>
 
 
 <%= link_to 'Edit', edit_user_path(@user) %>
