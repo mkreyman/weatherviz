@@ -21,6 +21,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.update_attributes(admin: true) if User.count == 0
+    if Rails.env.test? || Rails.env.development?
+      @ip = "174.51.246.225"
+    else
+      @ip = request.remote_ip
+    end
+    @user.update_attributes(ip_address: @ip)
 
     if @user.save
       session[:user_id] = @user.id
@@ -32,11 +38,11 @@ class UsersController < ApplicationController
   end
 
   def update
-      if @user.update(user_params)
-        redirect_to @user, notice: 'User was successfully updated.'
-      else
-        render :edit
-      end
+    if @user.update(user_params)
+      redirect_to @user, notice: 'User was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   def destroy
