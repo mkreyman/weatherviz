@@ -2,79 +2,72 @@ require 'open-uri'
 require 'json'
 
 class LocationFetcher
-  def self.fetch(search, provider='openweather')
 
+  def self.fetch(search, provider='openweather')
+    location_response = if provider == 'openweather'
+                          self.search_by_openweather(search)
+                        elsif provider == 'geocoder'
+                          self.search_by_geocoder(search)
+                        end
+    if location_response.empty?
+      location_response = { city: 'Denver', state_code: 'CO',
+                            state: 'Colorado', country_code: 'US', country: 'USA',
+                            latitude: 39.7392, longitude: -104.9847 }
+    end
+    location_search_params = {city: location_response[:city],
+                              country_code: location_response[:country_code]}
+    if location_response[:state_code].present?
+      location_search_params.merge!(state_code: location_response[:state_code])
+    end
+    @location = Location.where(location_search_params).first_or_create do |location|
+      location.city_id      = location_response[:city_id]
+      location.state_code   = location_response[:state_code],
+      location.city         = location_response[:city]
+      location.state_code   = location_response[:state_code]
+      location.state        = location_response[:state]
+      location.country_code = location_response[:country_code]
+      location.country      = location_response[:country]
+      location.latitude     = location_response[:latitude]
+      location.longitude    = location_response[:longitude]
+    end
+  end
+
+  def self.search_by_openweather(search)
     # API key for OpenWeatherMap API
     appkey = "APPID=#{ENV['OPENWEATHER_APPID']}"
 
-    @city_id = nil
-    @city = nil
-    @state_code = nil
-    @state = nil
-    @country_code = nil
-    @country = nil
-    @latitude = nil
-    @longitude = nil
-
-    if provider == 'openweather'
-      city_and_state_url = "http://api.openweathermap.org/data/2.5/weather?q="
-      sanitized_search = search.split(', ').join(',').downcase
-      url = URI.escape("#{city_and_state_url}#{sanitized_search}&#{appkey}")
-      response = JSON.parse(open(url).read)
-      @city_id = response['id']
-      @city = response['name']
-      if (response['sys']['country'] == 'United States of America')
-        @country = 'USA'
-        @country_code = 'US'
-      else
-        @country = response['sys']['country']
-        @country_code = @country
-      end
-      @latitude = response['coord']['lat']
-      @longitude = response['coord']['lon']
-
-    elsif provider == 'geocoder'
-      @geo = Geocoder.search(search).first
-      @city = geo.data['address_components'][0]['long_name']
-      @state_code = geo.data['address_components'][2]['short_name']
-      @country_code = geo.data['address_components'][3]['short_name']
-      @latitude = geo.data["geometry"]["location"]["lat"]
-      @longitude = geo.data["geometry"]["location"]["lng"]
-
-      @geo = Geocoder.search(search).first do |obj,results|
-          if geo = results.first
-            obj.street = geo.address.split(', ').first
-            @city    = geo.city
-            obj.state_code = geo.state_code
-            obj.postal_code = geo.postal_code
-            obj.state = geo.state
-            obj.country_code = geo.country_code
-            obj.country = geo.country
-            obj.latitude = geo.latitude
-            obj.longitude = geo.longitude
-          end
-      end
-
+    city_and_state_url = "http://api.openweathermap.org/data/2.5/weather?q="
+    sanitized_search = search.split(', ').join(',').downcase
+    url = URI.escape("#{city_and_state_url}#{sanitized_search}&#{appkey}")
+    response = JSON.parse(open(url).read)
+    city_id = response['id']
+    city = response['name']
+    if (response['sys']['country'] == 'United States of America')
+      country = 'USA'
+      country_code = 'US'
     else
-      @city = 'Denver'
-      @state_code = 'CO'
-      @state = 'Colorado'
-      @country_code = 'US'
-      @country = "United States"
+      country = response['sys']['country']
+      country_code = country
     end
+    latitude = response['coord']['lat']
+    longitude = response['coord']['lon']
+    { city_id: city_id, city: city, country: country,
+      country_code: country_code, latitude: latitude, longitude: longitude }
+  end
 
-    @location = Location.where(
-      city: @city,
-      state_code: @state_code,
-      country_code: @country_code).first_or_create do |location|
-        location.city_id = @city_id
-        location.city = @city
-        location.state_code = @state_code
-        location.state = @state
-        location.country_code = @country_code
-        location.country = @country
-        location.latitude = @latitude
-        location.longitude = @longitude
-      end
+  def self.search_by_geocoder(search)
+    results = Geocoder.search(search)
+
+    if geo = results.first
+      {
+          city: geo.city,
+          state_code: geo.state_code,
+          country_code: geo.country_code,
+          latitude: geo.latitude,
+          longitude: geo.longitude
+      }
+    else
+      {}
+    end
   end
 end

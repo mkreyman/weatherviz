@@ -15,20 +15,27 @@ class WeatherFetcher
       @response = JSON.parse(open(url).read)
     elsif (location.latitude && location.longitude)
       coordinates_url = "http://api.openweathermap.org/data/2.5/find?"
-      coordinates = "lat=#{location.latitude}&lon=#{location.longitude}"
+      coordinates = "lat=#{location.latitude.to_f.round(0).to_s}&lon=#{location.longitude.to_f.round(0).to_s}"
       url = URI.escape("#{coordinates_url}#{coordinates}&#{APPKEY}")
       fetched_data = JSON.parse(open(url).read)
       @response = fetched_data['list'].first
-      location.update_attributes(city_id: @response['id'])
     else
       city_and_state_url = "http://api.openweathermap.org/data/2.5/weather?q="
-      search = "#{location.city.downcase},#{location.state_code.downcase}"
+      search = if location.state_code
+        "#{location.city},#{location.state_code}"
+      elsif location.country_code
+        "#{location.city},#{location.country_code}"
+      else
+        location.city
+      end
       url = URI.escape("#{city_and_state_url}#{search}&#{APPKEY}")
       fetched_data = JSON.parse(open(url).read)
       @response = fetched_data['list'].first
     end
 
-    # location.update_attributes(city_id: @response['id']) if location.city_id.nil?
+    if @response && location.city_id.nil?
+      location.update_attributes(city_id: @response['id'])
+    end
 
     weather_report = WeatherReport.where(location: location,
       time_received: @response['dt']).first_or_create do |weather_report|

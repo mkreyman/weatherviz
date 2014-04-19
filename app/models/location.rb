@@ -27,8 +27,7 @@ class Location < ActiveRecord::Base
     end
   end
   #after_validation :geocode
-  after_validation :reverse_geocode, :if => :city_id_changed?
-
+  after_validation :reverse_geocode, :if => lambda{ |obj| obj.latitude_changed? }
 
   def self.search(search)
     if search
