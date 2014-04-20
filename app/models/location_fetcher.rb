@@ -37,10 +37,11 @@ class LocationFetcher
     appkey = "APPID=#{ENV['OPENWEATHER_APPID']}"
 
     city_and_state_url = "http://api.openweathermap.org/data/2.5/weather?q="
-    sanitized_search = search.split(', ').join(',').downcase
-    url = URI.escape("#{city_and_state_url}#{sanitized_search}&#{appkey}")
+    url = URI.escape("#{city_and_state_url}#{search}&#{appkey}")
     response = JSON.parse(open(url).read)
-    if response['cod'] == '200'
+    if response['cod'] == '404'
+      {}
+    else
       city_id = response['id']
       city = response['name']
       if (response['sys']['country'] == 'United States of America')
@@ -54,8 +55,6 @@ class LocationFetcher
       longitude = response['coord']['lon']
       { city_id: city_id, city: city, country: country,
         country_code: country_code, latitude: latitude, longitude: longitude }
-    else
-      {}
     end
   end
 
