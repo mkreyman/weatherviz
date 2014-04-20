@@ -1,10 +1,11 @@
 <h2>
   Based on your current IP address <%= request.remote_ip %>, your location is:
 </h2>
-<% if request.remote_ip == "127.0.0.1" %>
+<% if (request.remote_ip == "127.0.0.1" || request.location.nil?) %>
   <% @location = Location.search('Arvada').first %>
 <% else %>
-  <% @location = request.location %>
+  <% @location = Location.create(latitude: request.location.latitude,
+                                 longitude: request.location.longitude) %>
 <% end %>
 <p>
   <strong>City:</strong>
@@ -33,7 +34,7 @@
 
 <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
 
-<% unless @location.nearbys(50).empty? %>
+<% if @location.geocoded? && !@location.nearbys(50).empty? %>
 <h3>
   Weather reports for nearby locations
 </h3>
