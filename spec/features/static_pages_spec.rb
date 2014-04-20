@@ -66,6 +66,16 @@ describe 'Static pages' do
       expect(page).to_not have_link('Settings')
       expect(page).to_not have_link('Alerts')
     end
-
   end
+
+  describe 'Displays visitor specific information' do
+    it "should display a location map" do
+
+    end
+
+    it "should display a weather report for that location" do
+
+    end
+  end
+
 end

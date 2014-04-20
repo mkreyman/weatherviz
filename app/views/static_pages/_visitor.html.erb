@@ -1,0 +1,46 @@
+<h2>
+  Based on your current IP address <%= request.remote_ip %>, your location is:
+</h2>
+<% if request.remote_ip == "127.0.0.1" %>
+  <% @location = Location.search('Arvada').first %>
+<% else %>
+  <% @location = request.location %>
+<% end %>
+<p>
+  <strong>City:</strong>
+  <%= @location.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @location.state %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @location.country %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @location.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @location.longitude %>
+</p>
+
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+
+<% if @location.geocoded? && !@location.nearbys(50).empty? %>
+<h3>
+  Weather reports for nearby locations
+</h3>
+  <ul>
+    <li><%= link_to @location.city, reports_location_path(@location) %> (your current location)</li>
+    <% @location.nearbys(50).each do |location| %>
+      <li><%= link_to location.city, reports_location_path(location) %> (<%= location.distance.round(2) %> miles)</li>
+    <% end %>
+  </ul>
+<% end %>

@@ -1,5 +1,11 @@
 <h1>Listing reports for <%= @location.city %></h1>
 
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+
+<h3>
+  <%= link_to 'Setup a Weather Alert for this location' %>
+</h3>
+
 <table>
   <thead>
   <tr>
