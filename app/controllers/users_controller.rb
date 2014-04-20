@@ -67,7 +67,9 @@ class UsersController < ApplicationController
   end
 
   def admin_user
-    redirect_to(root_url) unless current_user.admin?
+    if current_user.nil? || !current_user.admin?
+      redirect_to root_url, alert: 'Not authorized'
+    end
   end
 
   private
@@ -78,7 +80,7 @@ class UsersController < ApplicationController
     def allowed_to_edit?
       if current_user.present? && (current_user.admin? || current_user == @user)
       else
-        redirect_to(root_url, alert: "Not authorized")
+        redirect_to(root_url, alert: 'Not authorized')
       end
     end
 
