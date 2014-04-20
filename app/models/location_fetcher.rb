@@ -40,19 +40,23 @@ class LocationFetcher
     sanitized_search = search.split(', ').join(',').downcase
     url = URI.escape("#{city_and_state_url}#{sanitized_search}&#{appkey}")
     response = JSON.parse(open(url).read)
-    city_id = response['id']
-    city = response['name']
-    if (response['sys']['country'] == 'United States of America')
-      country = 'USA'
-      country_code = 'US'
+    if response['cod'] == '200'
+      city_id = response['id']
+      city = response['name']
+      if (response['sys']['country'] == 'United States of America')
+        country = 'USA'
+        country_code = 'US'
+      else
+        country = response['sys']['country']
+        country_code = country
+      end
+      latitude = response['coord']['lat']
+      longitude = response['coord']['lon']
+      { city_id: city_id, city: city, country: country,
+        country_code: country_code, latitude: latitude, longitude: longitude }
     else
-      country = response['sys']['country']
-      country_code = country
+      {}
     end
-    latitude = response['coord']['lat']
-    longitude = response['coord']['lon']
-    { city_id: city_id, city: city, country: country,
-      country_code: country_code, latitude: latitude, longitude: longitude }
   end
 
   def self.search_by_geocoder(search)
