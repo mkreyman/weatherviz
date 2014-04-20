@@ -4,9 +4,12 @@
 <% if (request.remote_ip == "127.0.0.1" || request.location.nil?) %>
   <% @location = Location.search('Arvada').first %>
 <% else %>
-  <% @location = Location.create(latitude: request.location.latitude,
-                                 longitude: request.location.longitude) %>
+  <% @location = Location.where(city: request.location.city).first_or_create do |location| %>
+    <% location.latitude = request.location.latitude %>
+    <% location.longitude = request.location.longitude %>
+  <% end %>
 <% end %>
+
 <p>
   <strong>City:</strong>
   <%= @location.city %>
