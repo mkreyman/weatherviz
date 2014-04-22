@@ -7,6 +7,7 @@ gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem 'geocoder'
+gem 'psych'
 
 group :development, :test do
   gem 'rspec-rails'
