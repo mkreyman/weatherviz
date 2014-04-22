@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-feature 'User Authentication - signing up' do
+feature 'User Authentication - signing up', :vcr do
   background do
     @user = build(:user)
   end
 
-  scenario 'allows a user to signup' do
+  scenario 'allows a user to signup', :vcr do
     visit '/'
 
     expect(page).to have_link('Signup')
@@ -24,7 +24,7 @@ feature 'User Authentication - signing up' do
     expect(page).to have_text("Thank you for signing up #{@user.first_name}")
   end
 
-  scenario "prevents signing up with blank password" do
+  scenario "prevents signing up with blank password", :vcr do
     visit signup_path
 
     fill_in 'First name', with: @user.first_name
@@ -35,7 +35,7 @@ feature 'User Authentication - signing up' do
     expect(page).to have_content("Password can't be blank")
   end
 
-  scenario "prevents signing up with the same email" do
+  scenario "prevents signing up with the same email", :vcr do
     @user_existing = create(:user)
 
     visit signup_path
@@ -49,12 +49,12 @@ feature 'User Authentication - signing up' do
   end
 end
 
-feature 'User Authentication - signing in' do
+feature 'User Authentication - signing in', :vcr do
   background do
     @user = create(:user)
   end
 
-  scenario 'allows existing user to login' do
+  scenario 'allows existing user to login', :vcr do
     visit '/'
 
     expect(page).to have_link('Login')
@@ -70,7 +70,7 @@ feature 'User Authentication - signing in' do
     expect(page).to have_text("Signed in as #{@user.email}")
   end
 
-  scenario 'allows user to log out' do
+  scenario 'allows user to log out', :vcr do
     visit '/'
 
     expect(page).to have_link('Login')
@@ -88,7 +88,7 @@ feature 'User Authentication - signing in' do
     expect(page).to have_link('Login')
   end
 
-  scenario 'prevents signing in with invalid credentials' do
+  scenario 'prevents signing in with invalid credentials', :vcr do
     visit login_path
 
     fill_in 'Email', with: @user.email
@@ -102,20 +102,20 @@ feature 'User Authentication - signing in' do
 end
 
 
-feature "Profile Page" do
+feature "Profile Page", :vcr do
   background do
     @user = create(:user)
     sign_in(@user)
   end
 
-  scenario "allows signed in user to view their own profile" do
+  scenario "allows signed in user to view their own profile", :vcr do
     visit user_path(@user)
 
     expect(page).to have_content(@user.first_name)
     expect(page).to have_title("#{@user.first_name} #{@user.last_name}")
   end
 
-  scenario "allows signed in user to edit their profile" do
+  scenario "allows signed in user to edit their profile", :vcr do
     visit edit_user_path(@user)
 
     expect(page).to have_content("Update your profile")
@@ -129,7 +129,7 @@ feature "Profile Page" do
     expect(page).to have_content('User was successfully updated.')
   end
 
-  scenario "prevents user from updating their profile with blank or invalid email" do
+  scenario "prevents user from updating their profile with blank or invalid email", :vcr do
     visit edit_user_path(@user)
 
     fill_in 'Email', with: ''
@@ -140,19 +140,19 @@ feature "Profile Page" do
 end
 
 
-feature 'User Authorization' do
+feature 'User Authorization', :vcr do
   background do
     @user = create(:user)
   end
 
-  scenario "prompts to login before visiting a protected page" do
+  scenario "prompts to login before visiting a protected page", :vcr do
     visit edit_user_path(@user)
 
     expect(page).to have_title("Log in")
     expect(current_path).to eq(login_path)
   end
 
-  scenario "prevents user from viewing other users' profiles" do
+  scenario "prevents user from viewing other users' profiles", :vcr do
     @another_user = create(:user)
     sign_in(@user)
 
@@ -162,7 +162,7 @@ feature 'User Authorization' do
     expect(page).to have_text("Not authorized")
   end
 
-  scenario "allows admin to view all users" do
+  scenario "allows admin to view all users", :vcr do
     @admin = create(:admin)
     sign_in(@admin)
 
@@ -172,7 +172,7 @@ feature 'User Authorization' do
     expect(page).to have_title("All users")
   end
 
-  scenario "prevents non-admin user from viewing all users" do
+  scenario "prevents non-admin user from viewing all users", :vcr do
     sign_in(@user)
     visit users_path
 
@@ -180,7 +180,7 @@ feature 'User Authorization' do
     expect(page).to have_text("Not authorized")
   end
 
-  scenario "allows admin to delete a user" do
+  scenario "allows admin to delete a user", :vcr do
     @admin = create(:admin)
     sign_in(@admin)
     visit users_path
@@ -191,7 +191,7 @@ feature 'User Authorization' do
     expect(page).to have_content("User deleted.")
   end
 
-  scenario "prevents non-admin from deleting themselves" do
+  scenario "prevents non-admin from deleting themselves", :vcr do
     @another_user = create(:user)
     sign_in(@user)
     visit user_path(@user)
@@ -199,7 +199,7 @@ feature 'User Authorization' do
     expect(page).not_to have_link('delete')
   end
 
-  scenario "prevents admin from deleting themselves" do
+  scenario "prevents admin from deleting themselves", :vcr do
     @admin = create(:admin)
     sign_in(@admin)
     visit users_path

@@ -1,0 +1,1404 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://maps.googleapis.com/maps/api/geocode/json?language=en&latlng=39.800057,-105.089911&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Tue, 22 Apr 2014 18:09:45 GMT
+      Expires:
+      - Wed, 23 Apr 2014 18:09:45 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 80:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "5625",
+                       "short_name" : "5625",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Brentwood Street",
+                       "short_name" : "Brentwood St",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Arvada",
+                       "short_name" : "Arvada",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Jefferson County",
+                       "short_name" : "Jefferson County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Colorado",
+                       "short_name" : "CO",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "80002",
+                       "short_name" : "80002",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "5625 Brentwood Street, Arvada, CO 80002, USA",
+                 "geometry" : {
+                    "location" : {
+                       "lat" : 39.800057,
+                       "lng" : -105.089911
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 39.80140598029149,
+                          "lng" : -105.0885620197085
+                       },
+                       "southwest" : {
+                          "lat" : 39.7987080197085,
+                          "lng" : -105.0912599802915
+                       }
+                    }
+                 },
+                 "types" : [ "street_address" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "80001",
+                       "short_name" : "80001",
+                       "types" : [ "postal_code" ]
+                    },
+                    {
+                       "long_name" : "Arvada",
+                       "short_name" : "Arvada",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Jefferson County",
+                       "short_name" : "Jefferson County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Colorado",
+                       "short_name" : "CO",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Arvada, CO 80001, USA",
+                 "geometry" : {
+                    "location" : {
+                       "lat" : 39.8,
+                       "lng" : -105.09
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 39.8013489802915,
+                          "lng" : -105.0886510197085
+                       },
+                       "southwest" : {
+                          "lat" : 39.7986510197085,
+                          "lng" : -105.0913489802915
+                       }
+                    }
+                 },
+                 "types" : [ "postal_code" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "80002",
+                       "short_name" : "80002",
+                       "types" : [ "postal_code" ]
+                    },
+                    {
+                       "long_name" : "Arvada",
+                       "short_name" : "Arvada",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Colorado",
+                       "short_name" : "CO",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Arvada, CO 80002, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 39.8073709,
+                          "lng" : -105.0346971
+                       },
+                       "southwest" : {
+                          "lat" : 39.783819,
+                          "lng" : -105.165296
+                       }
+                    },
+                    "location" : {
+                       "lat" : 39.7907566,
+                       "lng" : -105.0849687
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 39.8073709,
+                          "lng" : -105.0346971
+                       },
+                       "southwest" : {
+                          "lat" : 39.783819,
+                          "lng" : -105.165296
+                       }
+                    }
+                 },
+                 "types" : [ "postal_code" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Arvada",
+                       "short_name" : "Arvada",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Jefferson County",
+                       "short_name" : "Jefferson County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Colorado",
+                       "short_name" : "CO",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Arvada, CO, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 39.89271790000001,
+                          "lng" : -105.0423129
+                       },
+                       "southwest" : {
+                          "lat" : 39.784087,
+                          "lng" : -105.3025431
+                       }
+                    },
+                    "location" : {
+                       "lat" : 39.8027644,
+                       "lng" : -105.0874842
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 39.89271790000001,
+                          "lng" : -105.0423129
+                       },
+                       "southwest" : {
+                          "lat" : 39.784087,
+                          "lng" : -105.3025431
+                       }
+                    }
+                 },
+                 "types" : [ "locality", "political" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Jefferson County",
+                       "short_name" : "Jefferson County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Colorado",
+                       "short_name" : "CO",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Jefferson County, CO, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 39.914386,
+                          "lng" : -105.04874
+                       },
+                       "southwest" : {
+                          "lat" : 39.12954300000001,
+                          "lng" : -105.3991499
+                       }
+                    },
+                    "location" : {
+                       "lat" : 39.5800298,
+                       "lng" : -105.2662931
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 39.914386,
+                          "lng" : -105.04874
+                       },
+                       "southwest" : {
+                          "lat" : 39.12954300000001,
+                          "lng" : -105.3991499
+                       }
+                    }
+                 },
+                 "types" : [ "administrative_area_level_2", "political" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Colorado",
+                       "short_name" : "CO",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Colorado, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 41.0034439,
+                          "lng" : -102.040878
+                       },
+                       "southwest" : {
+                          "lat" : 36.992424,
+                          "lng" : -109.060256
+                       }
+                    },
+                    "location" : {
+                       "lat" : 39.5500507,
+                       "lng" : -105.7820674
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 41.0034439,
+                          "lng" : -102.040878
+                       },
+                       "southwest" : {
+                          "lat" : 36.992424,
+                          "lng" : -109.060256
+                       }
+                    }
+                 },
+                 "types" : [ "administrative_area_level_1", "political" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "United States",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 29.3452067,
+                          "lng" : -90.90566229999999
+                       },
+                       "southwest" : {
+                          "lat" : 29.321898,
+                          "lng" : -90.9247501
+                       }
+                    },
+                    "location" : {
+                       "lat" : 37.09024,
+                       "lng" : -95.712891
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 49.38,
+                          "lng" : -66.94
+                       },
+                       "southwest" : {
+                          "lat" : 25.82,
+                          "lng" : -124.39
+                       }
+                    }
+                 },
+                 "types" : [ "country", "political" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Tue, 22 Apr 2014 18:08:44 GMT
+- request:
+    method: get
+    uri: http://maps.googleapis.com/maps/api/geocode/json?address=Arvada&language=en&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Tue, 22 Apr 2014 18:09:45 GMT
+      Expires:
+      - Wed, 23 Apr 2014 18:09:45 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 80:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Arvada",
+                       "short_name" : "Arvada",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Jefferson County",
+                       "short_name" : "Jefferson County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Colorado",
+                       "short_name" : "CO",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Arvada, CO, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 39.89271790000001,
+                          "lng" : -105.0423129
+                       },
+                       "southwest" : {
+                          "lat" : 39.784087,
+                          "lng" : -105.3025431
+                       }
+                    },
+                    "location" : {
+                       "lat" : 39.8027644,
+                       "lng" : -105.0874842
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 39.89271790000001,
+                          "lng" : -105.0423129
+                       },
+                       "southwest" : {
+                          "lat" : 39.784087,
+                          "lng" : -105.3025431
+                       }
+                    }
+                 },
+                 "types" : [ "locality", "political" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Arvada",
+                       "short_name" : "Arvada",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Sheridan County",
+                       "short_name" : "Sheridan County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Wyoming",
+                       "short_name" : "WY",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "82831",
+                       "short_name" : "82831",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Arvada, WY 82831, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 44.6704549,
+                          "lng" : -106.121166
+                       },
+                       "southwest" : {
+                          "lat" : 44.647475,
+                          "lng" : -106.170335
+                       }
+                    },
+                    "location" : {
+                       "lat" : 44.6535934,
+                       "lng" : -106.1311391
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 44.6704549,
+                          "lng" : -106.121166
+                       },
+                       "southwest" : {
+                          "lat" : 44.647475,
+                          "lng" : -106.170335
+                       }
+                    }
+                 },
+                 "types" : [ "locality", "political" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Tue, 22 Apr 2014 18:08:44 GMT
+- request:
+    method: get
+    uri: http://maps.googleapis.com/maps/api/geocode/json?address=Denver&language=en&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Tue, 22 Apr 2014 18:09:46 GMT
+      Expires:
+      - Wed, 23 Apr 2014 18:09:46 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 80:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Denver",
+                       "short_name" : "Denver",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Denver County",
+                       "short_name" : "Denver County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Colorado",
+                       "short_name" : "CO",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Denver, CO, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 39.91424689999999,
+                          "lng" : -104.6002959
+                       },
+                       "southwest" : {
+                          "lat" : 39.614431,
+                          "lng" : -105.109927
+                       }
+                    },
+                    "location" : {
+                       "lat" : 39.737567,
+                       "lng" : -104.9847179
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 39.91424689999999,
+                          "lng" : -104.6002959
+                       },
+                       "southwest" : {
+                          "lat" : 39.614431,
+                          "lng" : -105.109927
+                       }
+                    }
+                 },
+                 "types" : [ "locality", "political" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Denver",
+                       "short_name" : "Denver",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Jefferson",
+                       "short_name" : "Jefferson",
+                       "types" : [ "administrative_area_level_3", "political" ]
+                    },
+                    {
+                       "long_name" : "Miami County",
+                       "short_name" : "Miami County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Indiana",
+                       "short_name" : "IN",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Denver, IN, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 40.869306,
+                          "lng" : -86.071905
+                       },
+                       "southwest" : {
+                          "lat" : 40.85985489999999,
+                          "lng" : -86.08378499999999
+                       }
+                    },
+                    "location" : {
+                       "lat" : 40.8661533,
+                       "lng" : -86.0774938
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 40.869306,
+                          "lng" : -86.071905
+                       },
+                       "southwest" : {
+                          "lat" : 40.85985489999999,
+                          "lng" : -86.08378499999999
+                       }
+                    }
+                 },
+                 "types" : [ "locality", "political" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Denver",
+                       "short_name" : "Denver",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Lancaster County",
+                       "short_name" : "Lancaster County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Pennsylvania",
+                       "short_name" : "PA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Denver, PA, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 40.246485,
+                          "lng" : -76.125148
+                       },
+                       "southwest" : {
+                          "lat" : 40.2210059,
+                          "lng" : -76.15861389999999
+                       }
+                    },
+                    "location" : {
+                       "lat" : 40.2331483,
+                       "lng" : -76.1371683
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 40.246485,
+                          "lng" : -76.125148
+                       },
+                       "southwest" : {
+                          "lat" : 40.2210059,
+                          "lng" : -76.15861389999999
+                       }
+                    }
+                 },
+                 "types" : [ "locality", "political" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Denver",
+                       "short_name" : "Denver",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Jefferson",
+                       "short_name" : "Jefferson",
+                       "types" : [ "administrative_area_level_3", "political" ]
+                    },
+                    {
+                       "long_name" : "Bremer County",
+                       "short_name" : "Bremer County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Iowa",
+                       "short_name" : "IA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "50622",
+                       "short_name" : "50622",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Denver, IA 50622, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 42.681832,
+                          "lng" : -92.317549
+                       },
+                       "southwest" : {
+                          "lat" : 42.663483,
+                          "lng" : -92.3503719
+                       }
+                    },
+                    "location" : {
+                       "lat" : 42.6713718,
+                       "lng" : -92.33740450000001
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 42.681832,
+                          "lng" : -92.317549
+                       },
+                       "southwest" : {
+                          "lat" : 42.663483,
+                          "lng" : -92.3503719
+                       }
+                    }
+                 },
+                 "types" : [ "locality", "political" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Denver",
+                       "short_name" : "Denver",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Allen",
+                       "short_name" : "Allen",
+                       "types" : [ "administrative_area_level_3", "political" ]
+                    },
+                    {
+                       "long_name" : "Worth County",
+                       "short_name" : "Worth County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Missouri",
+                       "short_name" : "MO",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Denver, MO, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 40.405941,
+                          "lng" : -94.31874999999999
+                       },
+                       "southwest" : {
+                          "lat" : 40.391698,
+                          "lng" : -94.329049
+                       }
+                    },
+                    "location" : {
+                       "lat" : 40.3972162,
+                       "lng" : -94.3227345
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 40.405941,
+                          "lng" : -94.31874999999999
+                       },
+                       "southwest" : {
+                          "lat" : 40.391698,
+                          "lng" : -94.329049
+                       }
+                    }
+                 },
+                 "types" : [ "locality", "political" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Denver",
+                       "short_name" : "Denver",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Middletown",
+                       "short_name" : "Middletown",
+                       "types" : [ "administrative_area_level_3", "political" ]
+                    },
+                    {
+                       "long_name" : "Delaware County",
+                       "short_name" : "Delaware County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New York",
+                       "short_name" : "NY",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "12421",
+                       "short_name" : "12421",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Denver, NY 12421, USA",
+                 "geometry" : {
+                    "location" : {
+                       "lat" : 42.2125871,
+                       "lng" : -74.5693201
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 42.2139360802915,
+                          "lng" : -74.56797111970849
+                       },
+                       "southwest" : {
+                          "lat" : 42.2112381197085,
+                          "lng" : -74.57066908029151
+                       }
+                    }
+                 },
+                 "types" : [ "locality", "political" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Tue, 22 Apr 2014 18:08:45 GMT
+- request:
+    method: get
+    uri: http://maps.googleapis.com/maps/api/geocode/json?language=en&latlng=39.737567,-104.9847179&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Tue, 22 Apr 2014 18:09:46 GMT
+      Expires:
+      - Wed, 23 Apr 2014 18:09:46 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alternate-Protocol:
+      - 80:quic
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "1340",
+                       "short_name" : "1340",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Sherman Street",
+                       "short_name" : "Sherman St",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Capitol Hill",
+                       "short_name" : "Capitol Hill",
+                       "types" : [ "neighborhood", "political" ]
+                    },
+                    {
+                       "long_name" : "Denver",
+                       "short_name" : "Denver",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Denver County",
+                       "short_name" : "Denver County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Colorado",
+                       "short_name" : "CO",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "80203",
+                       "short_name" : "80203",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "1340 Sherman Street, Denver, CO 80203, USA",
+                 "geometry" : {
+                    "location" : {
+                       "lat" : 39.73748,
+                       "lng" : -104.984518
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 39.7388289802915,
+                          "lng" : -104.9831690197085
+                       },
+                       "southwest" : {
+                          "lat" : 39.7361310197085,
+                          "lng" : -104.9858669802915
+                       }
+                    }
+                 },
+                 "types" : [ "street_address" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Capitol Hill",
+                       "short_name" : "Capitol Hill",
+                       "types" : [ "neighborhood", "political" ]
+                    },
+                    {
+                       "long_name" : "Denver",
+                       "short_name" : "Denver",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Denver County",
+                       "short_name" : "Denver County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Colorado",
+                       "short_name" : "CO",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Capitol Hill, Denver, CO, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 39.7400862,
+                          "lng" : -104.9729361
+                       },
+                       "southwest" : {
+                          "lat" : 39.727287,
+                          "lng" : -104.9875358
+                       }
+                    },
+                    "location" : {
+                       "lat" : 39.7341143,
+                       "lng" : -104.9797753
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 39.7400862,
+                          "lng" : -104.9729361
+                       },
+                       "southwest" : {
+                          "lat" : 39.727287,
+                          "lng" : -104.9875358
+                       }
+                    }
+                 },
+                 "types" : [ "neighborhood", "political" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "80203",
+                       "short_name" : "80203",
+                       "types" : [ "postal_code" ]
+                    },
+                    {
+                       "long_name" : "Denver",
+                       "short_name" : "Denver",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Denver County",
+                       "short_name" : "Denver County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Colorado",
+                       "short_name" : "CO",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Denver, CO 80203, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 39.747596,
+                          "lng" : -104.9775301
+                       },
+                       "southwest" : {
+                          "lat" : 39.716515,
+                          "lng" : -104.9891779
+                       }
+                    },
+                    "location" : {
+                       "lat" : 39.7312095,
+                       "lng" : -104.9826965
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 39.747596,
+                          "lng" : -104.9775301
+                       },
+                       "southwest" : {
+                          "lat" : 39.716515,
+                          "lng" : -104.9891779
+                       }
+                    }
+                 },
+                 "types" : [ "postal_code" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Central",
+                       "short_name" : "Central",
+                       "types" : [ "neighborhood", "political" ]
+                    },
+                    {
+                       "long_name" : "Denver",
+                       "short_name" : "Denver",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Denver County",
+                       "short_name" : "Denver County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Colorado",
+                       "short_name" : "CO",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Central, Denver, CO, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 39.7603811,
+                          "lng" : -104.940634
+                       },
+                       "southwest" : {
+                          "lat" : 39.6969869,
+                          "lng" : -105.0181369
+                       }
+                    },
+                    "location" : {
+                       "lat" : 39.7340952,
+                       "lng" : -104.9713695
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 39.7603811,
+                          "lng" : -104.940634
+                       },
+                       "southwest" : {
+                          "lat" : 39.6969869,
+                          "lng" : -105.0181369
+                       }
+                    }
+                 },
+                 "types" : [ "neighborhood", "political" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Denver County",
+                       "short_name" : "Denver County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Colorado",
+                       "short_name" : "CO",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Denver County, CO, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 39.91424689999999,
+                          "lng" : -104.6002959
+                       },
+                       "southwest" : {
+                          "lat" : 39.614431,
+                          "lng" : -105.109927
+                       }
+                    },
+                    "location" : {
+                       "lat" : 39.76161889999999,
+                       "lng" : -104.9622498
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 39.91424689999999,
+                          "lng" : -104.6002959
+                       },
+                       "southwest" : {
+                          "lat" : 39.614431,
+                          "lng" : -105.109927
+                       }
+                    }
+                 },
+                 "types" : [ "administrative_area_level_2", "political" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Denver",
+                       "short_name" : "Denver",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Denver County",
+                       "short_name" : "Denver County",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Colorado",
+                       "short_name" : "CO",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Denver, CO, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 39.91424689999999,
+                          "lng" : -104.6002959
+                       },
+                       "southwest" : {
+                          "lat" : 39.614431,
+                          "lng" : -105.109927
+                       }
+                    },
+                    "location" : {
+                       "lat" : 39.737567,
+                       "lng" : -104.9847179
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 39.91424689999999,
+                          "lng" : -104.6002959
+                       },
+                       "southwest" : {
+                          "lat" : 39.614431,
+                          "lng" : -105.109927
+                       }
+                    }
+                 },
+                 "types" : [ "locality", "political" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Colorado",
+                       "short_name" : "CO",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Colorado, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 41.0034439,
+                          "lng" : -102.040878
+                       },
+                       "southwest" : {
+                          "lat" : 36.992424,
+                          "lng" : -109.060256
+                       }
+                    },
+                    "location" : {
+                       "lat" : 39.5500507,
+                       "lng" : -105.7820674
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 41.0034439,
+                          "lng" : -102.040878
+                       },
+                       "southwest" : {
+                          "lat" : 36.992424,
+                          "lng" : -109.060256
+                       }
+                    }
+                 },
+                 "types" : [ "administrative_area_level_1", "political" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "United States",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 29.3452067,
+                          "lng" : -90.90566229999999
+                       },
+                       "southwest" : {
+                          "lat" : 29.321898,
+                          "lng" : -90.9247501
+                       }
+                    },
+                    "location" : {
+                       "lat" : 37.09024,
+                       "lng" : -95.712891
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 49.38,
+                          "lng" : -66.94
+                       },
+                       "southwest" : {
+                          "lat" : 25.82,
+                          "lng" : -124.39
+                       }
+                    }
+                 },
+                 "types" : [ "country", "political" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Tue, 22 Apr 2014 18:08:45 GMT
+recorded_with: VCR 2.9.0
