@@ -4,6 +4,18 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'webmock/rspec'
+require 'vcr'
+
+# 'vcr' gem configuration
+# https://www.relishapp.com/vcr/vcr/v/2-2-5/docs/test-frameworks/usage-with-rspec-metadata
+# http://railscasts.com/episodes/291-testing-with-vcr?view=comments
+VCR.configure do |c|
+  c.cassette_library_dir  = Rails.root.join("spec", "vcr")
+  c.hook_into :webmock
+  c.configure_rspec_metadata!
+  c.filter_sensitive_data('<OpenWeatherMapAPIKey>') { ENV['OPENWEATHER_APPID'] }
+  c.allow_http_connections_when_no_cassette = true
+end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -14,6 +26,12 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
+  # 'vcr' gem related configuration
+  config.treat_symbols_as_metadata_keys_with_true_values = true
+  config.around(:each, :vcr) do |example|
+    name = example.metadata[:full_description].split(/\s+/, 2).join("/").underscore.gsub(/[^\w\/]+/, "_")
+    VCR.use_cassette(name) { example.call }
+  end
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
