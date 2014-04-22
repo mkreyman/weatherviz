@@ -1,13 +1,17 @@
 <h2>
   Based on your current IP address <%= request.remote_ip %>, your location is:
 </h2>
-<% if (request.remote_ip == "127.0.0.1" || request.location.nil?) %>
+
+<% if Rails.env.test? || Rails.env.development? %>
   <% @location = Location.search('Arvada').first %>
 <% else %>
-  <% @location = Location.where(city: request.location.city).first_or_create do |location| %>
-    <% location.latitude = request.location.latitude %>
-    <% location.longitude = request.location.longitude %>
-  <% end %>
+<% @response ||= request.location %>
+<% @location = Location.where(city: @response.city, state_code: @response.state_code).first_or_create do |location| %>
+      <% location.city = @response.city %>
+      <% location.state_code = @response.state_code %>
+      <% location.latitude = @response.latitude %>
+      <% location.longitude = @response.longitude %>
+    <% end %>
 <% end %>
 
 <p>
@@ -43,7 +47,7 @@
 <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
 
 
-<% if @location.geocoded? && !@location.nearbys(50).empty? %>
+<% if !@location.nearbys(50).empty? %>
 <h3>
   Weather reports for nearby locations
 </h3>

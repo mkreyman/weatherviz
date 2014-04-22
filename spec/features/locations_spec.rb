@@ -8,15 +8,14 @@ feature 'Location Search' do
   end
 
   scenario 'Visitor searches for a valid location' do
-    #@location = create(:location)
-    @location = 'Chicago'
+    @location = create(:location)
     visit root_path
 
-    fill_in 'Search for a city name:', with: @location
+    fill_in 'Search for a city name:', with: @location.city
 
     click_button 'Search'
 
-    expect(page).to have_content(@location)
+    expect(page).to have_content(@location.city)
   end
 
   scenario 'Visitor searches for an invalid location' do
@@ -31,26 +30,25 @@ feature 'Location Search' do
   end
 
   scenario 'Visitor views previously fetched locations' do
-    #@location = create(:location)
-    @location = 'Boston'
+    @location = create(:location)
     visit root_path
 
-    fill_in 'Search for a city name:', with: @location
+    fill_in 'Search for a city name:', with: @location.city
 
     click_button 'Search'
 
     visit '/locations'
 
     expect(page).to have_content("Listing locations")
-    expect(page).to have_content(@location)
+    expect(page).to have_content(@location.city)
   end
 end
 
 feature "Deleting locations" do
   background do
-    @location = 'New York'
+    @location = create(:location)
     visit '/locations'
-    fill_in 'Search for a city name:', with: @location
+    fill_in 'Search for a city name:', with: @location.city
     click_button 'Search'
   end
 
@@ -64,7 +62,7 @@ feature "Deleting locations" do
     expect(page).to_not have_link('Edit')
   end
 
-  scenario "Non-admin user can't delete a locaton" do
+  scenario "Non-admin user can't delete a location" do
     @user = create(:user)
     sign_in(@user)
 
@@ -72,7 +70,7 @@ feature "Deleting locations" do
     expect(page).to_not have_link('Delete')
   end
 
-  scenario "Non-admin user can't edit a locaton" do
+  scenario "Non-admin user can't edit a location" do
     @user = create(:user)
     sign_in(@user)
 
@@ -94,18 +92,41 @@ feature "Deleting locations" do
     click_button('Update Location')
 
     expect(page).to have_text('Location was successfully updated.')
-    expect(page).to have_content(@location)
+    expect(page).to have_content(@location.city)
   end
 
   scenario "admin can delete a location" do
+    @location = 'Denver'
     @admin = create(:admin)
     sign_in(@admin)
 
     visit '/locations'
+    fill_in 'Search for a city name:', with: @location
+    click_button 'Search'
+
     expect(page).to have_link('Delete')
 
     click_link('Delete', match: :first)
     expect(page).to have_text('Location was deleted.')
     expect(page).to_not have_content(@location)
+  end
+end
+
+feature 'Homepage displays visitor specific information' do
+  background do
+    @location = create(:location)
+    visit '/'
+  end
+  scenario "should display a location map" do
+
+    expect(page).to have_css("img[src$='#{@location.longitude}']")
+  end
+
+  scenario "should display a link to weather report for that location" do
+
+    expect(page).to have_link('View Weather Reports for this location')
+    click_link 'View Weather Reports for this location'
+
+    expect(page).to have_content("Listing reports for #{@location.city}")
   end
 end

@@ -3,7 +3,7 @@ require 'json'
 
 class LocationFetcher
 
-  def self.fetch(search, provider='openweather')
+  def self.fetch(search, provider='geocoder')
     location_response = if provider == 'openweather'
                           self.search_by_openweather(search)
                         elsif provider == 'geocoder'
