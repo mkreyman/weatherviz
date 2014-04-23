@@ -15,8 +15,8 @@ WeatherViz::Application.configure do
   config.action_controller.perform_caching = true
 
   config.action_dispatch.rack_cache = {
-      metastore:   'ENV["REDISTOGO_URL"]1/metastore',
-      entitystore: 'ENV["REDISTOGO_URL"]1/entitystore'
+      metastore:   ENV['REDISTOGO_URL'] + '1/metastore',
+      entitystore: ENV['REDISTOGO_URL'] + '1/entitystore'
   }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
