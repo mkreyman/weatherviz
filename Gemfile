@@ -10,6 +10,7 @@ gem 'geocoder'
 gem 'psych'
 gem 'redis'
 gem 'redis-rails'
+gem 'rack-cache'
 
 group :development, :test do
   gem 'rspec-rails'
