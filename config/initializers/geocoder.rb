@@ -1,5 +1,5 @@
 # config/initializers/geocoder.rb
-redis_url = ENV['REDISTOGO_URL'] || "redis://localhost:6379/0/weatherviz"
+redis_url = ENV['REDISTOGO_URL'] || 'redis://localhost:6379/0/cache'
 Geocoder.configure(
 
     # geocoding service (see below for supported options):

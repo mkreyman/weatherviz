@@ -11,6 +11,8 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+@redis_url = ENV['REDISTOGO_URL'] || 'redis://localhost:6379/0/cache'
+
 module WeatherViz
   class Application < Rails::Application
 
@@ -38,6 +40,6 @@ module WeatherViz
 
     # Redis configuration
     # http://redis-store.org/redis-rails/
-    config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes }
+    config.cache_store = :redis_store, @redis_url
   end
 end
