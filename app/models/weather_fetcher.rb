@@ -9,7 +9,7 @@ class WeatherFetcher
   def self.fetch(location)
     @response = {}
 
-    if location.city_id
+    if location.city_id && location.city_id != 0
       city_url = "http://api.openweathermap.org/data/2.5/weather?id="
       url = URI.escape("#{city_url}#{location.city_id}&#{APPKEY}")
       @response = JSON.parse(open(url).read)
@@ -21,10 +21,10 @@ class WeatherFetcher
     #  @response = fetched_data['list'].first
     else
       city_and_state_url = "http://api.openweathermap.org/data/2.5/weather?q="
-      search = if location.state_code
-        "#{location.city},#{location.state_code}"
-      elsif location.country_code
-        "#{location.city},#{location.country_code}"
+      search = if location.state
+        "#{location.city},#{location.state}"
+      elsif location.country
+        "#{location.city},#{location.country}"
       else
         location.city
       end
