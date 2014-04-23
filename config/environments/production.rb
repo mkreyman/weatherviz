@@ -1,5 +1,3 @@
-redis_url = ENV['REDISTOGO_URL']
-
 WeatherViz::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -23,10 +21,7 @@ WeatherViz::Application.configure do
 
   # Redis configuration
   # http://redis-store.org/redis-rails/
-  #config.action_dispatch.rack_cache = {
-  #    metastore:   :redis_store,
-  #    entitystore: :redis_store
-  #}
+  config.action_dispatch.rack_cache = :redis_store, ENV['REDISTOGO_URL']
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
   config.serve_static_assets = false
@@ -62,7 +57,7 @@ WeatherViz::Application.configure do
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
-  config.cache_store = :redis_store, redis_url
+  config.cache_store = :redis_store, ENV['REDISTOGO_URL']
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
