@@ -16,10 +16,10 @@ WeatherViz::Application.configure do
 
   # Redis configuration
   # http://redis-store.org/redis-rails/
-  config.action_dispatch.rack_cache = {
-      metastore:   :redis_store,
-      entitystore: :redis_store
-  }
+  #config.action_dispatch.rack_cache = {
+  #    metastore:   :redis_store,
+  #    entitystore: :redis_store
+  #}
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
