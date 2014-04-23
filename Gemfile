@@ -8,6 +8,8 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem 'geocoder'
 gem 'psych'
+gem 'redis'
+gem 'redis-rails'
 
 group :development, :test do
   gem 'rspec-rails'

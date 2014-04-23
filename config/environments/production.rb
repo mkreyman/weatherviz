@@ -77,4 +77,11 @@ WeatherViz::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # Redis configuration
+  # http://redis-store.org/redis-rails/
+  config.action_dispatch.rack_cache = {
+      metastore:   'redis://localhost:6379/1/metastore',
+      entitystore: 'redis://localhost:6379/1/entitystore'
+  }
 end

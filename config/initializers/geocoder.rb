@@ -16,8 +16,8 @@ Geocoder.configure(
     # set default units to kilometers:
     :units => :mi,
 
-    # caching (see below for details):
-    #:cache => Redis.new,
-    #:cache_prefix => "..."
+    # caching
+    :cache => Redis.new,
+    :cache_prefix => "geocoder"
 
 )
