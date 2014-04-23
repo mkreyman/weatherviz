@@ -14,8 +14,6 @@ WeatherViz::Application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
-  # http://nofail.de/2010/08/using-the-redis-addon-on-heroku/
-  config.cache_store = ActiveSupport::Cache::RailsRedisCache.new(:url => ENV['REDISTOGO_URL'])
   config.action_dispatch.rack_cache = {
       metastore:   'ENV["REDISTOGO_URL"]1/metastore',
       entitystore: 'ENV["REDISTOGO_URL"]1/entitystore'
