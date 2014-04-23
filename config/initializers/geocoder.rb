@@ -17,7 +17,7 @@ Geocoder.configure(
     :units => :mi,
 
     # caching
-    :cache => Redis.new,
+    :cache => :redis_store,
     :cache_prefix => "geocoder"
 
 )
