@@ -19,6 +19,6 @@ Geocoder.configure(
 
     # caching
     :cache => Redis.new(:url => redis_url),
-    :cache_prefix => "geocoder"
+    :cache_prefix => "geocoder_"
 
 )
