@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'Weather Reports Search', :vcr do
+feature 'Weather Reports Search', :vcr, record: :new_episodes do
   scenario 'Visitor views all recent reports', :vcr do
     visit '/weather_reports'
 

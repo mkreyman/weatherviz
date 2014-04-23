@@ -13,6 +13,7 @@ VCR.configure do |c|
   c.cassette_library_dir  = Rails.root.join("spec", "vcr")
   c.hook_into :webmock
   c.configure_rspec_metadata!
+  c.default_cassette_options = { :record => :new_episodes, :erb => true }
   c.filter_sensitive_data('<OpenWeatherMapAPIKey>') { ENV['OPENWEATHER_APPID'] }
   c.allow_http_connections_when_no_cassette = true
 end
