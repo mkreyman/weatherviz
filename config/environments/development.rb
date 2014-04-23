@@ -11,7 +11,14 @@ WeatherViz::Application.configure do
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = false
+  config.action_controller.perform_caching = true
+
+  # Redis configuration
+  # http://redis-store.org/redis-rails/
+  config.action_dispatch.rack_cache = {
+      metastore:   'redis://localhost:6379/1/metastore',
+      entitystore: 'redis://localhost:6379/1/entitystore'
+  }
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false

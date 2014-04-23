@@ -14,6 +14,13 @@ WeatherViz::Application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
+  # http://nofail.de/2010/08/using-the-redis-addon-on-heroku/
+  config.cache_store = ActiveSupport::Cache::RailsRedisCache.new(:url => ENV['REDISTOGO_URL'])
+  config.action_dispatch.rack_cache = {
+      metastore:   'ENV["REDISTOGO_URL"]1/metastore',
+      entitystore: 'ENV["REDISTOGO_URL"]1/entitystore'
+  }
+
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.
@@ -78,10 +85,4 @@ WeatherViz::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # Redis configuration
-  # http://redis-store.org/redis-rails/
-  config.action_dispatch.rack_cache = {
-      metastore:   'redis://localhost:6379/1/metastore',
-      entitystore: 'redis://localhost:6379/1/entitystore'
-  }
 end
