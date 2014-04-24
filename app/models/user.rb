@@ -15,6 +15,6 @@ class User < ActiveRecord::Base
             uniqueness: { case_sensitive: false }
 
   geocoded_by :ip_address
-  after_validation :geocode, :if => :ip_address_changed?
+  after_validation :geocode, :if => lambda{ |obj| obj.ip_address_changed? }
 
 end

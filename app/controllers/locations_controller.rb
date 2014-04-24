@@ -5,6 +5,9 @@ class LocationsController < ApplicationController
     if params[:search].present?
       LocationFetcher.fetch(params[:search])
       @locations = Location.search(params[:search]).order(updated_at: :desc)
+      if @locations.empty?
+        flash[:error] = 'Sorry, no results found.'
+      end
       redirect_to locations_path
     else
       @locations = Location.order(updated_at: :desc)
