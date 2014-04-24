@@ -2,28 +2,7 @@ class WeatherReportsController < ApplicationController
   before_action :set_weather_report, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:search]
-      location = LocationFetcher.fetch(params[:search])
-      WeatherFetcher.fetch(location)
-      sanitized_search = params[:search].split(/[\s,]+/).first.strip
-      @weather_reports = WeatherReport.search(sanitized_search).order(time_received: :desc)
-      if @weather_reports.blank?
-        redirect_to weather_reports_path #, notice: 'Sorry, no results found.'
-      end
-    else
-      @weather_reports = WeatherReport.order(time_received: :desc)
-    end
-
-=begin
-    if params[:search]
-      location = LocationFetcher.fetch(params[:search])
-      WeatherFetcher.fetch(location)
-      @weather_reports = WeatherReport.search(params[:search]).order(time_received: :desc)
-      redirect_to weather_reports_path(location)
-    else
-      @weather_reports = WeatherReport.order(updated_at: :desc)
-    end
-=end
+    @weather_reports = WeatherReport.order(time_received: :desc)
   end
 
   def show

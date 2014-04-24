@@ -135,7 +135,7 @@ feature "Profile Page" do
     fill_in 'Email', with: ''
 
     click_button 'Save changes'
-    expect(page).to have_content('errors')
+    expect(page).to have_content("Email can't be blank")
   end
 end
 
@@ -177,6 +177,7 @@ feature 'User Authorization' do
     visit users_path
 
     expect(current_path).to eq(root_path)
+    expect(page).to have_text("Not authorized")
   end
 
   scenario "allows admin to delete a user" do

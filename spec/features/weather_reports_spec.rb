@@ -9,54 +9,45 @@ feature 'Weather Reports Search' do
   end
 
   scenario 'Visitor searches for a location' do
-    # @location = create(:location)
-    # Faker gives too hard to find cities!
-    @location = 'Moscow'
+    @location = create(:location)
     visit '/weather_reports'
 
-    fill_in 'Search for a city name:', with: @location
+    fill_in 'Search for a city name:', with: @location.city
 
     click_button 'Search'
 
-    expect(page).to have_content(@location)
+    expect(page).to have_content(@location.city)
   end
 
-  # Found this doesn't work when deployed to Heroku.
-  # Need to figure out how to do that method correctly,
-  # so there would be no false negatives.
-  #scenario 'Visitor searches for an invalid location' do
-  #  @location = 'shshshgethr'
-  #  visit '/weather_reports'
-  #
-  #  fill_in 'Search for a city name:', with: @location
-  #
-  #  click_button 'Search'
-  #
-  #  expect(page).to have_content("Sorry, no results found.")
-  #end
-
-  scenario 'Visitor views previously fetched reports' do
-    # @location = create(:location)
-    # Faker gives too hard to find cities!
-    @location = 'Kiev'
+  scenario 'Visitor searches for an invalid location' do
+    @location = 'shshshgethr'
     visit '/weather_reports'
 
     fill_in 'Search for a city name:', with: @location
 
     click_button 'Search'
 
-    click_on 'Show'
+    expect(page).to have_content("Sorry, no results found.")
+  end
 
-    expect(page).to have_content(@location)
+  scenario 'Visitor views previously fetched reports' do
+    @location = create(:location)
+    visit '/locations'
+
+    fill_in 'Search for a city name:', with: @location.city
+
+    click_button 'Search'
+    click_link('Show reports', match: :first)
+
+    expect(page).to have_content(@location.city)
   end
 end
 
-
 feature "Deleting weather reports" do
   background do
-    @location = 'Aspen'
+    @location = create(:location)
     visit '/weather_reports'
-    fill_in 'Search for a city name:', with: @location
+    fill_in 'Search for a city name:', with: @location.city
     click_button 'Search'
   end
 
@@ -76,8 +67,12 @@ feature "Deleting weather reports" do
   scenario "admin can delete a report" do
     @admin = create(:admin)
     sign_in(@admin)
-
+    @location = 'Denver'
     visit '/weather_reports'
+
+    fill_in 'Search for a city name:', with: @location
+    click_button 'Search'
+
     expect(page).to have_link('Delete')
 
     click_link('Delete', match: :first)

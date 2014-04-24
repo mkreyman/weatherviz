@@ -13,12 +13,12 @@ class WeatherFetcher
       city_url = "http://api.openweathermap.org/data/2.5/weather?id="
       url = URI.escape("#{city_url}#{location.city_id}&#{APPKEY}")
       @response = JSON.parse(open(url).read)
-    elsif (location.latitude && location.longitude)
-      coordinates_url = "http://api.openweathermap.org/data/2.5/find?"
-      coordinates = "lat=#{location.latitude.to_f.round(0).to_s}&lon=#{location.longitude.to_f.round(0).to_s}"
-      url = URI.escape("#{coordinates_url}#{coordinates}&#{APPKEY}")
-      fetched_data = JSON.parse(open(url).read)
-      @response = fetched_data['list'].first
+    #elsif location.latitude && location.longitude
+    #  coordinates_url = "http://api.openweathermap.org/data/2.5/find?"
+    #  coordinates = "lat=#{location.latitude.to_f.round(0).to_s}&lon=#{location.longitude.to_f.round(0).to_s}"
+    #  url = URI.escape("#{coordinates_url}#{coordinates}&#{APPKEY}")
+    #  fetched_data = JSON.parse(open(url).read)
+    #  @response = fetched_data['list'].first
     else
       city_and_state_url = "http://api.openweathermap.org/data/2.5/weather?q="
       search = if location.state_code
@@ -29,8 +29,7 @@ class WeatherFetcher
         location.city
       end
       url = URI.escape("#{city_and_state_url}#{search}&#{APPKEY}")
-      fetched_data = JSON.parse(open(url).read)
-      @response = fetched_data['list'].first
+      @response = JSON.parse(open(url).read)
     end
 
     if @response && location.city_id.nil?
