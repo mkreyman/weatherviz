@@ -11,6 +11,8 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+@redis_url = ENV['REDISTOGO_URL'] || 'redis://localhost:6379/0/cache'
+
 module WeatherViz
   class Application < Rails::Application
 
@@ -35,5 +37,9 @@ module WeatherViz
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    # Redis configuration
+    # http://redis-store.org/redis-rails/
+    config.cache_store = :redis_store, @redis_url
   end
 end

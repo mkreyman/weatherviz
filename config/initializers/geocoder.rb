@@ -1,4 +1,5 @@
 # config/initializers/geocoder.rb
+redis_url = ENV['REDISTOGO_URL'] || 'redis://localhost:6379/0/cache'
 Geocoder.configure(
 
     # geocoding service (see below for supported options):
@@ -16,8 +17,8 @@ Geocoder.configure(
     # set default units to kilometers:
     :units => :mi,
 
-    # caching (see below for details):
-    #:cache => Redis.new,
-    #:cache_prefix => "..."
+    # caching
+    :cache => Redis.new(:url => redis_url),
+    :cache_prefix => "geocoder_"
 
 )

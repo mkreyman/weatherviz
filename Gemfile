@@ -7,6 +7,10 @@ gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem 'geocoder'
+gem 'psych'
+gem 'redis'
+gem 'redis-rails'
+gem 'rack-cache'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -25,6 +29,8 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do

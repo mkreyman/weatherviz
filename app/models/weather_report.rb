@@ -1,5 +1,5 @@
 class WeatherReport < ActiveRecord::Base
-  belongs_to :location, :autosave => true
+  belongs_to :location, touch: true, autosave: true
 
   def self.search(search)
     if search

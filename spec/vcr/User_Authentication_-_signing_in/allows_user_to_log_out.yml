@@ -1,0 +1,67 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://freegeoip.net/json/174.51.246.225
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 22 Apr 2014 18:11:18 GMT
+      Content-Length:
+      - '231'
+    body:
+      encoding: UTF-8
+      string: |
+        {"ip":"174.51.246.225","country_code":"US","country_name":"United States","region_code":"CO","region_name":"Colorado","city":"Arvada","zipcode":"80004","latitude":39.8131,"longitude":-105.1257,"metro_code":"751","area_code":"303"}
+    http_version: 
+  recorded_at: Tue, 22 Apr 2014 18:10:41 GMT
+- request:
+    method: get
+    uri: http://freegeoip.net/json/174.51.246.225
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 22 Apr 2014 18:11:18 GMT
+      Content-Length:
+      - '231'
+    body:
+      encoding: UTF-8
+      string: |
+        {"ip":"174.51.246.225","country_code":"US","country_name":"United States","region_code":"CO","region_name":"Colorado","city":"Arvada","zipcode":"80004","latitude":39.8131,"longitude":-105.1257,"metro_code":"751","area_code":"303"}
+    http_version: 
+  recorded_at: Tue, 22 Apr 2014 18:10:41 GMT
+recorded_with: VCR 2.9.0

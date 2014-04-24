@@ -1,17 +1,17 @@
 require 'spec_helper'
 
 feature 'Static pages' do
-  scenario "should have the content 'WeatherViz'" do
+  scenario "should have the content 'WeatherViz'", :vcr do
     visit '/'
     expect(page).to have_content('WeatherViz')
   end
 
-  scenario 'should have the WeatherViz logo' do
+  scenario 'should have the WeatherViz logo', :vcr do
     visit '/'
     expect(page).to have_css("img[src$='weatherviz_logo.png']")
   end
 
-  scenario "should link to the /signup" do
+  scenario "should link to the /signup", :vcr do
     visit '/'
 
     click_link 'Signup'
@@ -19,7 +19,7 @@ feature 'Static pages' do
     expect(current_path).to eq('/signup')
   end
 
-  scenario "should link to the /login" do
+  scenario "should link to the /login", :vcr do
     visit '/'
 
     click_link 'Login'
@@ -27,7 +27,7 @@ feature 'Static pages' do
     expect(current_path).to eq('/login')
   end
 
-  scenario "should link to the /logout for logged in users" do
+  scenario "should link to the /logout for logged in users", :vcr do
     @user = FactoryGirl.create(:user)
     visit '/'
 
@@ -41,7 +41,7 @@ feature 'Static pages' do
     expect(page).to have_link('Logout')
   end
 
-  scenario "should have links to user specific pages for logged in users" do
+  scenario "should have links to user specific pages for logged in users", :vcr do
     @user = FactoryGirl.create(:user)
     visit '/'
 
@@ -57,7 +57,7 @@ feature 'Static pages' do
     expect(page).to have_link('Alerts')
   end
 
-  scenario "should hide links to user specific pages for visitors" do
+  scenario "should hide links to user specific pages for visitors", :vcr do
     visit '/'
 
     expect(page).to_not have_link('Profile')

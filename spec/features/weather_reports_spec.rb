@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-feature 'Weather Reports Search' do
-  scenario 'Visitor views all recent reports' do
+feature 'Weather Reports Search', :vcr, record: :new_episodes do
+  scenario 'Visitor views all recent reports', :vcr do
     visit '/weather_reports'
 
     expect(page).to have_content('Recent weather reports')
     expect(page).to have_content('Search for a city name:')
   end
 
-  scenario 'Visitor searches for a location' do
+  scenario 'Visitor searches for a location', :vcr do
     @location = create(:location)
     visit '/weather_reports'
 
@@ -19,7 +19,7 @@ feature 'Weather Reports Search' do
     expect(page).to have_content(@location.city)
   end
 
-  scenario 'Visitor searches for an invalid location' do
+  scenario 'Visitor searches for an invalid location', :vcr do
     @location = 'shshshgethr'
     visit '/weather_reports'
 
@@ -30,7 +30,7 @@ feature 'Weather Reports Search' do
     expect(page).to have_content("Sorry, no results found.")
   end
 
-  scenario 'Visitor views previously fetched reports' do
+  scenario 'Visitor views previously fetched reports', :vcr do
     @location = create(:location)
     visit '/locations'
 
@@ -43,7 +43,7 @@ feature 'Weather Reports Search' do
   end
 end
 
-feature "Deleting weather reports" do
+feature "Deleting weather reports", :vcr do
   background do
     @location = create(:location)
     visit '/weather_reports'
@@ -51,12 +51,12 @@ feature "Deleting weather reports" do
     click_button 'Search'
   end
 
-  scenario "visitor can't delete a report" do
+  scenario "visitor can't delete a report", :vcr do
     visit '/weather_reports'
     expect(page).to_not have_link('Delete')
   end
 
-  scenario "Non-admin user can't delete a report" do
+  scenario "Non-admin user can't delete a report", :vcr do
     @user = create(:user)
     sign_in(@user)
 
@@ -64,7 +64,7 @@ feature "Deleting weather reports" do
     expect(page).to_not have_link('Delete')
   end
 
-  scenario "admin can delete a report" do
+  scenario "admin can delete a report", :vcr do
     @admin = create(:admin)
     sign_in(@admin)
     @location = 'Denver'
