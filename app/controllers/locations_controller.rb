@@ -10,7 +10,7 @@ class LocationsController < ApplicationController
       end
       redirect_to locations_path
     else
-      @locations = Location.order(updated_at: :desc)
+      @locations = Location.order(updated_at: :desc).paginate(page: params[:page])
     end
   end
 

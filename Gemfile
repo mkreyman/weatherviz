@@ -11,6 +11,8 @@ gem 'psych'
 gem 'redis'
 gem 'redis-rails'
 gem 'rack-cache'
+gem 'will_paginate'
+# gem 'bootstrap-will_paginate'
 
 group :development, :test do
   gem 'rspec-rails'
