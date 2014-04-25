@@ -1,10 +1,13 @@
 class AlertsController < ApplicationController
   before_action :set_alert, only: [:show, :edit, :update, :destroy]
+  before_action :current_user, only: [:new, :create, :index, :show, :edit,
+                                      :update, :destroy, :write_to_cache]
+  after_action :write_to_cache, only: [:show, :edit, :create, :update]
 
   # GET /alerts
   # GET /alerts.json
   def index
-    @alerts = Alert.all
+    @alerts = current_user.alerts
   end
 
   # GET /alerts/1
@@ -14,7 +17,7 @@ class AlertsController < ApplicationController
 
   # GET /alerts/new
   def new
-    @alert = Alert.new
+    @alert = current_user.alerts.new
   end
 
   # GET /alerts/1/edit
@@ -24,7 +27,7 @@ class AlertsController < ApplicationController
   # POST /alerts
   # POST /alerts.json
   def create
-    @alert = Alert.new(alert_params)
+    @alert = current_user.alerts.build(alert_params)
 
     respond_to do |format|
       if @alert.save
@@ -61,14 +64,23 @@ class AlertsController < ApplicationController
     end
   end
 
+  def rules
+    @alert.rules
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_alert
       @alert = Alert.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def alert_params
       params.require(:alert).permit(:alert_name, :by_email, :by_sms, :email, :sms, :email_verified, :phone_verified, :active)
     end
+
+    def write_to_cache
+      Rails.cache.delete(current_user.id)
+      Rails.cache.write(current_user.id, @alert.id)
+    end
+
 end

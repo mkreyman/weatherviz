@@ -2,17 +2,26 @@ WeatherViz::Application.routes.draw do
 
   resources :rules
 
-  resources :alerts
+  resources :alerts do
+    member do
+      get 'rules' => 'alerts#rules'
+    end
+  end
 
   resources :weather_reports
 
   resources :locations do
     member do
-      get 'reports' => "locations#reports"
+      get 'reports' => 'locations#reports'
     end
   end
 
-  resources :users
+  resources :users do
+    member do
+      get 'alerts' => 'users#alerts'
+    end
+  end
+
   get 'signup', to: 'users#new'
 
   root :to => 'static_pages#home'

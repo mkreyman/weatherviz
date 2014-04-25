@@ -39,6 +39,9 @@
   <strong>Active:</strong>
   <%= @alert.active %>
 </p>
+<br>
+
+<%= render partial: 'alerts/rules', member: @alert.rules %>
 
 <%= link_to 'Edit', edit_alert_path(@alert) %> |
 <%= link_to 'Back', alerts_path %>

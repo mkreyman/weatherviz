@@ -1,10 +1,12 @@
 class RulesController < ApplicationController
   before_action :set_rule, only: [:show, :edit, :update, :destroy]
+  before_action :current_user, only: [:read_from_cache]
+  before_action :read_from_cache, only: [:index, :new, :create]
 
   # GET /rules
   # GET /rules.json
   def index
-    @rules = Rule.all
+    @rules = @alert.rules
   end
 
   # GET /rules/1
@@ -14,7 +16,7 @@ class RulesController < ApplicationController
 
   # GET /rules/new
   def new
-    @rule = Rule.new
+    @rule = @alert.rules.new
   end
 
   # GET /rules/1/edit
@@ -24,8 +26,7 @@ class RulesController < ApplicationController
   # POST /rules
   # POST /rules.json
   def create
-    @rule = Rule.new(rule_params)
-
+    @rule = @alert.rules.new(rule_params)
     respond_to do |format|
       if @rule.save
         format.html { redirect_to @rule, notice: 'Rule was successfully created.' }
@@ -67,8 +68,11 @@ class RulesController < ApplicationController
       @rule = Rule.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def rule_params
       params.require(:rule).permit(:field, :operation, :value, :triggered)
+    end
+
+    def read_from_cache
+      @alert = Alert.find(Rails.cache.read(current_user.id))
     end
 end
