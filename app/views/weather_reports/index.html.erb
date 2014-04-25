@@ -1,7 +1,9 @@
 <h1>Recent weather reports</h1>
 
 <%= render 'locations/search_form' %>
-
+<br>
+<%= will_paginate %>
+<br>
 <table>
   <thead>
     <tr>
@@ -56,5 +58,8 @@
   </tbody>
 </table>
 
+<br>
+<%= will_paginate %>
+<br>
 <br>
 <%= link_to 'Search for a new location', root_path %>

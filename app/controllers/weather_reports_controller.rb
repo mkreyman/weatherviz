@@ -2,7 +2,8 @@ class WeatherReportsController < ApplicationController
   before_action :set_weather_report, only: [:show, :edit, :update, :destroy]
 
   def index
-    @weather_reports = WeatherReport.order(time_received: :desc)
+    @weather_reports = WeatherReport.order(time_received: :desc).
+                       paginate(page: params[:page])
   end
 
   def show
