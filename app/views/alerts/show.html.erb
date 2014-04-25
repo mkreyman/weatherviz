@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Alert name:</strong>
+  <%= @alert.alert_name %>
+</p>
+
+<p>
+  <strong>By email:</strong>
+  <%= @alert.by_email %>
+</p>
+
+<p>
+  <strong>By sms:</strong>
+  <%= @alert.by_sms %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @alert.email %>
+</p>
+
+<p>
+  <strong>Sms:</strong>
+  <%= @alert.sms %>
+</p>
+
+<p>
+  <strong>Email verified:</strong>
+  <%= @alert.email_verified %>
+</p>
+
+<p>
+  <strong>Phone verified:</strong>
+  <%= @alert.phone_verified %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @alert.active %>
+</p>
+
+<%= link_to 'Edit', edit_alert_path(@alert) %> |
+<%= link_to 'Back', alerts_path %>

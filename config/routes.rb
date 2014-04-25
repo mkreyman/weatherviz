@@ -1,5 +1,9 @@
 WeatherViz::Application.routes.draw do
 
+  resources :rules
+
+  resources :alerts
+
   resources :weather_reports
 
   resources :locations do

@@ -1,5 +1,6 @@
 class Location < ActiveRecord::Base
   has_many :weather_reports, :dependent => :destroy
+  has_many :alerts, :dependent => :destroy
   geocoded_by :city do |obj,results|
     if geo = results.first
       obj.street = geo.address.split(', ').first
