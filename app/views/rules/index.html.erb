@@ -20,7 +20,7 @@
         <td><%= rule.operation %></td>
         <td><%= rule.value %></td>
         <td><%= rule.triggered %></td>
-        <td><%= link_to 'Show', rule %></td>
+        <td><%= link_to 'Show', rules_path %></td>
         <td><%= link_to 'Edit', edit_rule_path(rule) %></td>
         <td><%= link_to 'Destroy', rule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -30,4 +30,3 @@
 
 <br>
 
-<%= link_to 'New Rule', new_rule_path %>

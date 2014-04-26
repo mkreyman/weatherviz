@@ -13,6 +13,7 @@ WeatherViz::Application.routes.draw do
   resources :locations do
     member do
       get 'reports' => 'locations#reports'
+      get 'alerts' => 'locations#alerts'
     end
   end
 

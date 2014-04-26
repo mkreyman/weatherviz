@@ -23,10 +23,12 @@ ActiveRecord::Schema.define(version: 20140425025449) do
     t.boolean  "phone_verified", default: false
     t.boolean  "active"
     t.integer  "user_id"
+    t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "alerts", ["location_id"], name: "index_alerts_on_location_id"
   add_index "alerts", ["user_id"], name: "index_alerts_on_user_id"
 
   create_table "locations", force: true do |t|

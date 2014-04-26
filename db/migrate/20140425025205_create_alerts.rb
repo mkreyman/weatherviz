@@ -10,6 +10,7 @@ class CreateAlerts < ActiveRecord::Migration
       t.boolean :phone_verified, default: false
       t.boolean :active
       t.references :user, index: true
+      t.references :location, index: true
 
       t.timestamps
     end

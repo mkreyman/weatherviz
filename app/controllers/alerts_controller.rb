@@ -1,7 +1,8 @@
 class AlertsController < ApplicationController
-  before_action :set_alert, only: [:show, :edit, :update, :destroy]
-  before_action :current_user, only: [:new, :create, :index, :show, :edit,
-                                      :update, :destroy, :write_to_cache]
+  before_action :set_alert, only: [:show, :edit, :update,
+                                   :destroy, :rules, :write_to_cache]
+  before_action :current_user, only: [:new, :create, :index, :show,
+                                      :edit, :update, :destroy, :write_to_cache]
   after_action :write_to_cache, only: [:show, :edit, :create, :update]
 
   # GET /alerts
@@ -68,6 +69,10 @@ class AlertsController < ApplicationController
     @alert.rules
   end
 
+  def write_to_cache
+    Rails.cache.write(current_user.id, {alert: @alert.id})
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_alert
@@ -75,12 +80,9 @@ class AlertsController < ApplicationController
     end
 
     def alert_params
-      params.require(:alert).permit(:alert_name, :by_email, :by_sms, :email, :sms, :email_verified, :phone_verified, :active)
-    end
-
-    def write_to_cache
-      Rails.cache.delete(current_user.id)
-      Rails.cache.write(current_user.id, @alert.id)
+      params.require(:alert).permit(:alert_name, :by_email, :by_sms,
+                                    :email, :sms, :email_verified,
+                                    :phone_verified, :active, :location_id)
     end
 
 end

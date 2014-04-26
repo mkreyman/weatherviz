@@ -62,6 +62,10 @@ class RulesController < ApplicationController
     end
   end
 
+  def read_from_cache
+    @alert = Alert.find(Rails.cache.read(current_user.id)[:alert])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_rule
@@ -72,7 +76,4 @@ class RulesController < ApplicationController
       params.require(:rule).permit(:field, :operation, :value, :triggered)
     end
 
-    def read_from_cache
-      @alert = Alert.find(Rails.cache.read(current_user.id))
-    end
 end
