@@ -27,6 +27,7 @@
         <td><%= location.latitude %></td>
         <td><%= location.longitude %></td>
         <td><%= link_to 'Show reports', reports_location_path(location) %></td>
+        <td><%= link_to 'Create an Alert', alert_location_path(location) %></td>
         <% if (current_user.present? && current_user.admin?) %>
           <td><%= link_to 'Edit location', edit_location_path(location) %></td>
           <td><%= link_to 'Delete', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>

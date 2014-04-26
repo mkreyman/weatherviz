@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update,
-                                      :destroy, :reports, :alerts]
+                                      :destroy, :reports, :alerts, :new_alert]
 
   def index
     if params[:search].present?

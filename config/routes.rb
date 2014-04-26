@@ -4,7 +4,7 @@ WeatherViz::Application.routes.draw do
 
   resources :alerts do
     member do
-      get 'rules' => 'alerts#rules'
+      get 'rules', to: 'alerts#rules'
     end
   end
 
@@ -12,22 +12,24 @@ WeatherViz::Application.routes.draw do
 
   resources :locations do
     member do
-      get 'reports' => 'locations#reports'
-      get 'alerts' => 'locations#alerts'
+      get 'reports', to: 'locations#reports'
+      get 'alerts', to: 'locations#alerts'
+      get 'alert', to: 'locations#new_alert'
     end
   end
 
   resources :users do
     member do
-      get 'alerts' => 'users#alerts'
+      get 'alerts', to: 'users#alerts'
+      get 'settings', to: 'users#edit'
+      get 'profile', to: 'users#show'
     end
   end
-
-  get 'signup', to: 'users#new'
 
   root :to => 'static_pages#home'
 
   resources :sessions, only: [:login, :create, :destroy]
+  get 'signup', to: 'users#new'
   get 'login', to: 'sessions#login'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
