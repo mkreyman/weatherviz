@@ -1,27 +1,5 @@
-<% provide(:title, 'Sign up') %>
-<% unless @user.omniauth? %>
- <div>
-   <h1>Sign up</h1>
- </div>
- <p><strong>Sign up through one of these services:</strong></p>
- <div class="'auth_providers">
-   <%= link_to image_tag('octocat.png', size: '64x64'), '/auth/github' %>
-   <%= link_to image_tag('google.png', size: '64x64'), '/auth/google_oauth2' %>
-   <%= link_to image_tag('facebook.png', size: '64x64'), '/auth/facebook' %>
- </div>
-
- <p><strong>Don't use these services? Sign up below.</strong></p>
-
-<% else %>
-    <h1>Verify Details</h1>
-<% end %>
-
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
-        <%= render 'users/fields', f: f %>
-        <%= f.submit 'Signup', class: "btn btn-large btn-primary" %>
-    <% end %>
-  </div>
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h1>
 </div>
-
+<%= render :partial => 'form' %>

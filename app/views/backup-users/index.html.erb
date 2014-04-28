@@ -1,0 +1,21 @@
+<% provide(:title, 'All users') %>
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<br>
+<%= will_paginate %>
+<br>
+
+<ul class="users">
+  <%= render @users %>
+</ul>
+
+<br>
+<%= will_paginate %>
+<br>
+
+
+
+

@@ -1,20 +1,5 @@
-<% provide(:title, "Edit user") %>
-<h1>Update your profile</h1>
-
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
-        <%= render 'users/fields', f: f %>
-        <% if current_user.present? && current_user.admin? %>
-          <div class="field">
-            <%= f.check_box :admin %>
-            <%= f.label :admin, "Admin" %>
-          </div>
-        <% end %>
-        <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
-    <% end %>
-
-    <%= gravatar_for @user %>
-    <a href="http://gravatar.com/emails" target="_blank">change</a>
-  </div>
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
 </div>
+<%= render :partial => 'form' %>
