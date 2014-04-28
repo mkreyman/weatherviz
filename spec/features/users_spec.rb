@@ -142,6 +142,7 @@ end
 
 feature 'User Authorization', :vcr do
   background do
+    @admin = create(:admin)
     @user = create(:user)
   end
 
@@ -163,7 +164,6 @@ feature 'User Authorization', :vcr do
   end
 
   scenario "allows admin to view all users", :vcr do
-    @admin = create(:admin)
     sign_in(@admin)
 
     visit users_path
@@ -181,12 +181,11 @@ feature 'User Authorization', :vcr do
   end
 
   scenario "allows admin to delete a user", :vcr do
-    @admin = create(:admin)
     sign_in(@admin)
     visit users_path
 
-    expect(page).to have_link('delete')
-    click_link('delete', match: :first)
+    expect(page).to have_text('Delete')
+    click_on('Delete', match: :first)
 
     expect(page).to have_content("User deleted.")
   end
@@ -196,28 +195,26 @@ feature 'User Authorization', :vcr do
     sign_in(@user)
     visit user_path(@user)
 
-    expect(page).not_to have_link('delete')
+    expect(page).not_to have_text('Delete')
   end
 
   scenario "prevents admin from deleting themselves", :vcr do
-    @admin = create(:admin)
     sign_in(@admin)
     visit users_path
 
-    expect(page).to have_link('delete')
+    expect(page).to have_text('Delete')
     # for an existing user created as the 'background' for this feature.
-    click_link('delete', match: :first)
+    click_on('Delete', match: :first)
 
     expect(page).to have_content("User deleted.")
 
     # no more users except himself
-    expect(page).not_to have_link('delete')
+    expect(page).not_to have_text('Delete')
   end
 
   scenario "prevents admin from disabling themselves as admin" do
 
   end
-
 
 end
 

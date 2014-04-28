@@ -9,28 +9,3 @@
 body {
     padding-top: 100px;
 }
-
-/* footer */
-
-footer {
-    margin-top: 45px;
-    padding-top: 5px;
-    border-top: 1px solid lightgray;
-    color: gray;
-a {
-    color: gray;
-&:hover {
-    color: gray;
-}
-}
-small {
-    float: left;
-}
-ul {
-    float: right;
-    list-style: none;
-li {
-    float: left;
-    margin-left: 10px;
-}
-}
