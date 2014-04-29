@@ -1,6 +1,10 @@
-<h1>Editing weather_report</h1>
+<%- model_class = WeatherReport -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+</div>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @weather_report %> |
-<%= link_to 'Back', weather_reports_path %>
+<%= link_to 'Show', @weather_report, :class => 'btn'  %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+            weather_reports_path, :class => 'btn'  %>
