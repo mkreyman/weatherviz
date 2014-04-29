@@ -1,0 +1,40 @@
+<%= form_for(@location.alerts.build(user_id: current_user.id, location_id: @location.id)) do |f| %>
+
+  <div class="field">
+    <%= f.label :alert_name %><br>
+    <%= f.text_field :alert_name %>
+  </div>
+  <div class="field">
+    <%= f.label :by_email %><br>
+    <%= f.check_box :by_email %>
+  </div>
+  <div class="field">
+    <%= f.label :by_sms %><br>
+    <%= f.check_box :by_sms %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :sms %><br>
+    <%= f.text_field :sms %>
+  </div>
+  <div class="field">
+    <%= f.label :email_verified %><br>
+    <%= f.check_box :email_verified %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_verified %><br>
+    <%= f.check_box :phone_verified %>
+  </div>
+  <div class="field">
+    <%= f.label :active %><br>
+    <%= f.check_box :active %>
+  </div>
+    <%= f.hidden_field :user_id %>
+    <%= f.hidden_field :location_id %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

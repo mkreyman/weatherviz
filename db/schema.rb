@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140418173516) do
+ActiveRecord::Schema.define(version: 20140425025449) do
+
+  create_table "alerts", force: true do |t|
+    t.string   "alert_name"
+    t.boolean  "by_email",       default: false
+    t.boolean  "by_sms",         default: false
+    t.string   "email"
+    t.string   "sms"
+    t.boolean  "email_verified", default: false
+    t.boolean  "phone_verified", default: false
+    t.boolean  "active"
+    t.integer  "user_id"
+    t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "alerts", ["location_id"], name: "index_alerts_on_location_id"
+  add_index "alerts", ["user_id"], name: "index_alerts_on_user_id"
 
   create_table "locations", force: true do |t|
     t.integer  "city_id"
@@ -30,6 +48,18 @@ ActiveRecord::Schema.define(version: 20140418173516) do
   end
 
   add_index "locations", ["latitude", "longitude"], name: "index_locations_on_latitude_and_longitude"
+
+  create_table "rules", force: true do |t|
+    t.string   "field"
+    t.string   "operation"
+    t.string   "value"
+    t.boolean  "triggered",  default: false
+    t.integer  "alert_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rules", ["alert_id"], name: "index_rules_on_alert_id"
 
   create_table "users", force: true do |t|
     t.string   "first_name"

@@ -42,7 +42,7 @@
 
 <p>
   <strong><%= link_to 'View Weather Reports for this location', reports_location_path(@location) %> |
-    <%= link_to 'Setup a Weather Alert' %></strong>
+    <%= link_to 'Setup a Weather Alert', alert_location_path(@location) %></strong>
 </p>
 
 <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>

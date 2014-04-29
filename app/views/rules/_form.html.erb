@@ -1,0 +1,23 @@
+<%= form_for(@rule) do |f| %>
+
+  <div class="field">
+    <%= f.label :field %><br>
+    <%= f.text_field :field %>
+  </div>
+  <div class="field">
+    <%= f.label :operation %><br>
+    <%= f.text_field :operation %>
+  </div>
+  <div class="field">
+    <%= f.label :value %><br>
+    <%= f.text_field :value %>
+  </div>
+  <div class="field">
+    <%= f.label :triggered %><br>
+    <%= f.check_box :triggered %>
+  </div>
+    <%= f.hidden_field  :alert_id %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

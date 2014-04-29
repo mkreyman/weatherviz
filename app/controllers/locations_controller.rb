@@ -1,5 +1,6 @@
 class LocationsController < ApplicationController
-  before_action :set_location, only: [:show, :edit, :update, :destroy, :reports]
+  before_action :set_location, only: [:show, :edit, :update,
+                                      :destroy, :reports, :alerts, :new_alert]
 
   def index
     if params[:search].present?
@@ -73,6 +74,14 @@ class LocationsController < ApplicationController
     else
       @location.weather_reports
     end
+  end
+
+  def alerts
+    @location.alerts
+  end
+
+  def new_alert
+    @location.alerts.new
   end
 
   private

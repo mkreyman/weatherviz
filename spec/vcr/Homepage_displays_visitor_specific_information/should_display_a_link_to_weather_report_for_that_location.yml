@@ -465,4 +465,46 @@ http_interactions:
         {"coord":{"lon":-105.09,"lat":39.8},"sys":{"message":0.1158,"country":"US","sunrise":1398168684,"sunset":1398217561},"weather":[{"id":802,"main":"Clouds","description":"scattered clouds","icon":"03d"}],"base":"cmc stations","main":{"temp":294.81,"pressure":1011,"temp_min":288.15,"temp_max":299.82,"humidity":41},"wind":{"speed":3.6,"gust":7.2,"deg":163},"clouds":{"all":44},"dt":1398190117,"id":5412199,"name":"Arvada","cod":200}
     http_version: 
   recorded_at: Tue, 22 Apr 2014 18:08:47 GMT
+- request:
+    method: get
+    uri: http://api.openweathermap.org/data/2.5/weather?APPID=<OpenWeatherMapAPIKey>&q=Arvada,Colorado
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 26 Apr 2014 00:06:52 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Source:
+      - back
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST
+    body:
+      encoding: UTF-8
+      string: |
+        {"coord":{"lon":-105.09,"lat":39.8},"sys":{"message":0.0139,"country":"United States of America","sunrise":1398513960,"sunset":1398563403},"weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04n"}],"base":"cmc stations","main":{"temp":294.15,"humidity":16,"pressure":1002,"temp_min":288.71,"temp_max":297.04},"wind":{"speed":3.08,"gust":4.11,"deg":320},"clouds":{"all":92},"dt":1398470756,"id":5412199,"name":"Arvada","cod":200}
+    http_version: 
+  recorded_at: Sat, 26 Apr 2014 00:05:48 GMT
 recorded_with: VCR 2.9.0

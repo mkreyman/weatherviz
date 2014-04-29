@@ -1,19 +1,35 @@
 WeatherViz::Application.routes.draw do
 
+  resources :rules
+
+  resources :alerts do
+    member do
+      get 'rules', to: 'alerts#rules'
+    end
+  end
+
   resources :weather_reports
 
   resources :locations do
     member do
-      get 'reports' => "locations#reports"
+      get 'reports', to: 'locations#reports'
+      get 'alerts', to: 'locations#alerts'
+      get 'alert', to: 'locations#new_alert'
     end
   end
 
-  resources :users
-  get 'signup', to: 'users#new'
+  resources :users do
+    member do
+      get 'alerts', to: 'users#alerts'
+      get 'settings', to: 'users#edit'
+      get 'profile', to: 'users#show'
+    end
+  end
 
   root :to => 'static_pages#home'
 
   resources :sessions, only: [:login, :create, :destroy]
+  get 'signup', to: 'users#new'
   get 'login', to: 'sessions#login'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
