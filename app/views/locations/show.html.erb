@@ -1,35 +1,25 @@
+<%- model_class = Location -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>City:</strong>
-  <%= @location.city_id %>
-</p>
+<dl class="dl-horizontal">
+  <dd><%= @location.city %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:state) %>:</strong></dt>
+  <dd><%= @location.state %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:country) %>:</strong></dt>
+  <dd><%= @location.country %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:latitude) %>:</strong></dt>
+  <dd><%= @location.latitude %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:longitude) %>:</strong></dt>
+  <dd><%= @location.longitude %></dd>
+</dl>
 
-<p>
-  <strong>City:</strong>
-  <%= @location.city %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @location.state %>
-</p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @location.country %>
-</p>
-
-<p>
-  <strong>Lat:</strong>
-  <%= @location.latitude %>
-</p>
-
-<p>
-  <strong>Lon:</strong>
-  <%= @location.longitude %>
-</p>
-
-<% if (current_user.present? && current_user.admin?) %>
-  <%= link_to 'Edit', edit_location_path(@location) %> |
-<% end %>
-<%= link_to 'Back', locations_path %>
+<div class="form-actions">
+  <% if (current_user.present? && current_user.admin?) %>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                  edit_location_path(@location), :class => 'btn' %>
+  <% end %>
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              locations_path, :class => 'btn'  %>
+</div>

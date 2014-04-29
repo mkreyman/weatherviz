@@ -1,47 +1,37 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Alert name:</strong>
-  <%= @alert.alert_name %>
-</p>
-
-<p>
-  <strong>By email:</strong>
-  <%= @alert.by_email %>
-</p>
-
-<p>
-  <strong>By sms:</strong>
-  <%= @alert.by_sms %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @alert.email %>
-</p>
-
-<p>
-  <strong>Sms:</strong>
-  <%= @alert.sms %>
-</p>
-
-<p>
-  <strong>Email verified:</strong>
-  <%= @alert.email_verified %>
-</p>
-
-<p>
-  <strong>Phone verified:</strong>
-  <%= @alert.phone_verified %>
-</p>
-
-<p>
-  <strong>Active:</strong>
-  <%= @alert.active %>
-</p>
+<%- model_class = Alert -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:alert_name) %>:</strong></dt>
+  <dd><%= @alert.alert_name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:by_email) %>:</strong></dt>
+  <dd><%= @alert.by_email %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:by_sms) %>:</strong></dt>
+  <dd><%= @alert.by_sms %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+  <dd><%= @alert.email %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:sms) %>:</strong></dt>
+  <dd><%= @alert.sms %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:email_verified) %>:</strong></dt>
+  <dd><%= @alert.email_verified %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:phone_verified) %>:</strong></dt>
+  <dd><%= @alert.phone_verified %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:active) %>:</strong></dt>
+  <dd><%= @alert.active %></dd>
+</dl>
 <br>
-
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              alerts_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_alert_path(@alert), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              alert_path(@alert),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
+<br>
 <%= render partial: 'alerts/rules', member: @alert.rules %>
-
-<%= link_to 'Edit', edit_alert_path(@alert) %> |
-<%= link_to 'Back', alerts_path %>

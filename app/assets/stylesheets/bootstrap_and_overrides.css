@@ -1,0 +1,138 @@
+/*
+  =require twitter-bootstrap-static/bootstrap
+
+  Use Font Awesome icons (default)
+  To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
+  =require twitter-bootstrap-static/fontawesome
+  */
+
+body {
+    padding-top: 80px;
+}
+.jumbotron {
+    background: #197aaa;
+    padding: 14px 0;
+}
+.jumbotron h1 {
+    color: #fff;
+    font-size: 30px;
+}
+.jumbotron {
+    margin-bottom: 30px;
+}
+.search {
+    text-align: right;
+    margin-top: 20px;
+}
+.main-content .container {
+    background: #f7f7f7;
+    border: 1px solid #e3e3e3;
+    padding: 10px;
+}
+.nearbys {
+    text-align: right;
+    padding-top: 10px;
+}
+.visitor {
+    float: left;
+}
+h2 {
+    font-size: 18px;
+    color: #333;
+    display: block;
+    border-bottom: 1px solid #e3e3e3;
+    font-weight: normal !important;
+    margin-top: 0;
+    line-height: 34px;
+}
+.green-btn {
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    background: #accf77;
+    padding: 8px 20px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+}
+.green-btn:hover, .orange-btn:hover {
+    color: #fff;
+    font-size: 16px;
+    background: #999;
+    text-decoration: none;
+}
+.orange-btn {
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    background: #ffb002;
+    padding: 8px 34px;
+    margin-bottom: 6px;
+}
+.nearbys img {
+    margin-top: 8px;
+}
+.visitor dl.dl-horizontal dt strong{
+    color: #197aaa !important;
+}
+.visitor {
+    font-size: 16px;
+}
+.visitor dl.dl-horizontal dt, .visitor dl.dl-horizontal dd {
+    text-align: left;
+    width: 100px !important;
+    padding-left: 10px;
+    margin-bottom: 8px;
+}
+.visitor dl.dl-horizontal dd {
+    margin-left: 100px;
+}
+li.location-item {
+    font-size: 13px;
+    color: #fff;
+    list-style: none;
+    display: inline-block;
+    background: #accf77;
+    padding: 4px;
+    margin-bottom: 8px;
+    margin-right: 4px;
+}
+li.location-item a, li.location-item a:hover {
+    color: #ffffff !important;
+    background-color: transparent;
+    text-decoration: none;
+}
+.visitor ul li.location-item a:hover {
+    color: #fff;
+}
+.row div.visitor ul {
+    margin-left: 0;
+}
+ul.nav li {
+    padding-top: 20px;
+
+}
+.navbar-right {
+    float: right !important;
+}
+.main-nav {
+    float: left;
+}
+ul.nav li a {
+    padding: 10px 18px;
+    font-size: 16px;
+
+}
+.footer {
+    background: #dedede;
+    padding: 8px 0 0 0;
+    color: #333;
+    margin-top: 8px;
+}
+.footer ul li {
+    list-style: none;
+    display: inline-block;
+    margin-left: 20px;
+}
+.foot-nav-container {
+    text-align: right;
+}

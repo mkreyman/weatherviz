@@ -1,49 +1,56 @@
-<h2>
-  Based on your current IP address <%= request.remote_ip %>, your location is:
-</h2>
+<div class="main-content">
+  <div class="container">
 
+    <div class="row">
+
+
+
+      <div class="visitor span6" >
+        <h2>
+          Based on your current IP address <%= request.remote_ip %>, your location is:
+        </h2>
 <% @location = visitor_location %>
-
-<p>
-  <strong>City:</strong>
-  <%= @location.city %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @location.state %>
-</p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @location.country %>
-</p>
-
-<p>
-  <strong>Latitude:</strong>
-  <%= @location.latitude %>
-</p>
-
-<p>
-  <strong>Longitude:</strong>
-  <%= @location.longitude %>
-</p>
-
-<p>
-  <strong><%= link_to 'View Weather Reports for this location', reports_location_path(@location) %> |
-    <%= link_to 'Setup a Weather Alert', alert_location_path(@location) %></strong>
-</p>
-
-<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+        <dl class="dl-horizontal">
+          <dt><strong>City:</strong></dt>
+          <dd><%= @location.city %></dd>
+          <dt><strong>State:</strong></dt>
+          <dd><%= @location.state %></dd>
+          <dt><strong>Country:</strong></dt>
+          <dd><%= @location.country %></dd>
+          <dt><strong>Latitude:</strong></dt>
+          <dd><%= @location.latitude %></dd>
+          <dt><strong>Longitude:</strong></dt>
+          <dd><%= @location.longitude %></dd>
+        </dl>
 
 
-<% if !@location.nearbys(50).empty? %>
-<h3>
-  Weather reports for nearby locations
-</h3>
-  <ul>
-    <% @location.nearbys(50).each do |location| %>
-      <li><%= link_to location.city, reports_location_path(location) %> (<%= location.distance.round(2) %> miles)</li>
-    <% end %>
-  </ul>
-<% end %>
+
+        <% if !@location.nearbys(50).empty? %>
+            <h2>
+              Weather reports for nearby locations
+            </h2>
+            <ul>
+              <% @location.nearbys(50).each do |location| %>
+                  <li class="location-item"><%= link_to location.city, reports_location_path(location) %> (<%= location.distance.round(2) %> miles)</li>
+              <% end %>
+            </ul>
+        <% end %>
+
+      </div>
+
+      <div class="nearbys span6" >
+
+
+        <p><strong><%= link_to 'View Weather Reports', reports_location_path(@location), :class => "green-btn" %>
+          <%= link_to 'Setup a Weather Alert', alert_location_path(@location), :class => "orange-btn" %></strong></p>
+
+        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+
+
+      </div>
+
+      <div style="clear: both;" ></div>
+
+    </div>
+  </div>
+</div>

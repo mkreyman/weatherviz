@@ -1,27 +1,29 @@
 <% provide(:title, 'Sign up') %>
+<%- model_class = User -%>
 <% unless @user.omniauth? %>
- <div>
-   <h1>Sign up</h1>
- </div>
- <p><strong>Sign up through one of these services:</strong></p>
- <div class="'auth_providers">
-   <%= link_to image_tag('octocat.png', size: '64x64'), '/auth/github' %>
-   <%= link_to image_tag('google.png', size: '64x64'), '/auth/google_oauth2' %>
-   <%= link_to image_tag('facebook.png', size: '64x64'), '/auth/facebook' %>
- </div>
+    <div>
+      <h1>Sign up</h1>
+    </div>
+    <p><strong>Sign up through one of these services:</strong></p>
+    <div class="'auth_providers">
+      <%= link_to image_tag('octocat.png', size: '64x64'), '/auth/github' %>
+      <%= link_to image_tag('google.png', size: '64x64'), '/auth/google_oauth2' %>
+      <%= link_to image_tag('facebook.png', size: '64x64'), '/auth/facebook' %>
+    </div>
 
- <p><strong>Don't use these services? Sign up below.</strong></p>
+    <p><strong>Don't use these services? Sign up below.</strong></p>
 
 <% else %>
     <h1>Verify Details</h1>
 <% end %>
 
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
-        <%= render 'users/fields', f: f %>
-        <%= f.submit 'Signup', class: "btn btn-large btn-primary" %>
-    <% end %>
-  </div>
-</div>
+<%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
+    <%= render 'users/fields', f: f %>
+    <div class="form-actions">
+      <%= f.submit 'Signup', :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  users_path, :class => 'btn' %>
+    </div>
+<% end %>
+
 

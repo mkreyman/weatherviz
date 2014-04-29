@@ -1,30 +1,30 @@
-<h1>Recent weather reports</h1>
+<%- model_class = WeatherReport -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
 
 <%= render 'locations/search_form' %>
 <br>
 <%= will_paginate %>
 <br>
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Location</th>
-      <th>At time</th>
-      <th>Sunrise</th>
-      <th>Sunset</th>
-      <th>Weather</th>
-      <th>Temp</th>
-      <th>Min Temp</th>
-      <th>Max Temp</th>
-      <th>Pressure</th>
-      <th>Humidity</th>
-      <th>Wind speed</th>
-      <th>Wind gust</th>
-      <th>Wind direction</th>
-      <th>Clouds</th>
+      <th>Received</th>
+      <th><%= model_class.human_attribute_name(:weather) %></th>
+      <th><%= model_class.human_attribute_name(:temp) %></th>
+      <th><%= model_class.human_attribute_name(:temp_min) %></th>
+      <th><%= model_class.human_attribute_name(:temp_max) %></th>
+      <th><%= model_class.human_attribute_name(:pressure) %></th>
+      <th><%= model_class.human_attribute_name(:humidity) %></th>
+      <th><%= model_class.human_attribute_name(:wind_speed) %></th>
+      <th><%= model_class.human_attribute_name(:wind_gust) %></th>
+      <th>Direction</th>
+      <th><%= model_class.human_attribute_name(:clouds) %></th>
       <th>Rain (3h)</th>
       <th>Snow (3h)</th>
-      <th></th>
-      <th></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
 
@@ -33,8 +33,6 @@
       <tr>
         <td><%= city(weather_report) %></td>
         <td><%= time_received(weather_report) %></td>
-        <td><%= sunrise(weather_report) %></td>
-        <td><%= sunset(weather_report) %></td>
         <td><%= describe_weather(weather_report) %></td>
         <td><%= temp(weather_report) %></td>
         <td><%= temp_min(weather_report) %></td>
@@ -47,11 +45,15 @@
         <td><%= clouds(weather_report) %></td>
         <td><%= rain_3h(weather_report) %></td>
         <td><%= snow_3h(weather_report) %></td>
-        <td><%= link_to 'Show', weather_report %></td>
+        <td>
+          <%= link_to 'Show', weather_report, :class => 'btn btn-mini' %>
         <% if (current_user.present? && current_user.admin?) %>
-          <td><%= link_to 'Delete', weather_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% else %>
-            <td></td>
+              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                          weather_report,
+                          :method => :delete,
+                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                          :class => 'btn btn-mini btn-danger' %>
+              </td>
         <% end %>
       </tr>
     <% end %>
@@ -62,4 +64,4 @@
 <%= will_paginate %>
 <br>
 <br>
-<%= link_to 'Search for a new location', root_path %>
+<%= link_to 'Search for a new location', root_path, :class => 'btn btn-primary' %>

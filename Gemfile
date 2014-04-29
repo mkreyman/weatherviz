@@ -12,7 +12,8 @@ gem 'redis'
 gem 'redis-rails'
 gem 'rack-cache'
 gem 'will_paginate'
-# gem 'bootstrap-will_paginate'
+gem 'bootstrap-will_paginate'
+gem 'twitter-bootstrap-rails'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -50,11 +51,11 @@ end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
+
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
