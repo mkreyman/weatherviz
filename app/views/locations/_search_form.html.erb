@@ -1,6 +1,4 @@
-<p>
-  <%= form_tag locations_path, method: :get, :class => "form-inline" do %>
-      <%= search_field_tag :search, params[:search], placeholder: "Search for 'city,state_code'", class: 'form-control' %>
-      <%= submit_tag 'Search', name: nil, class: 'btn btn-default' %>
-  <% end %>
-</p>
+<%= form_tag locations_path, method: :get, :class => "form-inline" do %>
+    <%= search_field_tag :search, params[:search], placeholder: "Search for 'city,state_code'", class: 'form-control' %>
+    <%= submit_tag 'Search', name: nil, class: 'btn btn-default' %>
+<% end %>

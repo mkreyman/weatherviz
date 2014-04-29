@@ -1,62 +1,67 @@
-<h2>
-  Based on your current IP address <%= request.remote_ip %>, your location is:
-</h2>
-<div class="visitor span6" >
-<% if Rails.env.test? || Rails.env.development? %>
-  <% @response = Geocoder.search('174.51.246.225').first %>
-<% else %>
-  <% @response ||= request.location %>
-<% end %>
-<% @location = Location.where(city: @response.city, state_code: @response.state_code).first_or_create do |location| %>
-      <% location.city = @response.city %>
-      <% location.state_code = @response.state_code %>
-      <% location.latitude = @response.latitude %>
-      <% location.longitude = @response.longitude %>
-    <% end %>
+<div class="main-content">
+  <div class="container">
+
+    <div class="row">
 
 
-<p>
-  <strong>City:</strong>
-  <%= @location.city %>
-</p>
 
-<p>
-  <strong>State:</strong>
-  <%= @location.state %>
-</p>
+      <div class="visitor span6" >
+        <h2>
+          Based on your current IP address <%= request.remote_ip %>, your location is:
+        </h2>
+        <% if Rails.env.test? || Rails.env.development? %>
+            <% @response = Geocoder.search('174.51.246.225').first %>
+        <% else %>
+            <% @response ||= request.location %>
+        <% end %>
+        <% @location = Location.where(city: @response.city, state_code: @response.state_code).first_or_create do |location| %>
+            <% location.city = @response.city %>
+            <% location.state_code = @response.state_code %>
+            <% location.latitude = @response.latitude %>
+            <% location.longitude = @response.longitude %>
+        <% end %>
 
-<p>
-  <strong>Country:</strong>
-  <%= @location.country %>
-</p>
+        <dl class="dl-horizontal">
+          <dt><strong>City:</strong></dt>
+          <dd><%= @location.city %></dd>
+          <dt><strong>State:</strong></dt>
+          <dd><%= @location.state %></dd>
+          <dt><strong>Country:</strong></dt>
+          <dd><%= @location.country %></dd>
+          <dt><strong>Latitude:</strong></dt>
+          <dd><%= @location.latitude %></dd>
+          <dt><strong>Longitude:</strong></dt>
+          <dd><%= @location.longitude %></dd>
+        </dl>
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @location.latitude %>
-</p>
 
-<p>
-  <strong>Longitude:</strong>
-  <%= @location.longitude %>
-</p>
 
-<p>
-  <strong><%= link_to 'View Weather Reports for this location', reports_location_path(@location) %> |
-    <%= link_to 'Setup a Weather Alert', alert_location_path(@location) %></strong>
-</p>
+        <% if !@location.nearbys(50).empty? %>
+            <h2>
+              Weather reports for nearby locations
+            </h2>
+            <ul>
+              <% @location.nearbys(50).each do |location| %>
+                  <li class="location-item"><%= link_to location.city, reports_location_path(location) %> (<%= location.distance.round(2) %> miles)</li>
+              <% end %>
+            </ul>
+        <% end %>
 
-<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+      </div>
+
+      <div class="nearbys span6" >
+
+
+        <p><strong><%= link_to 'View Weather Reports', reports_location_path(@location), :class => "green-btn" %>
+          <%= link_to 'Setup a Weather Alert', alert_location_path(@location), :class => "orange-btn" %></strong></p>
+
+        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+
+
+      </div>
+
+      <div style="clear: both;" ></div>
+
+    </div>
+  </div>
 </div>
-
-  <div class="nearbys span6" >
-<% if !@location.nearbys(50).empty? %>
-<h3>
-  Weather reports for nearby locations
-</h3>
-  <ul>
-    <% @location.nearbys(50).each do |location| %>
-      <li><%= link_to location.city, reports_location_path(location) %> (<%= location.distance.round(2) %> miles)</li>
-    <% end %>
-  </ul>
-<% end %>
-</div><div style="clear: both;" ></div>
