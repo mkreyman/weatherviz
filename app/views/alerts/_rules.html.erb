@@ -30,4 +30,6 @@
 
 <br>
 
-<%= link_to 'New Rule', new_rule_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_rule_path,
+            :class => 'btn btn-primary' %>
