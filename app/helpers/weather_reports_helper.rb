@@ -1,10 +1,10 @@
 module WeatherReportsHelper
 
   def time_received(weather_report)
-    if Time.at(weather_report.time_received).today?
-      Time.at(weather_report.time_received).localtime.strftime("today at %I:%M %P")
+    if Time.zone.at(weather_report.time_received).today?
+      Time.zone.at(weather_report.time_received).strftime("today at %I:%M %P")
     else
-      Time.at(weather_report.time_received).localtime.strftime("%x, %I:%M %P")
+      Time.zone.at(weather_report.time_received).strftime("%x, %I:%M %P")
     end
   end
 
