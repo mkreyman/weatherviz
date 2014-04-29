@@ -1,7 +1,7 @@
 <h2>
   Based on your current IP address <%= request.remote_ip %>, your location is:
 </h2>
-<div class="visitor col-lg-6" >
+<div class="visitor span6" >
 <% if Rails.env.test? || Rails.env.development? %>
   <% @response = Geocoder.search('174.51.246.225').first %>
 <% else %>
@@ -48,7 +48,7 @@
 <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
 </div>
 
-  <div class="nearbys col-lg-6" >
+  <div class="nearbys span6" >
 <% if !@location.nearbys(50).empty? %>
 <h3>
   Weather reports for nearby locations
@@ -59,4 +59,4 @@
     <% end %>
   </ul>
 <% end %>
-</div>
+</div><div style="clear: both;" ></div>
