@@ -2,7 +2,10 @@ require 'twilio-ruby'
 
 class AlertNotification
 
-  def initialize
+  @account_sid   = ''
+  @auth_token    = ''
+  @twilio_number = ''
+
     if Rails.env.test? || Rails.env.development?
       @account_sid   = ENV['TWILIO_TEST_SID']
       @auth_token    = ENV['TWILIO_TEST_TOKEN']
@@ -12,9 +15,10 @@ class AlertNotification
       @auth_token    = ENV['TWILIO_AUTH_TOKEN']
       @twilio_number = ENV['TWILIO_FROM_NUMBER']
     end
-    @client = Twilio::REST::Client.new @account_sid, @auth_token
-  end
 
+  @client = Twilio::REST::Client.new @account_sid, @auth_token
+
+byebug
   def send_alert(alert, weather_report)
     alert_messages = alert.messages(weather_report)
     alert_types = alert.alert_types

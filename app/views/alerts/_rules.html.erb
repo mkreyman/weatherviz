@@ -5,7 +5,7 @@
   <thead>
   <tr>
     <th>Field</th>
-    <th>Operation</th>
+    <th>Operator</th>
     <th>Value</th>
     <th>Triggered</th>
     <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -16,7 +16,7 @@
   <% @alert.rules.each do |rule| %>
       <tr>
         <td><%= rule.field %></td>
-        <td><%= rule.operation %></td>
+        <td><%= rule.operator %></td>
         <td><%= rule.value %></td>
         <td><%= rule.triggered %></td>
         <td>

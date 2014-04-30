@@ -1,1 +1,1 @@
-json.extract! @rule, :id, :field, :operation, :value, :triggered, :created_at, :updated_at
+json.extract! @rule, :id, :field, :operator, :value, :triggered, :created_at, :updated_at

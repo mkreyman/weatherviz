@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <%- model_class = Rule -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
@@ -6,8 +5,8 @@
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:field) %>:</strong></dt>
   <dd><%= @rule.field %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:operation) %>:</strong></dt>
-  <dd><%= @rule.operation %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:operator) %>:</strong></dt>
+  <dd><%= @rule.operator %></dd>
   <dt><strong><%= model_class.human_attribute_name(:value) %>:</strong></dt>
   <dd><%= @rule.value %></dd>
   <dt><strong><%= model_class.human_attribute_name(:triggered) %>:</strong></dt>
