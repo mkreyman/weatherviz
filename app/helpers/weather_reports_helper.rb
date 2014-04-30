@@ -104,6 +104,10 @@ module WeatherReportsHelper
     kelvin * 9 / 5 - 459.67
   end
 
+  def to_K(fahrenheit)
+    (fahrenheit + 459.67) * 5 / 9
+  end
+
   def hPA_to_psi(pressure)
     pressure / 68.95
   end

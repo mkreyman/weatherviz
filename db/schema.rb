@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140425025449) do
+ActiveRecord::Schema.define(version: 20140430083607) do
+
+  create_table "alert_logs", force: true do |t|
+    t.datetime "sent_at"
+    t.text     "alert_message"
+    t.text     "alert_message_types"
+    t.integer  "alerts_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "alert_logs", ["alerts_id"], name: "index_alert_logs_on_alerts_id"
 
   create_table "alerts", force: true do |t|
     t.string   "alert_name"
@@ -51,7 +62,7 @@ ActiveRecord::Schema.define(version: 20140425025449) do
 
   create_table "rules", force: true do |t|
     t.string   "field"
-    t.string   "operation"
+    t.string   "operator"
     t.string   "value"
     t.boolean  "triggered",  default: false
     t.integer  "alert_id"
