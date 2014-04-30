@@ -1,4 +1,19 @@
+require 'twilio-ruby'
+
 class AlertNotification
+
+  def initialize
+    if Rails.env.test? || Rails.env.development?
+      @account_sid   = ENV['TWILIO_TEST_SID']
+      @auth_token    = ENV['TWILIO_TEST_TOKEN']
+      @twilio_number = ENV['TWILIO_TEST_FROM_NUMBER']
+    else
+      @account_sid   = ENV['TWILIO_ACCOUNT_SID']
+      @auth_token    = ENV['TWILIO_AUTH_TOKEN']
+      @twilio_number = ENV['TWILIO_FROM_NUMBER']
+    end
+    @client = Twilio::REST::Client.new @account_sid, @auth_token
+  end
 
   def send_alert(alert, weather_report)
     alert_messages = alert.messages(weather_report)
@@ -16,7 +31,11 @@ class AlertNotification
 
   def send_sms(sms_number, message)
     if sms_number
-      # Send SMS to sms_number
+      @client.account.messages.create(
+          :from => @twilio_number,
+          :to => sms_number,
+          :body => message
+      )
     end
   end
 

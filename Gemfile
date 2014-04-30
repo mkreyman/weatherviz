@@ -14,6 +14,7 @@ gem 'rack-cache'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'twitter-bootstrap-rails'
+gem 'twilio-ruby', '~> 3.11'
 
 group :development, :test do
   gem 'rspec-rails'
