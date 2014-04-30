@@ -5,7 +5,7 @@
 <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
 
 <h3>
-  <%= link_to 'Setup a Weather Alert for this location' %>
+  <%= link_to 'Setup a Weather Alert for this location', alert_location_path(@location) %>
 </h3>
 
 <table class="table table-striped">
