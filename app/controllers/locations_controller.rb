@@ -5,7 +5,8 @@ class LocationsController < ApplicationController
   def index
     if params[:search].present?
       LocationFetcher.fetch(params[:search])
-      @locations = Location.search(params[:search]).order(updated_at: :desc)
+      first_word = params[:search].split(/[\s,]+/).first
+      @locations = Location.search(first_word)
       if @locations.empty?
         flash[:error] = 'Sorry, no results found.'
       end
