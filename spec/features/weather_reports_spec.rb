@@ -4,17 +4,17 @@ feature 'Weather Reports Search', :vcr, record: :new_episodes do
   scenario 'Visitor views all recent reports', :vcr do
     visit '/weather_reports'
 
-    expect(page).to have_content('Recent weather reports')
-    expect(page).to have_content('Search for a city name:')
+    expect(page).to have_content('Weather Reports')
+    expect(page).to have_selector(:link_or_button, 'Search')
   end
 
   scenario 'Visitor searches for a location', :vcr do
     @location = create(:location)
     visit '/weather_reports'
 
-    fill_in 'Search for a city name:', with: @location.city
+    fill_in 'search', with: @location.city
 
-    click_button 'Search'
+    click_on 'Search'
 
     expect(page).to have_content(@location.city)
   end
@@ -23,9 +23,9 @@ feature 'Weather Reports Search', :vcr, record: :new_episodes do
     @location = 'shshshgethr'
     visit '/weather_reports'
 
-    fill_in 'Search for a city name:', with: @location
+    fill_in 'search', with: @location
 
-    click_button 'Search'
+    click_on 'Search'
 
     expect(page).to have_content("Sorry, no results found.")
   end
@@ -34,10 +34,10 @@ feature 'Weather Reports Search', :vcr, record: :new_episodes do
     @location = create(:location)
     visit '/locations'
 
-    fill_in 'Search for a city name:', with: @location.city
+    fill_in 'search', with: @location.city
 
-    click_button 'Search'
-    click_link('Show reports', match: :first)
+    click_on 'Search'
+    click_on('Show reports', match: :first)
 
     expect(page).to have_content(@location.city)
   end
@@ -47,13 +47,13 @@ feature "Deleting weather reports", :vcr do
   background do
     @location = create(:location)
     visit '/weather_reports'
-    fill_in 'Search for a city name:', with: @location.city
-    click_button 'Search'
+    fill_in 'search', with: @location.city
+    click_on 'Search'
   end
 
   scenario "visitor can't delete a report", :vcr do
     visit '/weather_reports'
-    expect(page).to_not have_link('Delete')
+    expect(page).to_not have_selector(:link_or_button, 'Delete')
   end
 
   scenario "Non-admin user can't delete a report", :vcr do
@@ -61,7 +61,7 @@ feature "Deleting weather reports", :vcr do
     sign_in(@user)
 
     visit '/weather_reports'
-    expect(page).to_not have_link('Delete')
+    expect(page).to_not have_selector(:link_or_button, 'Delete')
   end
 
   scenario "admin can delete a report", :vcr do
@@ -70,12 +70,12 @@ feature "Deleting weather reports", :vcr do
     @location = 'Denver'
     visit '/weather_reports'
 
-    fill_in 'Search for a city name:', with: @location
-    click_button 'Search'
+    fill_in 'search', with: @location
+    click_on 'Search'
 
-    expect(page).to have_link('Delete')
+    expect(page).to have_selector(:link_or_button, 'Delete')
 
-    click_link('Delete', match: :first)
+    click_on('Delete', match: :first)
     expect(page).to_not have_content(@location)
   end
 

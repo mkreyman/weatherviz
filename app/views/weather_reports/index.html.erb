@@ -22,8 +22,6 @@
       <th><%= model_class.human_attribute_name(:wind_gust) %></th>
       <th>Direction</th>
       <th><%= model_class.human_attribute_name(:clouds) %></th>
-      <th>Rain (3h)</th>
-      <th>Snow (3h)</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -43,8 +41,6 @@
         <td><%= wind_gust(weather_report) %></td>
         <td><%= wind_degree(weather_report) %></td>
         <td><%= clouds(weather_report) %></td>
-        <td><%= rain_3h(weather_report) %></td>
-        <td><%= snow_3h(weather_report) %></td>
         <td>
           <%= link_to 'Show', weather_report, :class => 'btn btn-mini' %>
         <% if (current_user.present? && current_user.admin?) %>
