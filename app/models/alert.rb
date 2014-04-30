@@ -1,7 +1,7 @@
 class Alert < ActiveRecord::Base
   has_many :rules, :dependent => :destroy
   belongs_to :user
-  has_many :alert_logs, :dependent => :destroy
+  has_many :alert_logs
 
   def messages(weather_report)
     rules.map do |rule|
@@ -9,13 +9,13 @@ class Alert < ActiveRecord::Base
     end.compact
   end
 
-  def alert_types(alert)
+  def alert_types
     @types = Hash.new
-    if alert.by_email.present? && !alert.email.blank?
-      @types[:email] = alert.email
+    if self.by_email.present? && !self.email.blank?
+      @types[:email] = self.email
     end
-    if alert.by_sms.present? && !alert.sms.blank?
-      @types[:sms] = alert.sms
+    if self.by_sms.present? && !self.sms.blank?
+      @types[:sms] = self.sms
     end
     @types
   end
