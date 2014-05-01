@@ -1,5 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
+require 'rails/all'
+
 # Pick the frameworks you want:
 require "active_record/railtie"
 require "action_controller/railtie"
@@ -41,5 +43,7 @@ module WeatherViz
     # Redis configuration
     # http://redis-store.org/redis-rails/
     config.cache_store = :redis_store, @redis_url
+
+    config.autoload_paths += %W(#{config.root}/app/workers)
   end
 end

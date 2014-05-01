@@ -11,10 +11,12 @@ gem 'psych'
 gem 'redis'
 gem 'redis-rails'
 gem 'rack-cache'
-gem 'will_paginate'
+gem 'will_paginate', '~> 3.0.5'
 gem 'bootstrap-will_paginate'
 gem 'twitter-bootstrap-rails'
 gem 'twilio-ruby', '~> 3.11'
+gem "resque", require: "resque/server"
+gem 'resque-scheduler', :require => 'resque_scheduler/server'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -24,6 +26,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'byebug'
   gem 'sqlite3'
+  gem 'foreman'
 end
 
 group :test do

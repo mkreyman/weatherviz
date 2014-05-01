@@ -2,16 +2,26 @@ class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update,
                                       :destroy, :reports, :alerts, :new_alert]
 
+  #def index
+  #  if params[:search].present?
+  #    LocationFetcher.fetch(params[:search])
+  #    first_word = params[:search].split(/[\s,]+/).first
+  #    @locations = Location.search(first_word).order(updated_at: :desc)
+  #    if @locations.empty?
+  #      flash[:error] = 'Sorry, no results found.'
+  #    end
+  #    redirect_to locations_path
+  #  else
+  #    @locations = Location.order(updated_at: :desc).paginate(page: params[:page])
+  #  end
+  #end
+
   def index
     if params[:search].present?
-      LocationFetcher.fetch(params[:search])
+      Resque.enqueue(LocationFetcherWorker, params[:search])
       first_word = params[:search].split(/[\s,]+/).first
-      sleep 1
       @locations = Location.search(first_word).order(updated_at: :desc)
-      if @locations.empty?
-        flash[:error] = 'Sorry, no results found.'
-      end
-      redirect_to locations_path
+      redirect_to locations_path, notice: "#{params[:search]} queued for import"
     else
       @locations = Location.order(updated_at: :desc).paginate(page: params[:page])
     end
@@ -74,7 +84,7 @@ class LocationsController < ApplicationController
     if @location.weather_reports.blank?
       redirect_to root_path, notice: 'Sorry, no results found.'
     else
-      @location.weather_reports
+      @location.weather_reports.order(updated_at: :desc)
     end
   end
 
