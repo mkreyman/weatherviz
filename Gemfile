@@ -15,6 +15,7 @@ gem 'will_paginate', '~> 3.0.5'
 gem 'bootstrap-will_paginate'
 gem 'twitter-bootstrap-rails'
 gem 'twilio-ruby', '~> 3.11'
+gem 'resque'
 
 group :development, :test do
   gem 'rspec-rails'
