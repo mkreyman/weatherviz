@@ -8,9 +8,9 @@ class LocationsController < ApplicationController
       first_word = params[:search].split(/[\s,]+/).first
       sleep 1
       @locations = Location.search(first_word).order(updated_at: :desc)
-      #if @locations.empty?
-      #  flash[:error] = 'Sorry, no results found.'
-      #end
+      if @locations.empty?
+        flash[:error] = 'Sorry, no results found.'
+      end
       redirect_to locations_path
     else
       @locations = Location.order(updated_at: :desc).paginate(page: params[:page])

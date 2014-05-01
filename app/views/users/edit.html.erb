@@ -3,7 +3,7 @@
 <div class="page-header">
   <h1>Update your profile</h1>
 </div>
-
+<p id="notice"><%= notice %></p>
 <%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
     <%= render 'users/fields', f: f %>
     <% if current_user.present? && current_user.admin? %>

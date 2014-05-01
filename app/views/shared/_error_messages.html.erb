@@ -1,7 +1,7 @@
 <% if object.errors.any? %>
     <div id="error_explanation">
       <div class="alert alert-error">
-        <h2><%= pluralize(object.errors.count, "error") %> prohibited this <%= object.class %> from being saved:</h2>
+        <strong><%= pluralize(object.errors.count, "error") %> prohibited this <%= object.class %> from being saved:</strong>
       </div>
       <ul>
         <% object.errors.full_messages.each do |msg| %>
