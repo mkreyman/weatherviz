@@ -2,10 +2,12 @@
   <h1>Listing reports for <%= @location.city %></h1>
 </div>
 
-<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+<p>
+  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+</p>
 
 <h3>
-  <%= link_to 'Setup a Weather Alert for this location', alert_location_path(@location) %>
+  <%= link_to 'Setup a Weather Alert for this location', alert_location_path(@location), :class => "orange-btn btn-primary" %>
 </h3>
 
 <table class="table table-striped">
@@ -60,4 +62,4 @@
 </table>
 
 
-<%= link_to 'Back', locations_path, :class => 'btn btn-primary' %>
+<%= link_to 'Back', locations_path, :class => 'green-btn' %>
