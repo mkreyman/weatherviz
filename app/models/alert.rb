@@ -20,7 +20,7 @@ class Alert < ActiveRecord::Base
     @types
   end
 
-  def location
+  def city
     Location.find(self.location_id).city
   end
 end
