@@ -29,7 +29,7 @@
   <tbody>
     <% @weather_reports.each do |weather_report| %>
       <tr>
-        <td><%# city(weather_report) %></td>
+        <td><%= weather_report.location %></td>
         <td><%= time_received(weather_report) %></td>
         <td><%= describe_weather(weather_report) %></td>
         <td><%= temp(weather_report) %></td>
