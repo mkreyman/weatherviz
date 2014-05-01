@@ -9,7 +9,7 @@ class WeatherReport < ActiveRecord::Base
     end
   end
 
-  def location
+  def city
     Location.find(self.location_id).city
   end
 end
