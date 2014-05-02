@@ -9,7 +9,9 @@ class WeatherReportWorker
         AlertNotification.new.send_alert(alert, weather_report)
       end
     end
-    # Added it in the schedule instead
-    #Resque.enqueue_in(5.minutes, WeatherReportWorker)
+      # Added it in the schedule instead
+      #Resque.enqueue_in(5.minutes, WeatherReportWorker)
+  rescue Resque::TermException
+    Resque.enqueue(self)
   end
 end
