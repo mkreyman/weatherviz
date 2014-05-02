@@ -17,20 +17,6 @@ class LocationsController < ApplicationController
     end
   end
 
-  # Search takes too long with background job
-  #def index
-  #  if params[:search].present?
-  #    Resque.enqueue(LocationFetcherWorker, params[:search])
-  #    first_word = params[:search].split(/[\s,]+/).first
-  #    @locations = Location.search(first_word).order(updated_at: :desc)
-  #    redirect_to locations_path,
-  #                notice: "\'#{params[:search].capitalize}\' queued for import.
-  #                Please refresh the page if you don't see it below."
-  #  else
-  #    @locations = Location.order(updated_at: :desc).paginate(page: params[:page])
-  #  end
-  #end
-
   def show
   end
 
