@@ -32,7 +32,7 @@ class AlertNotification
 
   def send_email(email, message)
     if email
-      AlertNotifier.new.notify(email, message)
+      AlertNotifier.notify(email, message).deliver
     end
   end
 
