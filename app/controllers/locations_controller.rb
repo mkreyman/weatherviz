@@ -6,9 +6,10 @@ class LocationsController < ApplicationController
     if params[:search].present?
       LocationFetcher.fetch(params[:search])
       first_word = params[:search].split(/[\s,]+/).first
-      @locations = Location.search(first_word)
+      @locations = Location.search(first_word).order(updated_at: :desc)
       if @locations.empty?
-        flash[:error] = 'Sorry, no results found.'
+        flash[:notice] = "\'#{params[:search].capitalize}\' queued for import.
+                Please refresh the page if you don't see it below right away."
       end
       redirect_to locations_path
     else
@@ -73,7 +74,7 @@ class LocationsController < ApplicationController
     if @location.weather_reports.blank?
       redirect_to root_path, notice: 'Sorry, no results found.'
     else
-      @location.weather_reports
+      @location.weather_reports.order(updated_at: :desc)
     end
   end
 

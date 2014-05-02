@@ -1,11 +1,13 @@
 <div class="page-header">
-  <h1>Listing reports for <%= @location.city %></h1>
+  <h1>Weather reports for <%= @location.city %></h1>
 </div>
 
-<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+<p>
+  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+</p>
 
 <h3>
-  <%= link_to 'Setup a Weather Alert for this location', alert_location_path(@location) %>
+  <%= link_to 'Setup a Weather Alert for this location', alert_location_path(@location), :class => "orange-btn btn-primary" %>
 </h3>
 
 <table class="table table-striped">
@@ -29,7 +31,7 @@
   </thead>
 
   <tbody>
-  <% @location.weather_reports.each do |weather_report| %>
+  <% @location.weather_reports.order(updated_at: :desc).each do |weather_report| %>
       <tr>
         <td><%= time_received(weather_report) %></td>
         <td><%= describe_weather(weather_report) %></td>
@@ -59,5 +61,4 @@
   </tbody>
 </table>
 
-
-<%= link_to 'Back', locations_path, :class => 'btn btn-primary' %>
+<%= link_to 'Back', locations_path, :class => 'green-btn' %>

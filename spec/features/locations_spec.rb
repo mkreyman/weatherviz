@@ -128,6 +128,6 @@ feature "Homepage displays visitor specific information", :vcr do
     expect(page).to have_selector(:link_or_button, 'View Weather Reports')
     click_on 'View Weather Reports'
 
-    expect(page).to have_content("Listing reports for #{@location.city}")
+    expect(page).to have_content("Weather reports for #{@location.city}")
   end
 end

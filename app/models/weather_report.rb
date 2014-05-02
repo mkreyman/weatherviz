@@ -8,4 +8,8 @@ class WeatherReport < ActiveRecord::Base
       WeatherReport.all
     end
   end
+
+  def city
+    Location.find(self.location_id).city
+  end
 end

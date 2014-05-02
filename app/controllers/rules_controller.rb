@@ -73,7 +73,7 @@ class RulesController < ApplicationController
     end
 
     def rule_params
-      params.require(:rule).permit(:field, :operation, :value, :triggered)
+      params.require(:rule).permit(:field, :operator, :value, :triggered)
     end
 
 end

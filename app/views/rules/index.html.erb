@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:field) %></th>
-      <th><%= model_class.human_attribute_name(:operation) %></th>
+      <th><%= model_class.human_attribute_name(:operator) %></th>
       <th><%= model_class.human_attribute_name(:value) %></th>
       <th><%= model_class.human_attribute_name(:triggered) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -17,7 +17,7 @@
     <% @rules.each do |rule| %>
       <tr>
         <td><%= rule.field %></td>
-        <td><%= rule.operation %></td>
+        <td><%= rule.operator %></td>
         <td><%= rule.value %></td>
         <td><%= rule.triggered %></td>
         <td><%= link_to 'Show', rules_path, :class => 'btn btn-mini' %>
@@ -35,4 +35,5 @@
 </table>
 
 <br>
-
+<%= link_to t('.back', :default => t("helpers.links.back")),
+            alert_path(@alert), :class => 'btn'  %>

@@ -6,7 +6,7 @@ class WeatherReportWorker
                        .map(&:location_id)).each do |location|
       weather_report = WeatherFetcher.fetch(location)
       location.alerts.map do |alert|
-        AlertNotification.send_alert(alert, weather_report)
+        AlertNotification.new.send_alert(alert, weather_report)
       end
     end
   end

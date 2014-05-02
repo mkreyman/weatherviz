@@ -34,7 +34,7 @@ class Location < ActiveRecord::Base
     if search
       search_results = where("city LIKE ?", "%#{search}%")
       search_results.find_each { |location| location.touch }
-      search_results.order(updated_at: :desc)
+      search_results
     else
       Location.all
     end

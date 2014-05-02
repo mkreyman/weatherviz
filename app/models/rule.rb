@@ -3,7 +3,7 @@ class Rule < ActiveRecord::Base
 
   def message(weather_report)
     field = self.field
-    operator = self.operation
+    operator = self.operator
     # Need to calculate value based field type...
     # temperature fields only for now.
     value = self.value.to_i

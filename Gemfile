@@ -11,9 +11,10 @@ gem 'psych'
 gem 'redis'
 gem 'redis-rails'
 gem 'rack-cache'
-gem 'will_paginate'
+gem 'will_paginate', '~> 3.0.5'
 gem 'bootstrap-will_paginate'
 gem 'twitter-bootstrap-rails'
+gem 'twilio-ruby', '~> 3.11'
 
 group :development, :test do
   gem 'rspec-rails'
