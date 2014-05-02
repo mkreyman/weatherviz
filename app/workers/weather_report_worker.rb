@@ -9,5 +9,6 @@ class WeatherReportWorker
         AlertNotification.new.send_alert(alert, weather_report)
       end
     end
+    Resque.enqueue_in(5.minutes, WeatherReportWorker)
   end
 end

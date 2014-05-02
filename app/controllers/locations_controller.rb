@@ -2,15 +2,28 @@ class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update,
                                       :destroy, :reports, :alerts, :new_alert]
 
+  #def index
+  #  if params[:search].present?
+  #    LocationFetcher.fetch(params[:search])
+  #    first_word = params[:search].split(/[\s,]+/).first
+  #    @locations = Location.search(first_word).order(updated_at: :desc)
+  #    if @locations.empty?
+  #      flash[:error] = 'Sorry, no results found.'
+  #    end
+  #    redirect_to locations_path
+  #  else
+  #    @locations = Location.order(updated_at: :desc).paginate(page: params[:page])
+  #  end
+  #end
+
   def index
     if params[:search].present?
-      LocationFetcher.fetch(params[:search])
+      Resque.enqueue(LocationFetcherWorker, params[:search])
       first_word = params[:search].split(/[\s,]+/).first
       @locations = Location.search(first_word).order(updated_at: :desc)
-      if @locations.empty?
-        flash[:error] = 'Sorry, no results found.'
-      end
-      redirect_to locations_path
+      redirect_to locations_path,
+                  notice: "\'#{params[:search].capitalize}\' queued for import.
+                  Please refresh the page if you don't see it below."
     else
       @locations = Location.order(updated_at: :desc).paginate(page: params[:page])
     end
@@ -59,7 +72,7 @@ class LocationsController < ApplicationController
   def destroy
     if (current_user.present? && current_user.admin?)
       @location.destroy
-        respond_to do |format|
+      respond_to do |format|
         format.html { redirect_to locations_url, notice: 'Location was deleted.' }
         format.json { head :no_content }
       end
@@ -86,13 +99,13 @@ class LocationsController < ApplicationController
   end
 
   private
-    def set_location
-      @location = Location.find(params[:id])
-    end
+  def set_location
+    @location = Location.find(params[:id])
+  end
 
-    def location_params
-      params.require(:location).permit(
-          :woeid, :city_id, :street, :city, :state_code, :state,
-          :postal_code, :country_code, :country, :latitude, :longitude)
-    end
+  def location_params
+    params.require(:location).permit(
+        :woeid, :city_id, :street, :city, :state_code, :state,
+        :postal_code, :country_code, :country, :latitude, :longitude)
+  end
 end
