@@ -18,7 +18,7 @@ class LocationsController < ApplicationController
 
   def index
     if params[:search].present?
-      Resque.enqueue(LocationFetcherWorker.perform, params[:search])
+      Resque.enqueue(LocationFetcherWorker, params[:search])
       first_word = params[:search].split(/[\s,]+/).first
       @locations = Location.search(first_word).order(updated_at: :desc)
       redirect_to locations_path,
