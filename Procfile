@@ -1,2 +1,2 @@
-resque: env TERM_CHILD=1 COUNT=2 bundle exec rake resque:workers
+resque: env TERM_CHILD=1 bundle exec rake resque:work
 scheduler: bundle exec rake environment resque:scheduler
