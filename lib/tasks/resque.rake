@@ -1,5 +1,5 @@
 require 'resque/tasks'
-require 'resque_scheduler/tasks'
+require 'resque/scheduler/tasks'
 
 Resque.logger.level = Logger::DEBUG
 
