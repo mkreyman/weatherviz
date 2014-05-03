@@ -1,6 +1,8 @@
 require 'open-uri'
 require 'json'
 
+class WeatherFetcherError < StandardError; end
+
 class WeatherFetcher
 
   # API key for OpenWeatherMap API
@@ -30,6 +32,10 @@ class WeatherFetcher
       end
       url = URI.escape("#{city_and_state_url}#{search}&#{APPKEY}")
       @response = JSON.parse(open(url).read)
+    end
+
+    if @response['cod'] == '404'
+      raise WeatherFetcherError.new("Weather Report for #{location.city} not found")
     end
 
     if @response && location.city_id.nil?

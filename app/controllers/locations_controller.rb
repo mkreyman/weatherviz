@@ -76,6 +76,8 @@ class LocationsController < ApplicationController
     else
       @weather_reports = @location.weather_reports.order(updated_at: :desc).paginate(:page => params[:page])
     end
+  rescue WeatherFetcherError => e
+    redirect_to locations_path, notice: e.message
   end
 
   def alerts
