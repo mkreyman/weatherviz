@@ -4,7 +4,7 @@ class Rule < ActiveRecord::Base
   def message(weather_report)
     field = self.field
     operator = self.operator
-    # Need to calculate value based field type...
+    # Need to calculate value based on field type...
     # temperature fields only for now.
     value = self.value.to_i
     value_converted = (value + 459.67) * 5 / 9

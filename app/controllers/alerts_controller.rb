@@ -70,7 +70,7 @@ class AlertsController < ApplicationController
   end
 
   def logs
-    @alert_logs = @alert.alert_logs.paginate(:page => params[:page])
+    @alert_logs = @alert.alert_logs.order(created_at: :desc).paginate(:page => params[:page])
   end
 
   def write_to_cache

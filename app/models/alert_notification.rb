@@ -5,7 +5,7 @@ class AlertNotification
   def send_alert(alert, weather_report)
     alert_messages = alert.messages(weather_report)
     alert_types = alert.alert_types
-    message = "#{alert.alert_name}: #{alert_messages.join("\n")}"
+    message = "#{alert.alert_name}: #{alert_messages.join(', ')}"
     if alert_messages.any?
       AlertLog.create(alert_id: alert.id,
                       sent_at: Time.zone.now,
