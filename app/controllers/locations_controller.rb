@@ -13,7 +13,7 @@ class LocationsController < ApplicationController
       end
       redirect_to locations_path
     else
-      @locations = Location.order(updated_at: :desc).paginate(page: params[:page])
+      @locations = Location.order(updated_at: :desc).paginate(:page => params[:page])
     end
   end
 
@@ -70,11 +70,11 @@ class LocationsController < ApplicationController
   end
 
   def reports
-    WeatherFetcher.fetch(@location)
-    if @location.weather_reports.blank?
-      redirect_to root_path, notice: 'Sorry, no results found.'
+    if @location.weather_reports.blank? || @location.weather_reports.last.created_at < 1.hour.ago
+      WeatherFetcher.fetch(@location)
+      redirect_to locations_path, notice: "We're fetching weather reports for this location. Click on the 'Show reports' button in a few seconds."
     else
-      @location.weather_reports.order(updated_at: :desc)
+      @weather_reports = @location.weather_reports.order(updated_at: :desc).paginate(:page => params[:page])
     end
   end
 

@@ -3,6 +3,10 @@ class Alert < ActiveRecord::Base
   has_many :rules, :dependent => :destroy
   has_many :alert_logs, :dependent => :destroy
 
+  def self.per_page
+    10
+  end
+
   def messages(weather_report)
     rules.map do |rule|
       rule.message(weather_report)

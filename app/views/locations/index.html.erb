@@ -5,7 +5,7 @@
 
 <%= render 'locations/search_form' %>
 
-<%= will_paginate %>
+<%= will_paginate @locations %>
 <br>
 <table class="table table-striped">
   <thead>
@@ -50,5 +50,5 @@
 </table>
 
 <br>
-<%= will_paginate %>
+<%= will_paginate @locations %>
 <br>

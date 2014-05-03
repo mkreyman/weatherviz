@@ -21,8 +21,8 @@ class WeatherFetcher
     #  @response = fetched_data['list'].first
     else
       city_and_state_url = "http://api.openweathermap.org/data/2.5/weather?q="
-      search = if location.state
-        "#{location.city},#{location.state}"
+      search = if location.state_code && location.state_code.length == 2
+        "#{location.city},#{location.state_code}"
       elsif location.country
         "#{location.city},#{location.country}"
       else
