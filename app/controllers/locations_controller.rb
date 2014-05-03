@@ -60,7 +60,7 @@ class LocationsController < ApplicationController
   def destroy
     if (current_user.present? && current_user.admin?)
       @location.destroy
-        respond_to do |format|
+      respond_to do |format|
         format.html { redirect_to locations_url, notice: 'Location was deleted.' }
         format.json { head :no_content }
       end
@@ -76,8 +76,15 @@ class LocationsController < ApplicationController
     else
       @weather_reports = @location.weather_reports.order(updated_at: :desc).paginate(:page => params[:page])
     end
-  rescue WeatherFetcherError => e
-    redirect_to locations_path, notice: e.message
+  rescue => e
+    case e
+      when WeatherFetcherError
+        redirect_to locations_path, notice: e.message
+      when OpenURI::HTTPError
+        redirect_to weather_reports_path, notice: "HTTP Error: #{e.message}. Weather service is temporarily down, please try again later or browse most recent reports below."
+      else
+        raise e
+    end
   end
 
   def alerts
@@ -89,13 +96,13 @@ class LocationsController < ApplicationController
   end
 
   private
-    def set_location
-      @location = Location.find(params[:id])
-    end
+  def set_location
+    @location = Location.find(params[:id])
+  end
 
-    def location_params
-      params.require(:location).permit(
-          :woeid, :city_id, :street, :city, :state_code, :state,
-          :postal_code, :country_code, :country, :latitude, :longitude)
-    end
+  def location_params
+    params.require(:location).permit(
+        :woeid, :city_id, :street, :city, :state_code, :state,
+        :postal_code, :country_code, :country, :latitude, :longitude)
+  end
 end
