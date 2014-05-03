@@ -19,16 +19,10 @@
         <%= f.text_field :value, :class => 'text_field' %>
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :triggered, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.check_box :triggered, :class => 'check_box' %>
-      </div>
-    </div>
     <%= f.hidden_field  :alert_id %>
     <div class="form-actions">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  rules_path, :class => 'btn' %>
+                  @rule.alert, :class => 'btn' %>
     </div>
 <% end %>

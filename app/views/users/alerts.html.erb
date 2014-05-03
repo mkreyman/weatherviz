@@ -1,1 +1,11 @@
+<% if @user.alerts.any? %>
+
 <%= render partial: 'users/alerts', member: @user.alerts %>
+
+<% else %>
+
+<p>
+  <strong>It looks like you don't have any Alerts set up yet! From the <%= link_to 'Locations', locations_path %> page click on 'Create an Alert' button.</strong>
+</p>
+
+<% end %>

@@ -2,51 +2,39 @@
 <%= form_for @alert, :html => { :class => 'form-horizontal' } do |f| %>
 
     <div class="control-group">
+      <%= f.label :active, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.check_box :active, :class => 'check_box' %>
+      </div>
+    </div>
+    <div class="control-group">
       <%= f.label :alert_name, :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :alert_name, :class => 'text_field' %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :by_email, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.check_box :by_email, :class => 'check_box' %>
-      </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :by_sms, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.check_box :by_sms, :class => 'check_box' %>
-      </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :email, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :email, :class => 'text_field' %>
-      </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :sms, :class => 'control-label' %>
+      <%= f.label 'Cell phone', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :sms, :class => 'text_field' %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :email_verified, :class => 'control-label' %>
+      <%= f.label :email, :class => 'control-label' %>
       <div class="controls">
-        <%= f.check_box :email_verified, :class => 'check_box' %>
+        <%= f.text_field :email, :value => current_user.email, :class => 'text_field' %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :phone_verified, :class => 'control-label' %>
+      <%= f.label 'Send SMS', :class => 'control-label' %>
       <div class="controls">
-        <%= f.check_box :phone_verified, :class => 'check_box' %>
+        <%= f.check_box :by_sms, :class => 'check_box' %>
       </div>
     </div>
     <div class="control-group">
-      <%= f.label :active, :class => 'control-label' %>
+      <%= f.label 'Send email', :class => 'control-label' %>
       <div class="controls">
-        <%= f.check_box :active, :class => 'check_box' %>
+        <%= f.check_box :by_email, :class => 'check_box' %>
       </div>
     </div>
     <%= f.hidden_field :user_id %>
@@ -56,4 +44,5 @@
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                   alerts_path, :class => 'btn' %>
     </div>
+
 <% end %>

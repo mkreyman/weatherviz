@@ -1,10 +1,13 @@
 WeatherViz::Application.routes.draw do
 
+  get "alert_logs/index"
+
   resources :rules
 
   resources :alerts do
     member do
       get 'rules', to: 'alerts#rules'
+      get 'logs', to: 'alerts#logs'
     end
   end
 
