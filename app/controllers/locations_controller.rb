@@ -9,7 +9,7 @@ class LocationsController < ApplicationController
       @locations = Location.search(first_word).order(updated_at: :desc)
       if @locations.empty?
         flash[:notice] = "\'#{params[:search].capitalize}\' queued for import.
-                Please refresh the page if you don't see it below right away."
+          Please refresh the page if the new location doesn't appear below right away."
       end
       redirect_to locations_path
     else
