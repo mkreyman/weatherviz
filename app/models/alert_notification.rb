@@ -7,7 +7,7 @@ class AlertNotification
     alert_types = alert.alert_types
     message = "#{alert.alert_name}: #{alert_messages.join("\n")}"
     if alert_messages.any?
-      AlertLog.create(alerts_id: alert.id,
+      AlertLog.create(alert_id: alert.id,
                       sent_at: Time.zone.now,
                       alert_message: alert_messages.join("\n"),
                       alert_message_types: alert_types.values.join(" "))

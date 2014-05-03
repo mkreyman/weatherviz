@@ -5,9 +5,12 @@
 <% else %>
 
     <p>
-      <strong>It looks like you don't have any Alerts set up yet! Search for a location and then click on 'Create an Alert' button for that location.</strong>
+      It looks like you don't have any Alerts set up yet!
+      Search for a location using the <strong>Search</strong> box below, and then click on <%= link_to 'Create an Alert', locations_path, :class => 'btn btn-mini' %> button for that location.
     </p>
-
-    <%= render 'locations/search_form' %>
+    <br>
+    <p>
+      <%= render 'locations/search_form' %>
+    </p>
 
 <% end %>
