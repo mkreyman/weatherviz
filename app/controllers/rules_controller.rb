@@ -29,7 +29,7 @@ class RulesController < ApplicationController
     @rule = @alert.rules.new(rule_params)
     respond_to do |format|
       if @rule.save
-        format.html { redirect_to @rule, notice: 'Rule was successfully created.' }
+        format.html { redirect_to @rule.alert, notice: 'Rule was successfully created.' }
         format.json { render action: 'show', status: :created, location: @rule }
       else
         format.html { render action: 'new' }
@@ -43,7 +43,7 @@ class RulesController < ApplicationController
   def update
     respond_to do |format|
       if @rule.update(rule_params)
-        format.html { redirect_to @rule, notice: 'Rule was successfully updated.' }
+        format.html { redirect_to @rule.alert, notice: 'Rule was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -57,7 +57,7 @@ class RulesController < ApplicationController
   def destroy
     @rule.destroy
     respond_to do |format|
-      format.html { redirect_to rules_url }
+      format.html { redirect_to @rule.alert }
       format.json { head :no_content }
     end
   end
@@ -73,7 +73,7 @@ class RulesController < ApplicationController
     end
 
     def rule_params
-      params.require(:rule).permit(:field, :operator, :value, :triggered)
+      params.require(:rule).permit(:field, :operator, :value)
     end
 
 end

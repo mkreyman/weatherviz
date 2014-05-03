@@ -1,6 +1,6 @@
 class AlertsController < ApplicationController
   before_action :set_alert, only: [:show, :edit, :update,
-                                   :destroy, :rules, :write_to_cache]
+                                   :destroy, :rules, :logs, :write_to_cache]
   before_action :current_user, only: [:new, :create, :index, :show,
                                       :edit, :update, :destroy, :write_to_cache]
   after_action :write_to_cache, only: [:show, :edit, :create, :update]
@@ -32,7 +32,7 @@ class AlertsController < ApplicationController
 
     respond_to do |format|
       if @alert.save
-        format.html { redirect_to @alert, notice: 'Alert was successfully created.' }
+        format.html { redirect_to @alert, notice: 'Alert was successfully created. Make sure to add at least one rule!' }
         format.json { render action: 'show', status: :created, location: @alert }
       else
         format.html { render action: 'new' }
@@ -67,6 +67,10 @@ class AlertsController < ApplicationController
 
   def rules
     @alert.rules
+  end
+
+  def logs
+    @alert.alert_logs
   end
 
   def write_to_cache

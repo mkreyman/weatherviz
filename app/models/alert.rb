@@ -1,7 +1,7 @@
 class Alert < ActiveRecord::Base
-  has_many :rules, :dependent => :destroy
   belongs_to :user
-  has_many :alert_logs
+  has_many :rules, :dependent => :destroy
+  has_many :alert_logs, :dependent => :destroy
 
   def messages(weather_report)
     rules.map do |rule|
@@ -23,4 +23,9 @@ class Alert < ActiveRecord::Base
   def city
     Location.find(self.location_id).city
   end
+
+  def user
+    User.find(self.user_id)
+  end
+
 end
