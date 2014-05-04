@@ -30,6 +30,10 @@ class Location < ActiveRecord::Base
   #after_validation :geocode
   after_validation :reverse_geocode, :if => lambda{ |obj| obj.latitude_changed? }
 
+  def self.per_page
+    10
+  end
+
   def self.search(search)
     if search
       search_results = where("city LIKE ?", "%#{search}%")

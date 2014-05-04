@@ -9,11 +9,11 @@ class LocationsController < ApplicationController
       @locations = Location.search(first_word).order(updated_at: :desc)
       if @locations.empty?
         flash[:notice] = "\'#{params[:search].capitalize}\' queued for import.
-                Please refresh the page if you don't see it below right away."
+          Please refresh the page if the new location doesn't appear below right away."
       end
       redirect_to locations_path
     else
-      @locations = Location.order(updated_at: :desc).paginate(page: params[:page])
+      @locations = Location.order(updated_at: :desc).paginate(:page => params[:page])
     end
   end
 
@@ -60,7 +60,7 @@ class LocationsController < ApplicationController
   def destroy
     if (current_user.present? && current_user.admin?)
       @location.destroy
-        respond_to do |format|
+      respond_to do |format|
         format.html { redirect_to locations_url, notice: 'Location was deleted.' }
         format.json { head :no_content }
       end
@@ -70,11 +70,20 @@ class LocationsController < ApplicationController
   end
 
   def reports
-    WeatherFetcher.fetch(@location)
-    if @location.weather_reports.blank?
-      redirect_to root_path, notice: 'Sorry, no results found.'
+    if @location.weather_reports.blank? || @location.weather_reports.last.created_at < 1.hour.ago
+      WeatherFetcher.fetch(@location)
+      redirect_to locations_path, notice: "We're fetching weather reports for this location. Click on the 'Show reports' button in a few seconds."
     else
-      @location.weather_reports.order(updated_at: :desc)
+      @weather_reports = @location.weather_reports.order(updated_at: :desc).paginate(:page => params[:page])
+    end
+  rescue => e
+    case e
+      when WeatherFetcherError
+        redirect_to locations_path, notice: e.message
+      when OpenURI::HTTPError
+        redirect_to weather_reports_path, notice: "HTTP Error: #{e.message}. Weather service is temporarily down, please try again later or browse most recent reports below."
+      else
+        raise e
     end
   end
 
@@ -87,13 +96,13 @@ class LocationsController < ApplicationController
   end
 
   private
-    def set_location
-      @location = Location.find(params[:id])
-    end
+  def set_location
+    @location = Location.find(params[:id])
+  end
 
-    def location_params
-      params.require(:location).permit(
-          :woeid, :city_id, :street, :city, :state_code, :state,
-          :postal_code, :country_code, :country, :latitude, :longitude)
-    end
+  def location_params
+    params.require(:location).permit(
+        :woeid, :city_id, :street, :city, :state_code, :state,
+        :postal_code, :country_code, :country, :latitude, :longitude)
+  end
 end

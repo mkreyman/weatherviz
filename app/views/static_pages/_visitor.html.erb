@@ -42,8 +42,16 @@
       <div class="nearbys span6" >
 
 
-        <p><strong><%= link_to 'View Weather Reports', reports_location_path(@location), :class => "green-btn" %>
-          <%= link_to 'Setup a Weather Alert', alert_location_path(@location), :class => "orange-btn" %></strong></p>
+        <p>
+          <strong>
+            <%= link_to 'View Weather Reports', reports_location_path(@location), :class => "green-btn" %>
+            <% if current_user.present? %>
+              <%= link_to 'Setup a Weather Alert', alert_location_path(@location), :class => "orange-btn" %>
+            <% else %>
+              <%= link_to 'Setup a Weather Alert', signup_path, :class => "orange-btn" %>
+            <% end %>
+          </strong>
+        </p>
 
         <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
 

@@ -3,6 +3,8 @@
   <h1>Logs for the '<%= @alert.alert_name %>' alert</h1>
 </div>
 
+<%= will_paginate @alert_logs %>
+
 <table class="table table-striped">
   <thead>
   <tr>
@@ -13,7 +15,7 @@
   </thead>
 
   <tbody>
-  <% @alert.alert_logs.each do |log| %>
+  <% @alert_logs.each do |log| %>
       <tr>
         <td><%= log.sent_at.strftime("%x, %I:%M %P") %></td>
         <td><%= log.alert_message %></td>
@@ -24,5 +26,8 @@
 </table>
 
 <br>
+<%= will_paginate @alert_logs %>
+<br>
+
 <%= link_to 'Current alert', alert_path(@alert), :class => 'btn' %>
 <%= link_to 'All alerts', alerts_path, :class => 'btn' %>

@@ -5,54 +5,61 @@
 
 <% if @alerts.any? %>
 
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th>Location</th>
-    <th>Name</th>
-    <th>By email</th>
-    <th>By sms</th>
-    <th>Email</th>
-    <th>Sms</th>
-    <th>Email verified</th>
-    <th>Phone verified</th>
-    <th>Active</th>
-    <th><%=t '.actions', :default => t("helpers.actions") %></th>
-  </tr>
-  </thead>
+    <%= will_paginate @alerts %>
 
-  <tbody>
-  <% @alerts.each do |alert| %>
+    <table class="table table-striped">
+      <thead>
       <tr>
-        <td><%= alert.city %></td>
-        <td><%= alert.alert_name %></td>
-        <td><%= alert.by_email %></td>
-        <td><%= alert.by_sms %></td>
-        <td><%= alert.email %></td>
-        <td><%= alert.sms %></td>
-        <td><%= alert.email_verified %></td>
-        <td><%= alert.phone_verified %></td>
-        <td><%= alert.active %></td>
-        <td>
-          <%= link_to 'Show', alert, :class => 'btn btn-mini' %>
-          <%= link_to 'Logs', logs_alert_path(alert), :class => 'btn btn-mini' %>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_alert_path(alert), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      alert,
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
+        <th>Location</th>
+        <th>Name</th>
+        <th>By email</th>
+        <th>By sms</th>
+        <th>Email</th>
+        <th>Sms</th>
+        <th>Email verified</th>
+        <th>Phone verified</th>
+        <th>Active</th>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
       </tr>
-  <% end %>
-  </tbody>
-</table>
+      </thead>
+
+      <tbody>
+      <% @alerts.each do |alert| %>
+          <tr>
+            <td><%= alert.city %></td>
+            <td><%= alert.alert_name %></td>
+            <td><%= alert.by_email %></td>
+            <td><%= alert.by_sms %></td>
+            <td><%= alert.email %></td>
+            <td><%= alert.sms %></td>
+            <td><%= alert.email_verified %></td>
+            <td><%= alert.phone_verified %></td>
+            <td><%= alert.active %></td>
+            <td>
+              <%= link_to 'Show', alert, :class => 'btn btn-mini' %>
+              <%= link_to 'Logs', logs_alert_path(alert), :class => 'btn btn-mini' %>
+              <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                          edit_alert_path(alert), :class => 'btn btn-mini' %>
+              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                          alert,
+                          :method => :delete,
+                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                          :class => 'btn btn-mini btn-danger' %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
 
 <% else %>
 
     <p>
-      <strong>It looks like you don't have any Alerts set up yet! From the <%= link_to 'Locations', locations_path %> page click on 'Create an Alert' button.</strong>
+      It looks like you don't have any Alerts set up yet!
+      Search for a location using the <strong>Search</strong> box below, and then click on <%= link_to 'Create an Alert', locations_path, :class => 'btn btn-mini' %> button for that location.
+    </p>
+    <br>
+    <p>
+      <%= render 'locations/search_form' %>
     </p>
 
 <% end %>

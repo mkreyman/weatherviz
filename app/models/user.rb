@@ -19,4 +19,8 @@ class User < ActiveRecord::Base
   geocoded_by :ip_address
   after_validation :geocode, :if => lambda{ |obj| obj.ip_address_changed? }
 
+  def self.per_page
+    10
+  end
+
 end

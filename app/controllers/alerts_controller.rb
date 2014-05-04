@@ -8,7 +8,7 @@ class AlertsController < ApplicationController
   # GET /alerts
   # GET /alerts.json
   def index
-    @alerts = current_user.alerts
+    @alerts = current_user.alerts.paginate(:page => params[:page])
   end
 
   # GET /alerts/1
@@ -70,7 +70,7 @@ class AlertsController < ApplicationController
   end
 
   def logs
-    @alert.alert_logs
+    @alert_logs = @alert.alert_logs.order(created_at: :desc).paginate(:page => params[:page])
   end
 
   def write_to_cache

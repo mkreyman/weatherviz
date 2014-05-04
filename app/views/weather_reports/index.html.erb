@@ -4,8 +4,8 @@
 </div>
 
 <%= render 'locations/search_form' %>
-<br>
-<%= will_paginate %>
+
+<%= will_paginate @weather_reports %>
 <br>
 <table class="table table-striped">
   <thead>
@@ -56,5 +56,4 @@
   </tbody>
 </table>
 
-<br>
-<%= will_paginate %>
+<%= will_paginate @weather_reports %>

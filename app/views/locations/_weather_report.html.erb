@@ -10,6 +10,8 @@
   <%= link_to 'Setup a Weather Alert for this location', alert_location_path(@location), :class => "orange-btn btn-primary" %>
 </h3>
 
+<%= will_paginate @weather_reports %>
+
 <table class="table table-striped">
   <thead>
   <tr>
@@ -31,7 +33,7 @@
   </thead>
 
   <tbody>
-  <% @location.weather_reports.order(updated_at: :desc).each do |weather_report| %>
+  <% @weather_reports.each do |weather_report| %>
       <tr>
         <td><%= time_received(weather_report) %></td>
         <td><%= describe_weather(weather_report) %></td>
@@ -60,5 +62,8 @@
   <% end %>
   </tbody>
 </table>
+
+<%= will_paginate @weather_reports %>
+<br>
 
 <%= link_to 'Back', locations_path, :class => 'green-btn' %>
