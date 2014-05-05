@@ -1,29 +1,58 @@
 <% provide(:title, 'Sign up') %>
-<%- model_class = User -%>
-<% unless @user.omniauth? %>
-    <div>
-      <h1>Sign up</h1>
+</div>
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="span9">
+        <%- model_class = User -%>
+        <% unless @user.omniauth? %>
+        <h1>Sign up</h1>
+      </div>
+      <div class="'auth_providers span3">
+        <%= link_to image_tag('octocat.png', size: '48x48'), '/auth/github' %>
+        <%= link_to image_tag('google.png', size: '48x48'), '/auth/google_oauth2' %>
+        <%= link_to image_tag('facebook.png', size: '48x48'), '/auth/facebook' %>
+      </div>
     </div>
-    <p><strong>Sign up through one of these services:</strong></p>
-    <div class="'auth_providers">
-      <%= link_to image_tag('octocat.png', size: '64x64'), '/auth/github' %>
-      <%= link_to image_tag('google.png', size: '64x64'), '/auth/google_oauth2' %>
-      <%= link_to image_tag('facebook.png', size: '64x64'), '/auth/facebook' %>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="about span12" >
+        <p><strong>Sign up through one of these services:</strong></p>
+        <div class="'auth_providers">
+          <%= link_to image_tag('octocat.png', size: '64x64'), '/auth/github' %>
+          <%= link_to image_tag('google.png', size: '64x64'), '/auth/google_oauth2' %>
+          <%= link_to image_tag('facebook.png', size: '64x64'), '/auth/facebook' %>
+        </div>
+        <br>
+        <p><strong>Don't use these services? Sign up below.</strong></p>
+
+        <% else %>
+          <h1>Verify Details</h1>
+      </div>
     </div>
+  </div>
+</div>
 
-    <p><strong>Don't use these services? Sign up below.</strong></p>
-
-<% else %>
-    <h1>Verify Details</h1>
-<% end %>
+<div class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="about span12" >
+        <% end %>
 
 <%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
-    <%= render 'users/fields', f: f %>
-    <div class="form-actions">
-      <%= f.submit 'Signup', :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  users_path, :class => 'btn' %>
-    </div>
+   <%= render 'users/fields', f: f %>
+ <div class="form-actions">
+   <%= f.submit 'Signup', :class => 'btn btn-primary' %>
+   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                          users_path, :class => 'btn' %>
+ </div>
 <% end %>
 
-
+    </div>
+  </div>
+ </div>
+</div>

@@ -1,16 +1,36 @@
-<% provide(:title, "Log in") %>
-<h1>Log in</h1>
-
-<p><strong>Log in through one of these services:</strong></p>
-
-<div class="'auth_providers">
-  <%= link_to image_tag('octocat.png', size: '64x64'), '/auth/github' %>
-  <%= link_to image_tag('google.png', size: '64x64'), '/auth/google_oauth2' %>
-  <%= link_to image_tag('facebook.png', size: '64x64'), '/auth/facebook' %>
+<% provide(:title, 'Log in') %>
 </div>
-<div>
-  <p><strong>Don't use these services? Log in below.</strong></p>
-  <%= form_tag login_path do %>
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="span9">
+        <%- model_class = User -%>
+        <h1>Log in</h1>
+      </div>
+      <div class="'auth_providers span3">
+        <%= link_to image_tag('octocat.png', size: '48x48'), '/auth/github' %>
+        <%= link_to image_tag('google.png', size: '48x48'), '/auth/google_oauth2' %>
+        <%= link_to image_tag('facebook.png', size: '48x48'), '/auth/facebook' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="about span12" >
+        <p><strong>Log in through one of these services:</strong></p>
+
+        <div class="'auth_providers">
+          <%= link_to image_tag('octocat.png', size: '64x64'), '/auth/github' %>
+          <%= link_to image_tag('google.png', size: '64x64'), '/auth/google_oauth2' %>
+          <%= link_to image_tag('facebook.png', size: '64x64'), '/auth/facebook' %>
+        </div>
+      <div>
+        <br>
+        <p><strong>Don't use these services? Log in below.</strong></p>
+      <%= form_tag login_path do %>
       <p>
         <%= label_tag :email %>
         <%= text_field_tag :email, params[:email] %>
@@ -24,5 +44,10 @@
       <p class="button">
         <%= submit_tag 'Login' %>
       </p>
-  <% end %>
+      <% end %>
+    </div>
+
+      </div>
+    </div>
+  </div>
 </div>
