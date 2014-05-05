@@ -1,69 +1,90 @@
-<div class="page-header">
-  <h1>Weather reports for <%= @location.city %></h1>
+<% provide(:title, 'Home') %>
+</div>
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="span6">
+        <h1>Weather reports for <%= @location.city %></h1>
+      </div>
+      <div class="search span6" >
+        <%= render 'locations/search_form' %>
+      </div>
+    </div>
+  </div>
 </div>
 
-<p>
-  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
-</p>
+<div class="main-content">
+  <div class="container">
 
-<h3>
-  <%= link_to 'Setup a Weather Alert for this location', alert_location_path(@location), :class => "orange-btn btn-primary" %>
-</h3>
+    <div class="row">
+      <div class="about span12" >
+        <p>
+          <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+        </p>
 
-<%= will_paginate @weather_reports %>
+        <h3>
+          <%= link_to 'Setup a Weather Alert for this location', alert_location_path(@location), :class => "orange-btn btn-primary" %>
+        </h3>
 
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th>Received</th>
-    <th>Weather</th>
-    <th>Temp</th>
-    <th>Min Temp</th>
-    <th>Max Temp</th>
-    <th>Pressure</th>
-    <th>Humidity</th>
-    <th>Wind speed</th>
-    <th>Wind gust</th>
-    <th>Direction</th>
-    <th>Clouds</th>
-    <th>Rain (3h)</th>
-    <th>Snow (3h)</th>
-    <th><%=t '.actions', :default => t("helpers.actions") %></th>
-  </tr>
-  </thead>
+        <%= will_paginate @weather_reports %>
 
-  <tbody>
-  <% @weather_reports.each do |weather_report| %>
-      <tr>
-        <td><%= time_received(weather_report) %></td>
-        <td><%= describe_weather(weather_report) %></td>
-        <td><%= temp(weather_report) %></td>
-        <td><%= temp_min(weather_report) %></td>
-        <td><%= temp_max(weather_report) %></td>
-        <td><%= pressure(weather_report) %></td>
-        <td><%= humidity(weather_report) %></td>
-        <td><%= wind_speed(weather_report) %></td>
-        <td><%= wind_gust(weather_report) %></td>
-        <td><%= wind_degree(weather_report) %></td>
-        <td><%= clouds(weather_report) %></td>
-        <td><%= rain_3h(weather_report) %></td>
-        <td><%= snow_3h(weather_report) %></td>
-        <td>
-          <%= link_to 'Show', weather_report, :class => 'btn btn-mini' %>
-        <% if (current_user.present? && current_user.admin?) %>
-              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                          weather_report,
-                          :method => :delete,
-                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                          :class => 'btn btn-mini btn-danger' %>
-              </td>
-        <% end %>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Received</th>
+            <th>Weather</th>
+            <th>Temp</th>
+            <th>Min Temp</th>
+            <th>Max Temp</th>
+            <th>Pressure</th>
+            <th>Humidity</th>
+            <th>Wind speed</th>
+            <th>Wind gust</th>
+            <th>Direction</th>
+            <th>Clouds</th>
+            <th>Rain (3h)</th>
+            <th>Snow (3h)</th>
+            <th><%=t '.actions', :default => t("helpers.actions") %></th>
+          </tr>
+          </thead>
 
-<%= will_paginate @weather_reports %>
-<br>
+          <tbody>
+          <% @weather_reports.each do |weather_report| %>
+              <tr>
+                <td><%= time_received(weather_report) %></td>
+                <td><%= describe_weather(weather_report) %></td>
+                <td><%= temp(weather_report) %></td>
+                <td><%= temp_min(weather_report) %></td>
+                <td><%= temp_max(weather_report) %></td>
+                <td><%= pressure(weather_report) %></td>
+                <td><%= humidity(weather_report) %></td>
+                <td><%= wind_speed(weather_report) %></td>
+                <td><%= wind_gust(weather_report) %></td>
+                <td><%= wind_degree(weather_report) %></td>
+                <td><%= clouds(weather_report) %></td>
+                <td><%= rain_3h(weather_report) %></td>
+                <td><%= snow_3h(weather_report) %></td>
+                <td>
+                  <%= link_to 'Show', weather_report, :class => 'btn btn-mini' %>
+                  <% if (current_user.present? && current_user.admin?) %>
+                      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                                  weather_report,
+                                  :method => :delete,
+                                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                                  :class => 'btn btn-mini btn-danger' %>
+                      </td>
+                  <% end %>
+                  </tr>
+          <% end %>
+          </tbody>
+        </table>
 
-<%= link_to 'Back', locations_path, :class => 'green-btn' %>
+        <%= will_paginate @weather_reports %>
+        <br>
+
+        <%= link_to 'Back', locations_path, :class => 'green-btn' %>
+
+      </div>
+    </div>
+  </div>
+</div>

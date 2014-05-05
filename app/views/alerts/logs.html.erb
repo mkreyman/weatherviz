@@ -1,33 +1,51 @@
 <% provide(:title, 'Logs') %>
-<div class="page-header">
-  <h1>Logs for the '<%= @alert.alert_name %>' alert</h1>
 </div>
 
-<%= will_paginate @alert_logs %>
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <h1>Logs for the '<%= @alert.alert_name %>' alert</h1>
+      </div>
+    </div>
+  </div>
+</div>
 
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th>Sent</th>
-    <th>Message</th>
-    <th>Sent to</th>
-  </tr>
-  </thead>
+<div class="main-content">
+  <div class="container">
 
-  <tbody>
-  <% @alert_logs.each do |log| %>
-      <tr>
-        <td><%= log.sent_at.strftime("%x, %I:%M %P") %></td>
-        <td><%= log.alert_message %></td>
-        <td><%= log.alert_message_types %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+    <div class="row">
+      <div class="about span12" >
 
-<br>
-<%= will_paginate @alert_logs %>
-<br>
+        <%= will_paginate @alert_logs %>
 
-<%= link_to 'Current alert', alert_path(@alert), :class => 'btn' %>
-<%= link_to 'All alerts', alerts_path, :class => 'btn' %>
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Sent</th>
+            <th>Message</th>
+            <th>Sent to</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @alert_logs.each do |log| %>
+              <tr>
+                <td><%= log.sent_at.strftime("%x, %I:%M %P") %></td>
+                <td><%= log.alert_message %></td>
+                <td><%= log.alert_message_types %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+        <%= will_paginate @alert_logs %>
+        <br>
+
+        <%= link_to 'Current alert', alert_path(@alert), :class => 'btn' %>
+        <%= link_to 'All alerts', alerts_path, :class => 'btn' %>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,7 +7,7 @@
 
       <div class="visitor span6" >
         <h2>
-          Based on your current IP address <%= request.remote_ip %>, your location is:
+          Based on your IP address <%= request.remote_ip %>, your location is:
         </h2>
 
         <% @location = visitor_location %>
@@ -28,7 +28,7 @@
 
         <% if !@location.nearbys(50).empty? %>
             <h2>
-              Weather reports for nearby locations
+              Weather reports for nearby locations:
             </h2>
             <ul>
               <% @location.nearbys(50).each do |location| %>
