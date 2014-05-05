@@ -1,0 +1,82 @@
+<% provide(:title, 'About this site') %>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="span6">
+        <h1>
+          About this site
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="container">
+
+    <div class="row">
+      <div class="about span8" >
+        <p>
+          Hi, my name is <a href="https://www.linkedin.com/in/mkreyman">Mark Kreyman</a>,
+          and this site is a demo project I made at <a href="http://www.davincicoders.com/">DaVinci Coders</a>.
+          DaVinci Coders is a 13-week Ruby on Rails training program taught by <a href="http://jasonnoble.org/">Jason Noble</a>,
+          one of the top 50 Rails contributors. I consider DaVinci's <a href="http://www.davincicoders.com/programs#level_2">'Building the Toolbelt of a Junior Ruby on Rails Developer'</a>
+          program to be one of the best investments of time and money I've ever made. Seriously.
+        </p>
+
+        <h2>
+          A list of APIs and technologies used to make this site work
+        </h2>
+        <ul>
+          <li><a href="http://freegeoip.net/">freegeoip.net</a> - to map visitor's IP address to a location.</li>
+          <li><a href="https://developers.google.com/maps/documentation/imageapis/">Google Maps Image APIs</a> - to lookup a place on earth.</li>
+          <li>Accounts Authentication and Authorization with: <a href="https://developers.google.com/accounts/docs/OAuth2Login">Google</a>,
+            <a href="https://developer.github.com/v3/oauth/">GitHub</a>,
+            <a href="https://developers.facebook.com/docs/facebook-login/overview/v2.0">Facebook</a>.</li>
+          <li><a href="http://en.gravatar.com/">Gravatar</a> - to pull users' gravatars.</li>
+          <li><a href="http://openweathermap.org/API">Open Weather Map API</a> - to fetch weather reports for a given location.</li>
+          <li><a href="https://addons.heroku.com/redistogo">RedisToGo</a> - to cache API calls to above listed services.</li>
+          <li><a href="https://github.com/resque/resque">Resque</a> - for creating background jobs.</li>
+          <li><a href="https://addons.heroku.com/scheduler">Heroku Scheduler</a> - to run scheduled tasks.</li>
+          <li><a href="https://www.twilio.com/docs">Twilio API</a> - to send sms notifications.</li>
+          <li><a href="https://sendgrid.com/docs/API_Reference/SMTP_API/index.html">SendGrid API</a> - to send email notifications.</li>
+          <li><a href="http://getbootstrap.com/">Bootstrap</a> - to make this site prettier.</li>
+          <li><a href="http://www.heroku.com/">Heroku</a> - to host it.</li>
+          <li><a href="http://osticket.com/">osTicket</a> - to run support desk at support.weatherviz.org.</li>
+          <li><a href="http://rubyonrails.org/">Ruby on Rails</a></li>
+          <li><a href="https://github.com/mkreyman/weatherviz">GitHub</a> - to store the site's source code.</li>
+        </ul>
+
+        <h2>
+          The site's design
+        </h2>
+
+        <p>
+          Homepage design was done by <a href="https://twitter.com/yandrinkstea">Yan Odnoralov</a>.
+          Yan would have made it much prettier and in less time by himself, but I was trying hard to be helpful,
+          so it took us from midnight to 4:30 am to do. :) Yan designs websites when he's not touring with <a href="http://www.jamtour.com/artist/everfound">Everfound</a>.
+          Check out his portfolio at <a href="http://yandesigns.com/">yandesigns.com</a>.
+        </p>
+
+        <h2>
+          To Do list
+        </h2>
+
+        <ul>
+          <li>Email verification for emailing alerts.</li>
+          <li>Cell phone verification for texting alerts.</li>
+          <li>Letting users create their own accounts with Twilio and select their own phone number for alerts to be sent from.</li>
+          <li>Alerts on weather forecasts, not only on current weather conditions.</li>
+          <li>Additional sources of weather data to select from.</li>
+          <li>Creating/enabling/disabling alerts by sending a text message.</li>
+          <li>Voice call notification of alerts.</li>
+          <li>Sending alerts to a list.</li>
+        </ul>
+
+      </div>
+
+    </div>
+  </div>
+</div>

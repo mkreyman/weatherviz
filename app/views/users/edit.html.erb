@@ -1,29 +1,45 @@
 <% provide(:title, "Edit user") %>
-<%- model_class = User -%>
-<div class="page-header">
-  <h1>Update your profile</h1>
 </div>
-<p id="notice"><%= notice %></p>
-<%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
-    <%= render 'users/fields', f: f %>
-    <% if current_user.present? && current_user.admin? %>
-        <div class="control-group">
-          <%= f.label :admin, "Admin", :class => 'control-label' %>
-          <div class="controls">
-            <%= f.check_box :admin, :class => 'check_box' %>
-          </div>
-        </div>
-    <% end %>
-    <div class="form-actions">
-      <%= f.submit "Save changes", :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  users_path, :class => 'btn' %>
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="span6">
+        <%- model_class = User -%>
+        <h1>Update your profile</h1>
+      </div>
     </div>
-<% end %>
-
-<div class="gravatar">
-  <%= gravatar_for @user %>
-  <a href="http://gravatar.com/emails" target="_blank">change</a>
+  </div>
 </div>
+<div class="main-content">
+  <div class="container">
 
+    <div class="row">
+      <div class="about span12" >
 
+        <p id="notice"><%= notice %></p>
+        <%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
+            <%= render 'users/fields', f: f %>
+            <% if current_user.present? && current_user.admin? %>
+                <div class="control-group">
+                  <%= f.label :admin, "Admin", :class => 'control-label' %>
+                  <div class="controls">
+                    <%= f.check_box :admin, :class => 'check_box' %>
+                  </div>
+                </div>
+            <% end %>
+            <div class="form-actions">
+              <%= f.submit "Save changes", :class => 'btn btn-primary' %>
+              <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                          users_path, :class => 'btn' %>
+            </div>
+        <% end %>
+
+        <div class="gravatar">
+          <%= gravatar_for @user %>
+          <a href="http://gravatar.com/emails" target="_blank">change</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

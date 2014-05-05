@@ -1,43 +1,62 @@
-<p id="notice"><%= notice %></p>
-<%- model_class = WeatherReport -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+<% provide(:title, 'Weather Report') %>
 </div>
-<dl class="dl-horizontal">
-  <dt><strong>Location:</strong></dt>
-  <dd><%= city(@weather_report) %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:time_received) %>:</strong></dt>
-  <dd><%= @weather_report.time_received %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:sunrise) %>:</strong></dt>
-  <dd><%= @weather_report.sunrise %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:sunset) %>:</strong></dt>
-  <dd><%= @weather_report.sunset %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:weather) %>:</strong></dt>
-  <dd><%= describe_weather(@weather_report) %></dd>
-  <dt><strong>Current Temp:</strong></dt>
-  <dd><%= temp(@weather_report) %></dd>
-  <dt><strong>Min Temp:</strong></dt>
-  <dd><%= temp_min(@weather_report) %></dd>
-  <dt><strong>Max Temp:</strong></dt>
-  <dd><%= temp_max(@weather_report) %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:pressure) %>:</strong></dt>
-  <dd><%= pressure(@weather_report) %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:humidity) %>:</strong></dt>
-  <dd><%= humidity(@weather_report) %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:wind_speed) %>:</strong></dt>
-  <dd><%= wind_speed(@weather_report) %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:wind_gust) %>:</strong></dt>
-  <dd><%= wind_gust(@weather_report) %></dd>
-  <dt><strong>Wind direction:</strong></dt>
-  <dd><%= wind_degree(@weather_report) %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:clouds) %>:</strong></dt>
-  <dt><strong>Rain (3h):</strong></dt>
-  <dd><%= rain_3h(@weather_report) %></dd>
-  <dt><strong>Snow (3h):</strong></dt>
-  <dd><%= snow_3h(@weather_report) %></dd>
-</dl>
+<p id="notice"><%= notice %></p>
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="span6">
+        <%- model_class = WeatherReport -%>
+        <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+      </div>
+    </div>
+  </div>
+</div>
 
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              weather_reports_path, :class => 'btn'  %>
+<div class="main-content">
+  <div class="container">
+
+    <div class="row">
+      <div class="about span12" >
+        <dl class="dl-horizontal">
+          <dt><strong>Location:</strong></dt>
+          <dd><%= city(@weather_report) %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:time_received) %>:</strong></dt>
+          <dd><%= @weather_report.time_received %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:sunrise) %>:</strong></dt>
+          <dd><%= @weather_report.sunrise %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:sunset) %>:</strong></dt>
+          <dd><%= @weather_report.sunset %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:weather) %>:</strong></dt>
+          <dd><%= describe_weather(@weather_report) %></dd>
+          <dt><strong>Current Temp:</strong></dt>
+          <dd><%= temp(@weather_report) %></dd>
+          <dt><strong>Min Temp:</strong></dt>
+          <dd><%= temp_min(@weather_report) %></dd>
+          <dt><strong>Max Temp:</strong></dt>
+          <dd><%= temp_max(@weather_report) %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:pressure) %>:</strong></dt>
+          <dd><%= pressure(@weather_report) %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:humidity) %>:</strong></dt>
+          <dd><%= humidity(@weather_report) %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:wind_speed) %>:</strong></dt>
+          <dd><%= wind_speed(@weather_report) %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:wind_gust) %>:</strong></dt>
+          <dd><%= wind_gust(@weather_report) %></dd>
+          <dt><strong>Wind direction:</strong></dt>
+          <dd><%= wind_degree(@weather_report) %></dd>
+          <dt><strong><%= model_class.human_attribute_name(:clouds) %>:</strong></dt>
+          <dt><strong>Rain (3h):</strong></dt>
+          <dd><%= rain_3h(@weather_report) %></dd>
+          <dt><strong>Snow (3h):</strong></dt>
+          <dd><%= snow_3h(@weather_report) %></dd>
+        </dl>
+
+        <div class="form-actions">
+          <%= link_to t('.back', :default => t("helpers.links.back")),
+                      weather_reports_path, :class => 'btn'  %>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>

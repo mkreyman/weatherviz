@@ -1,12 +1,31 @@
-<%- model_class = Alert -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+<% provide(:title, 'Edit Alert') %>
 </div>
 
-<%= render 'form' %>
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="span6">
+        <%- model_class = Alert -%>
+        <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= render partial: 'alerts/rules', member: @alert.rules %>
+<div class="main-content">
+  <div class="container">
 
-<%= link_to 'Show', @alert, :class => 'btn'  %>
-<%= link_to t('.back', :default => t("helpers.links.back")),
-            alerts_path, :class => 'btn'  %>
+    <div class="row">
+      <div class="about span12" >
+
+        <%= render 'form' %>
+
+        <%= render partial: 'alerts/rules', member: @alert.rules %>
+
+        <%= link_to 'Show', @alert, :class => 'btn'  %>
+        <%= link_to t('.back', :default => t("helpers.links.back")),
+                    alerts_path, :class => 'btn'  %>
+      </div>
+    </div>
+  </div>
+</div>
