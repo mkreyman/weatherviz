@@ -61,7 +61,7 @@ class UsersController < ApplicationController
   end
 
   def logs
-    @logs = @user.alerts.joins(:alert_logs).order(created_at: :desc).paginate(:page => params[:page])
+    @user_logs = @user.alerts.joins(:alert_logs).order(created_at: :desc).paginate(:page => params[:page])
   end
 
   def signed_in?
