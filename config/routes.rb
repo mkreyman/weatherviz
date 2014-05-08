@@ -26,6 +26,7 @@ WeatherViz::Application.routes.draw do
       get 'alerts', to: 'users#alerts'
       get 'settings', to: 'users#edit'
       get 'profile', to: 'users#show'
+      get 'logs', to: 'users#logs'
     end
   end
 
