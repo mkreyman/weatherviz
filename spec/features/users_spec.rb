@@ -6,6 +6,7 @@ feature 'User Authentication - signing up', :vcr do
   end
 
   scenario 'allows a user to signup', :vcr do
+    ActionMailer::Base.deliveries.clear
     visit '/'
 
     expect(page).to have_link('Signup')
@@ -21,7 +22,11 @@ feature 'User Authentication - signing up', :vcr do
     click_button 'Signup'
 
     expect(current_path).to eq('/')
+
     expect(page).to have_text("Thank you for signing up #{@user.first_name}")
+    expect(page).to have_text("Signed in as #{@user.email}")
+
+    expect(ActionMailer::Base.deliveries).to have(1).email
   end
 
   scenario "prevents signing up with blank password", :vcr do

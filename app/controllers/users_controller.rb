@@ -29,6 +29,7 @@ class UsersController < ApplicationController
     @user.update_attributes(ip_address: @ip)
 
     if @user.save
+      @user.needs_verification!
       session[:user_id] = @user.id
       redirect_to root_path,
                   notice: "Thank you for signing up #{@user.first_name}."

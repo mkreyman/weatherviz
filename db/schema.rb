@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140509023108) do
+ActiveRecord::Schema.define(version: 20140509040957) do
 
   create_table "alert_logs", force: true do |t|
     t.datetime "sent_at"
@@ -95,6 +95,8 @@ ActiveRecord::Schema.define(version: 20140509023108) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "ip_address"
+    t.boolean  "verified_email",  default: false
+    t.string   "token",           default: ""
   end
 
   add_index "users", ["latitude", "longitude"], name: "index_users_on_latitude_and_longitude"

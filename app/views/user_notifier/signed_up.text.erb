@@ -1,0 +1,16 @@
+
+Hello <%= @user.first_name.titleize %>,
+
+You recently created a <%= t('site_name') %> account
+using your email address of <%= @user.email %>.
+
+To verify your email address, please open the following link:
+
+    <%= verify_email_url(@user.token) %>
+
+If the link does not work, please login to your account
+and enter this token:
+
+    <%= @user.token %>
+
+Thank you for visiting <%= t('site_name') %>.

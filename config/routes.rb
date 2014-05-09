@@ -43,6 +43,8 @@ WeatherViz::Application.routes.draw do
   get 'static_pages/home'
   get 'about', to: 'static_pages#about'
 
+  get 'verification/:token', to: 'users#verify', as: 'verify_email'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

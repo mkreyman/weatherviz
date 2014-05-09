@@ -25,4 +25,12 @@ class User < ActiveRecord::Base
     10
   end
 
+  def needs_verification!
+    self.update_attributes!(
+        token: SecureRandom.urlsafe_base64,
+        verified_email: false
+    )
+    UserNotifier.signed_up(self).deliver
+  end
+
 end

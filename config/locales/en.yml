@@ -20,4 +20,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  site_name: WeatherViz
+  user_notifier:
+    verified:
+      subject: Thank you for verifying your e-mail address
+    verify:
+      subject: Please verify your e-mail address
+    signed_up:
+      subject: Please verify your e-mail address
