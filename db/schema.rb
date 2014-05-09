@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140503025648) do
+ActiveRecord::Schema.define(version: 20140509023108) do
 
   create_table "alert_logs", force: true do |t|
     t.datetime "sent_at"
@@ -41,6 +41,17 @@ ActiveRecord::Schema.define(version: 20140503025648) do
 
   add_index "alerts", ["location_id"], name: "index_alerts_on_location_id"
   add_index "alerts", ["user_id"], name: "index_alerts_on_user_id"
+
+  create_table "emails", force: true do |t|
+    t.string   "address"
+    t.string   "token",      default: ""
+    t.boolean  "verified",   default: false
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "emails", ["user_id"], name: "index_emails_on_user_id"
 
   create_table "locations", force: true do |t|
     t.integer  "city_id"
