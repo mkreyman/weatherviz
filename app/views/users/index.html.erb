@@ -19,9 +19,49 @@
         <%= will_paginate %>
         <br>
 
-        <ul class="users">
-          <%= render @users %>
-        </ul>
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Gravatar</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>OAuth</th>
+            <th>Admin</th>
+            <th>Lat</th>
+            <th>Lon</th>
+            <th>IP</th>
+            <th>Created</th>
+            <th><%=t '.actions', :default => t("helpers.actions") %></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @users.each do |user| %>
+              <tr>
+                <td><%= gravatar_for user %></td>
+                <td><%= user.id %></td>
+                <td><%= user.first_name %> <%= user.last_name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.omniauth %></td>
+                <td><%= user.admin %></td>
+                <td><%= sprintf '%.2f', user.latitude %></td>
+                <td><%= sprintf '%.2f', user.longitude %></td>
+                <td><%= user.ip_address %></td>
+                <td><%= user.created_at.strftime("%x") %></td>
+                <td>
+                  <%= link_to 'Alerts', alerts_user_path(user), :class => 'btn btn-mini' %>
+                  <%= link_to 'Logs', logs_user_path(user), :class => 'btn btn-mini' %>
+                  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                                  user,
+                                  :method => :delete,
+                                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                                  :class => 'btn btn-mini btn-danger' %>
+                      </td>
+                  </tr>
+          <% end %>
+          </tbody>
+        </table>
 
         <br>
         <%= will_paginate %>

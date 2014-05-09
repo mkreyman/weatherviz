@@ -1,0 +1,50 @@
+<% provide(:title, 'Logs') %>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <h1>Logs for <%= @user.first_name %> <%= @user.last_name %></h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="container">
+
+    <div class="row">
+      <div class="about span12" >
+
+        <%= will_paginate @user_logs %>
+
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Alert name</th>
+            <th>Sent</th>
+            <th>Message</th>
+            <th>Sent to</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @user_logs.each do |log| %>
+              <tr>
+                <td><%= log.alert_name %></td>
+                <td><%= log.sent_at.strftime("%x, %I:%M %P") %></td>
+                <td><%= log.alert_message %></td>
+                <td><%= log.alert_message_types %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+        <%= will_paginate @user_logs %>
+        <br>
+        <%= link_to 'Back', users_path, :class => 'btn' %>
+      </div>
+    </div>
+  </div>
+</div>

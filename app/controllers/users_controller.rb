@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :signed_in_user, only: [:show, :edit, :update]
-  before_action :set_user, only: [:show, :edit, :update, :alerts]
+  before_action :set_user, only: [:show, :edit, :update, :alerts, :logs]
   before_action :allowed_to_edit?, only: [:show, :edit, :update]
   before_action :admin_user, only: [:index, :destroy]
 
@@ -57,7 +57,11 @@ class UsersController < ApplicationController
   end
 
   def alerts
-    @user.alerts
+    @user_alerts = @user.alerts.order(created_at: :desc).paginate(:page => params[:page])
+  end
+
+  def logs
+    @user_logs = @user.alert_logs.order(created_at: :desc).paginate(:page => params[:page])
   end
 
   def signed_in?
