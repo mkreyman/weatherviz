@@ -1,16 +1,59 @@
-<% if @user.alerts.any? %>
+<% provide(:title, 'Alerts') %>
+</div>
 
-    <%= render partial: 'users/alerts', member: @user.alerts %>
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <h1>Listing alerts for <%= @user.first_name %> <%= @user.last_name %></h1>
+      </div>
+    </div>
+  </div>
+</div>
 
-<% else %>
+<div class="main-content">
+  <div class="container">
 
-    <p>
-      It looks like you don't have any Alerts set up yet!
-      Search for a location using the <strong>Search</strong> box below, and then click on <%= link_to 'Create an Alert', locations_path, :class => 'btn btn-mini' %> button for that location.
-    </p>
-    <br>
-    <p>
-      <%= render 'locations/search_form' %>
-    </p>
+    <div class="row">
+      <div class="about span12" >
 
-<% end %>
+        <%= will_paginate @user_alerts %>
+
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Location</th>
+            <th>Alert Name</th>
+            <th>By email</th>
+            <th>By sms</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Email verified</th>
+            <th>Phone verified</th>
+            <th>Active</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @user_alerts.each do |alert| %>
+              <tr>
+                <td><%= alert.city %></td>
+                <td><%= alert.alert_name %></td>
+                <td><%= alert.by_email %></td>
+                <td><%= alert.by_sms %></td>
+                <td><%= alert.email %></td>
+                <td><%= alert.sms %></td>
+                <td><%= alert.email_verified %></td>
+                <td><%= alert.phone_verified %></td>
+                <td><%= alert.active %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <%= will_paginate @user_alerts %>
+        <br>
+        <%= link_to 'Back', users_path, :class => 'btn' %>
+      </div>
+    </div>
+  </div>
+</div>

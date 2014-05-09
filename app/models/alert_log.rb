@@ -4,4 +4,8 @@ class AlertLog < ActiveRecord::Base
   def self.per_page
     10
   end
+
+  def alert_name
+    Alert.find(self.alert_id).alert_name
+  end
 end

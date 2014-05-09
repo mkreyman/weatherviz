@@ -23,17 +23,15 @@
           <thead>
           <tr>
             <th>Gravatar</th>
-            <th><%= model_class.human_attribute_name(:id) %></th>
-            <th><%= model_class.human_attribute_name(:first_name) %></th>
-            <th><%= model_class.human_attribute_name(:last_name) %></th>
-            <th><%= model_class.human_attribute_name(:email) %></th>
-            <th><%= model_class.human_attribute_name(:omniauth) %></th>
-            <th><%= model_class.human_attribute_name(:admin) %></th>
-            <th><%= model_class.human_attribute_name(:latitude) %></th>
-            <th><%= model_class.human_attribute_name(:longitude) %></th>
-            <th><%= model_class.human_attribute_name(:ip_address) %></th>
-            <th><%= model_class.human_attribute_name(:created_at) %></th>
-            <th><%= model_class.human_attribute_name(:updated_at) %></th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>OAuth</th>
+            <th>Admin</th>
+            <th>Lat</th>
+            <th>Lon</th>
+            <th>IP</th>
+            <th>Created</th>
             <th><%=t '.actions', :default => t("helpers.actions") %></th>
           </tr>
           </thead>
@@ -43,16 +41,14 @@
               <tr>
                 <td><%= gravatar_for user %></td>
                 <td><%= user.id %></td>
-                <td><%= user.first_name %></td>
-                <td><%= user.last_name %></td>
+                <td><%= user.first_name %> <%= user.last_name %></td>
                 <td><%= user.email %></td>
                 <td><%= user.omniauth %></td>
                 <td><%= user.admin %></td>
-                <td><%= user.latitude %></td>
-                <td><%= user.longitude %></td>
+                <td><%= sprintf '%.2f', user.latitude %></td>
+                <td><%= sprintf '%.2f', user.longitude %></td>
                 <td><%= user.ip_address %></td>
-                <td><%= user.created_at %></td>
-                <td><%= user.updated_at %></td>
+                <td><%= user.created_at.strftime("%x") %></td>
                 <td>
                   <%= link_to 'Alerts', alerts_user_path(user), :class => 'btn btn-mini' %>
                   <%= link_to 'Logs', logs_user_path(user), :class => 'btn btn-mini' %>

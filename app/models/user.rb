@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :alerts, :dependent => :destroy
   has_many :rules, :through => :alerts
+  has_many :alert_logs, :through => :alerts
   has_secure_password(validations: false)
 
   validates_confirmation_of :password,

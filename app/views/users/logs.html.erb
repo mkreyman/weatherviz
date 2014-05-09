@@ -22,6 +22,7 @@
         <table class="table table-striped">
           <thead>
           <tr>
+            <th>Alert name</th>
             <th>Sent</th>
             <th>Message</th>
             <th>Sent to</th>
@@ -31,10 +32,10 @@
           <tbody>
           <% @user_logs.each do |log| %>
               <tr>
-                <td><%= log %></td>
-                <td><%# log.sent_at.strftime("%x, %I:%M %P") %></td>
-                <td><%# log.alert_message %></td>
-                <td><%# log.alert_message_types %></td>
+                <td><%= log.alert_name %></td>
+                <td><%= log.sent_at.strftime("%x, %I:%M %P") %></td>
+                <td><%= log.alert_message %></td>
+                <td><%= log.alert_message_types %></td>
               </tr>
           <% end %>
           </tbody>
@@ -42,7 +43,7 @@
 
         <%= will_paginate @user_logs %>
         <br>
-
+        <%= link_to 'Back', users_path, :class => 'btn' %>
       </div>
     </div>
   </div>
