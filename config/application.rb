@@ -45,5 +45,7 @@ module WeatherViz
     config.cache_store = :redis_store, @redis_url
 
     config.autoload_paths += %W(#{config.root}/app/workers)
+
+    config.action_mailer.default_url_options = { host: ENV['MAILER_URL'] }
   end
 end

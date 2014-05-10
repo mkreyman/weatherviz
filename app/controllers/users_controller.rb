@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       @user.needs_verification!
       session[:user_id] = @user.id
       redirect_to root_path,
-                  notice: "Thank you for signing up #{@user.first_name}."
+                  notice: "Thank you for signing up #{@user.first_name}. Please check your email for a verification link."
     else
       render :new
     end
@@ -54,6 +54,17 @@ class UsersController < ApplicationController
       User.find(params[:id]).destroy
       flash[:success] = "User deleted."
       redirect_to users_url
+    end
+  end
+
+  def verify
+    @user = User.where(token: params[:token]).first
+    @user.update_attributes(verified_email: true)
+    if @user.save
+      redirect_to root_path, notice: "Thank you, email has been verified."
+      UserNotifier.verified(@user).deliver
+    else
+      redirect_to root_path, alert: 'Not authorized'
     end
   end
 
